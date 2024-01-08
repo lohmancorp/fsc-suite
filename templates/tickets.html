@@ -137,21 +137,25 @@
   <body class="d-flex flex-column h-100">
 
  <div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #070354; justify-content: center; align-items: center; z-index: 9998;">
-    <div style="display: flex; align-items: center; justify-content: center; z-index: 9999;">
-        <div class="spinner-border text-light" style="width: 2rem; height: 2rem;" role="status"></div>
-        <span style="padding-left: 10px; color: white; font-weight: bold;">Loading All Open Tickets...</span>
-    </div>
-    <div style="display: flex; align-items: center; justify-content: center; z-index: 9999;">
-        <p><span style="padding-top: 20px;"><img src="https://i.pinimg.com/originals/57/61/5b/57615b8c0092a66c1d4058b1692955cc.gif" style="max-width: 150px;"></span></p>
-    </div>
-    <!-- New Log Section -->
-    <div class="row">
-        <div id="logContainer" style="max-height: 200px; overflow-y: auto; background-color: #070354; color: white; font-family: 'Courier New', monospace; padding: 10px; margin-top: 10px; width: 80%; align-self: center; border-radius: 5px;">
-            <!-- Log messages will appear here -->
+  <div class="card mb-3 border border-0" style="max-width: 540px;" style="background-color: #070354;">
+    <div class="row g-0">
+      <div class="col-md-4" style="background-color: #070354;">
+        <img src="https://i.pinimg.com/originals/57/61/5b/57615b8c0092a66c1d4058b1692955cc.gif" class="img-fluid rounded-start" alt="A walking duck.">
+      </div>
+      <div class="col-md-8" style="background-color: #070354;">
+        <div class="card-body" style="background-color: #070354;">
+          <h5 class="card-title" style="background-color: #070354;">
+                <div style="display: flex; align-items: center; justify-content: center; z-index: 9999;">
+                  <div class="spinner-border text-light" style="width: 2rem; height: 2rem;" role="status"></div>
+                  <span style="padding-left: 10px; color: white; font-weight: bold;">Loading All Open Tickets...</span>
+                </div>
+          </h5>
+          <p class="card-text small text-light text-center fw-lighter fst-italic" id="inspirationalText" style="padding-top:20px;">Loading some inspiration for you  ...</p>         
         </div>
+      </div>
     </div>
+  </div>
 </div>
-
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
@@ -338,7 +342,7 @@
                         <option value="focused">Focused</option>
                     </select>
                     <!-- Reset Button -->
-                    <button id="resetFilters" class="btn btn-outline-secondary" type="button">Reset</button>
+                    <button id="resetFilters" class="btn btn-secondary" type="button">Reset</button>
                 </div>
         </div>
     </nav>
@@ -346,50 +350,59 @@
 
 
 <!-- Begin page content -->
-<main class="flex-shrink-0" style="padding-top: 40px;">
+<main class="flex-shrink-0" style="padding-top: 45px;">
   <div class="container-fluid">
     <p class="lead">
       <div class="row">
         <div class="card-group">
-          <div class="card">
+          <div class="card mb-2">
+              <div class="card-header bg-dark">
+                <h5 class="card-title text-white fw-bold align-middle text-center">Tickets</h5>
+              </div>
             <div class="card-body">
-              <h5 class="card-title">Tickets</h5>
-              <p class="card-text" id="totalTickets">Loading...</p>
+              <p class="card-text fw-bold text-center" id="totalTickets">Loading...</p>
             </div>
             <!-- ... -->
           </div>
-          <div class="card">
+          <div class="card mb-2">
+              <div class="card-header bg-dark">
+                <h5 class="card-title text-white fw-bold align-middle text-center">Incidents</h5>
+              </div>
             <div class="card-body">
-              <h5 class="card-title">Incidents</h5>
-              <p class="card-text" id="totalIncidents">Loading...</p>
+              <p class="card-text fw-bold text-center" id="totalIncidents">Loading...</p>
             </div>
             <!-- ... -->
           </div>
-          <div class="card">
+          <div class="card mb-2">
+              <div class="card-header bg-dark">
+                <h5 class="card-title text-white fw-bold align-middle text-center">Service Requests</h5>
+              </div>
             <div class="card-body">
-              <h5 class="card-title">Service Requests</h5>
-              <p class="card-text" id="totalServiceRequests">Loading...</p>
+              <p class="card-text fw-bold text-center" id="totalServiceRequests">Loading...</p>
             </div>
             <!-- ... -->
           </div>
-          <!-- ... more cards ... -->
-          <div class="card">
+          <div class="card mb-2">
+              <div class="card-header bg-dark">
+                <h5 class="card-title text-white fw-bold align-middle text-center">Escalated</h5>
+              </div>
             <div class="card-body">
-              <h5 class="card-title">Escalated</h5>
-              <p class="card-text" id="totalEscalated">Loading...</p>
+              <p class="card-text fw-bold text-center" id="totalEscalated">Loading...</p>
             </div>
             <!-- ... -->
           </div>
-          <div class="card">
+          <div class="card mb-2">
+              <div class="card-header bg-dark">
+                <h5 class="card-title text-white fw-bold align-middle text-center">Overdue</h5>
+              </div>
             <div class="card-body">
-              <h5 class="card-title">Overdue</h5>
-              <p class="card-text" id="totalOverdue">Loading...</p>
+              <p class="card-text fw-bold text-center" id="totalOverdue">Loading...</p>
             </div>
             <!-- ... -->
           </div>
         </div>
       </div>
-     <table class="table table-striped table-hover table-borderless table-sm align-middle" id="ticketsTable">
+     <table class="table table-striped table-hover table-sm align-middle" id="ticketsTable">
         <thead>
             <tr>
                 <th class="text-center">ID</th>
@@ -767,6 +780,46 @@
         filterRows();
     });
 
+</script>
+
+<script>
+    const quotes = [
+        "Enjoying the endless parade of 'easy' user issues?",
+        "You fix the problems people don't even know exist.",
+        "Solving mysteries: 'My computer is doing a thing.'",
+        "Tech support: where patience becomes a superpower.",
+        "It's not rocket science; it's tech support... oh wait.",
+        "Helping users navigate the intricate world of 'idk'.",
+        "Because explaining 'turn it off and on' is rocket science.",
+        "Bringing calm to the storm of user 'emergencies.'",
+        "Tech support: where sanity meets absurdity.",
+        "Fixing problems users didn't realize they'd created."
+    ];
+
+    const inspirationalText = document.getElementById('inspirationalText');
+
+    function updateQuote() {
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        
+        // Fade out
+        inspirationalText.style.opacity = 0;
+        inspirationalText.style.transition = 'opacity 1s';
+
+        setTimeout(() => {
+            // Change text and fade in
+            inspirationalText.textContent = randomQuote;
+            inspirationalText.style.opacity = 1;
+        }, 1000); // Delay for the fade-out effect
+
+        setTimeout(() => {
+            // Start fade out after quote has been displayed
+            inspirationalText.style.opacity = 0;
+        }, 4000); // 3 seconds display + 1 second fade in
+    }
+
+    // Load the first quote immediately and start the interval
+    updateQuote();
+    setInterval(updateQuote, 5000); // 1 second fade out + 3 seconds display + 1 second fade in
 </script>
 
 <script src="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.min.js') }}"></script>
