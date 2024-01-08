@@ -349,6 +349,46 @@
 <main class="flex-shrink-0" style="padding-top: 40px;">
   <div class="container-fluid">
     <p class="lead">
+      <div class="row">
+        <div class="card-group">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Tickets</h5>
+              <p class="card-text" id="totalTickets">Loading...</p>
+            </div>
+            <!-- ... -->
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Incidents</h5>
+              <p class="card-text" id="totalIncidents">Loading...</p>
+            </div>
+            <!-- ... -->
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Service Requests</h5>
+              <p class="card-text" id="totalServiceRequests">Loading...</p>
+            </div>
+            <!-- ... -->
+          </div>
+          <!-- ... more cards ... -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Escalated</h5>
+              <p class="card-text" id="totalEscalated">Loading...</p>
+            </div>
+            <!-- ... -->
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Overdue</h5>
+              <p class="card-text" id="totalOverdue">Loading...</p>
+            </div>
+            <!-- ... -->
+          </div>
+        </div>
+      </div>
      <table class="table table-striped table-hover table-borderless table-sm align-middle" id="ticketsTable">
         <thead>
             <tr>
@@ -483,6 +523,29 @@
         filterRows();
     };
 
+    // Function to update dashboard counts
+    const updateDashboardCounts = () => {
+        const rows = document.querySelectorAll('#ticketsTable tbody tr:not([style*="display: none"])');
+
+        const totalTickets = rows.length;
+        const totalIncidents = Array.from(rows).filter(row => row.cells[6].textContent.trim() === 'Incident or Problem').length;
+        const totalServiceRequests = Array.from(rows).filter(row => row.cells[6].textContent.trim() === 'Service request').length;
+        const totalEscalated = Array.from(rows).filter(row => row.cells[8].textContent.trim().includes('Yes')).length;
+        const totalOverdue = Array.from(rows).filter(row => row.cells[9].textContent.trim().includes('Yes')).length;
+
+        document.getElementById('totalTickets').textContent = totalTickets;
+        document.getElementById('totalIncidents').textContent = totalIncidents;
+        document.getElementById('totalServiceRequests').textContent = totalServiceRequests;
+        document.getElementById('totalEscalated').textContent = totalEscalated;
+        document.getElementById('totalOverdue').textContent = totalOverdue;
+    };
+
+    const delayedUpdateDashboardCounts = () => {
+        setTimeout(() => {
+            updateDashboardCounts();
+        }, 100); // Delay by 100 milliseconds
+    };
+
 
     // Function to filter rows based on dropdown selection
     const filterRows = () => {
@@ -520,6 +583,7 @@
 
             row.style.display = isMatch ? '' : 'none';
         });
+        delayedUpdateDashboardCounts();
     };
 
     // Function to reset filters
@@ -625,6 +689,7 @@
         });
 
         applySettings();
+        delayedUpdateDashboardCounts();
     };
 
     document.querySelectorAll('.column-toggle').forEach(checkbox => {
