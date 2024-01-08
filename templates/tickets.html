@@ -353,22 +353,22 @@
      <table class="table table-striped table-hover table-borderless table-sm align-middle" id="ticketsTable">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Company</th>
-                <th>Tier</th>
-                <th>Subject</th>
-                <th>Priority</th>
-                <th>Status</th>
+                <th class="text-center">ID</th>
+                <th class="col-1 text-truncate">Company</th>
+                <th class="text-center">Tier</th>
+                <th class="col-2 text-truncate">Subject</th>
+                <th class="text-center">Priority</th>
+                <th class="text-center">Status</th>
                 <th>Type</th>
                 <th>Environment</th>
-                <th>Escalated</th>
-                <th>Past Due</th>
-                <th>Created</th>
-                <th>Due By</th>
-                <th>Last Update</th>
+                <th class="text-center">Escalated</th>
+                <th class="text-center">Past Due</th>
+                <th class="text-center">Created</th>
+                <th class="text-center">Due By</th>
+                <th class="text-center">Last Update</th>
                 <th>Agent</th>
                 <th>Group</th>
-                <th>Score</th>
+                <th class="text-center">Score</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -378,14 +378,6 @@
     </p>
   </div>
 </main>
-
-<footer class="footer mt-auto py-3 bg-body-tertiary fixed-bottom">
-  <div class="container">
-    <div>
-      <span class="text-body-secondary">Author <a href="https://github.com/lohmancorp/fsc-suite" target="_blank">Taylor Giddens</a>.</span>
-    </div>
-  </div>
-</footer>
 
 <script>
     let globalTickets = [];
@@ -620,6 +612,17 @@
             agents.add(ticket.agent_name);
             escalated.add(ticket.escalated ? 'Yes' : 'No');
             overdue.add(ticket.is_past_due ? 'Yes' : 'No');
+            cellId.classList.add('text-center');
+            cellTier.classList.add('text-center');
+            cellPriority.classList.add('text-center');
+            cellStatus.classList.add('text-center');
+            cellEscalated.classList.add('text-center');
+            cellPastDue.classList.add('text-center');
+            cellCreated.classList.add('text-center');
+            cellDueBy.classList.add('text-center');
+            cellLastUpdate.classList.add('text-center');
+            cellScore.classList.add('text-center');
+
         });
 
         applySettings();
@@ -701,9 +704,6 @@
     });
 
 </script>
-
-
-
 
 <script src="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.min.js') }}"></script>
 
