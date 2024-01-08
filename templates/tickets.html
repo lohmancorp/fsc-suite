@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+  <head>
+    <script src="{{ url_for('static', filename='assets/js/color-modes.js') }}"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Taylor Giddens">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>CloudBlue - FS Commander Suite</title>
+
+    <link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <style>
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+        bottom: 0;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+
+      [data-href] { 
+        cursor: pointer; 
+      }
+
+      footer {
+          height: 70px;
+      }
+
+    .table-fixed-header thead {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 1;
+    }
+
+    .table-fixed-header tbody {
+      display: block;
+      max-height: 1050px; /* Adjust the height as needed */
+      overflow-y: auto;
+    }
+
+    .table-fixed-header thead, .table-fixed-header tbody tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .table-fixed-header thead {
+      width: calc(100% - 1em); /* Adjust the scrollbar width */
+    }
+
+    #ticketsTable thead th {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 10;
+    }
+
+
+    </style>
+
+    
+  </head>
+  <body class="d-flex flex-column h-100">
+
+ <div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #070354; justify-content: center; align-items: center; z-index: 9998;">
+    <div style="display: flex; align-items: center; justify-content: center; z-index: 9999;">
+        <div class="spinner-border text-light" style="width: 2rem; height: 2rem;" role="status"></div>
+        <span style="padding-left: 10px; color: white; font-weight: bold;">Loading All Open Tickets...</span>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; z-index: 9999;">
+        <p><span style="padding-top: 20px;"><img src="https://i.pinimg.com/originals/57/61/5b/57615b8c0092a66c1d4058b1692955cc.gif" style="max-width: 150px;"></span></p>
+    </div>
+    <!-- New Log Section -->
+    <div class="row">
+        <div id="logContainer" style="max-height: 200px; overflow-y: auto; background-color: #070354; color: white; font-family: 'Courier New', monospace; padding: 10px; margin-top: 10px; width: 80%; align-self: center; border-radius: 5px;">
+            <!-- Log messages will appear here -->
+        </div>
+    </div>
+</div>
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="check2" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+      </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+      </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+      </symbol>
+    </svg>
+
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+              id="bd-theme"
+              type="button"
+              aria-expanded="false"
+              data-bs-toggle="dropdown"
+              aria-label="Toggle theme (auto)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+            Light
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+            Dark
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
+            Auto
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+    
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: #070354;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='assets/logos/cloudblue-logo-white.png') }}" style="max-height: 30px;"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                      <a class="btn btn-dark active" aria-expanded="false" role="button" href="/">
+                        Home
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="padding-left: 10px;">
+                        Columns
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="2" data-column="2" checked>
+                                      <label class="form-check-label" for="2"> Company</label>
+                                    </div>
+                                  </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="3" data-column="3" checked>
+                                      <label class="form-check-label" for="3"> Tier</label>
+                                    </div>
+                                  </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="4" data-column="4" checked>
+                                      <label class="form-check-label" for="4"> Subject</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="5" data-column="5" checked>
+                                      <label class="form-check-label" for="5"> Priority</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="6" data-column="6" checked>
+                                      <label class="form-check-label" for="6"> Status</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="7" data-column="7" checked>
+                                      <label class="form-check-label" for="7"> Type</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="8" data-column="8" checked>
+                                      <label class="form-check-label" for="8"> Environment</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="9" data-column="9" checked>
+                                      <label class="form-check-label" for="9"> Escalated</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="10" data-column="10" checked>
+                                      <label class="form-check-label" for="10"> Past Due</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="11" data-column="11" checked>
+                                      <label class="form-check-label" for="11"> Created</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="12" data-column="12" checked>
+                                      <label class="form-check-label" for="12"> Due Bye</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="13" data-column="13" checked>
+                                      <label class="form-check-label" for="13"> Updated</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="14" data-column="14" checked>
+                                      <label class="form-check-label" for="14"> Agent</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="15" data-column="15" checked>
+                                      <label class="form-check-label" for="15"> Group</label>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="16" data-column="16" checked>
+                                      <label class="form-check-label" for="16"> Score</label>
+                                    </div>
+                                </a></li>
+                      </ul>
+                    </li>
+                </ul>
+                <!-- Dropdown for Filter Category -->
+                <div class="input-group" style="max-width: 40%;">
+                    <span class="input-group-text">Ticket Filters</span>
+                    <select id="filterCategory" class="form-control me-2" style="padding-left: 10px;">
+                        <option value="all">All</option>
+                        <option value="company">Company</option>
+                        <option value="group">Group</option>
+                        <option value="agent">Agent</option>
+                        <option value="escalated">Escalated</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                    <!-- Dropdown for Filter Value -->
+                    <select id="filterValue" class="form-control me-2">
+                        <!-- Options will be dynamically populated based on the category selection -->
+                    </select>
+                    <!-- Dropdown for Third Filter -->
+                    <select id="focusFilter" class="form-control me-2">
+                        <option value="all">All</option>
+                        <option value="focused">Focused</option>
+                    </select>
+                    <!-- Reset Button -->
+                    <button id="resetFilters" class="btn btn-outline-secondary" type="button">Reset</button>
+                </div>
+        </div>
+    </nav>
+</header>
+
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+  <div class="container-fluid">
+    <p class="lead">
+     <table class="table table-striped table-hover table-borderless table-sm align-middle" id="ticketsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company</th>
+                <th>Tier</th>
+                <th>Subject</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Environment</th>
+                <th>Escalated</th>
+                <th>Past Due</th>
+                <th>Created</th>
+                <th>Due By</th>
+                <th>Last Update</th>
+                <th>Agent</th>
+                <th>Group</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <pre id="content">{{ results | safe }}</pre>
+        </tbody>
+    </table>
+    </p>
+  </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-body-tertiary fixed-bottom">
+  <div class="container">
+    <div>
+      <span class="text-body-secondary">Author <a href="https://github.com/lohmancorp/fsc-suite" target="_blank">Taylor Giddens</a>.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+    let globalTickets = [];
+    let companies = new Set();
+    let groups = new Set();
+    let agents = new Set();
+    let escalated = new Set(['Yes', 'No']); // Prepopulate with Yes and No
+    let overdue = new Set(['Yes', 'No']); // Prepopulate with Yes and No
+    let focusedStatuses = new Set(['Open', 'New', 'Service request triage']); // Prepopulate with focused statuses
+
+    // Function to get a random MP3 file
+    const getRandomLoadingAudio = () => {
+        const audios = ['/static/assets/music/loading_1.mp3', '/static/assets/music/loading_2.mp3', '/static/assets/music/loading_3.mp3', '/static/assets/music/loading_4.mp3'];
+        const randomIndex = Math.floor(Math.random() * audios.length);
+        return new Audio(audios[randomIndex]);
+    };
+
+    // Initialize loading audio with a random MP3
+    const loadingAudio = getRandomLoadingAudio();
+
+    // Show loading overlay
+    const showLoadingOverlay = () => {
+        document.getElementById('loadingOverlay').style.display = 'flex';
+        loadingAudio.play();
+    };
+
+    // Hide loading overlay
+    const hideLoadingOverlay = () => {
+        document.getElementById('loadingOverlay').style.display = 'none';
+        loadingAudio.pause();
+        loadingAudio.currentTime = 0;
+    };
+
+    // Function to format date and time
+    const formatDateTime = (dateTimeStr) => {
+        if (!dateTimeStr) return "";
+        const dateTime = new Date(dateTimeStr);
+        const date = dateTime.toISOString().split('T')[0];
+        const time = dateTime.toTimeString().split(' ')[0].substring(0, 5);
+        return `${date} - ${time}`;
+    };
+
+    // Function to format escalated and past due fields
+    const formatBadge = (value) => {
+        return value ? '<span class="badge bg-danger-subtle border border-danger-subtle text-danger-emphasis rounded-pill">Yes</span>' : 'No';
+    };
+
+    // Function to toggle column visibility
+    const toggleColumnVisibility = (column, isVisible) => {
+        document.querySelectorAll(`#ticketsTable td:nth-child(${column}), #ticketsTable th:nth-child(${column})`).forEach(cell => {
+            cell.style.display = isVisible ? '' : 'none';
+        });
+    };
+
+    // Function to save settings to a cookie
+    const saveSettingsToCookie = () => {
+        const settings = {
+            columnVisibility: {},
+            filterCategory: document.getElementById('filterCategory').value,
+            filterValue: document.getElementById('filterValue').value,
+            focusFilter: document.getElementById('focusFilter').value // Adding focus filter to settings
+        };
+        document.querySelectorAll('.column-toggle').forEach(checkbox => {
+            settings.columnVisibility[checkbox.dataset.column] = checkbox.checked;
+        });
+        document.cookie = `fsc-settings=${JSON.stringify(settings)};path=/`;
+    };
+
+    // Function to get settings from a cookie
+    const getSettingsFromCookie = () => {
+        const cookieValue = document.cookie.split('; ').find(row => row.startsWith('fsc-settings='));
+        return cookieValue ? JSON.parse(cookieValue.split('=')[1]) : {};
+    };
+
+    // Function to apply settings and then apply the filters
+    const applySettings = () => {
+        const settings = getSettingsFromCookie();
+        // Apply column visibility
+        Object.keys(settings.columnVisibility || {}).forEach(column => {
+            const isVisible = settings.columnVisibility[column];
+            toggleColumnVisibility(column, isVisible);
+            const checkbox = document.querySelector(`.column-toggle[data-column="${column}"]`);
+            if (checkbox) {
+                checkbox.checked = isVisible;
+            }
+        });
+
+        // Apply filters for category and value
+        if (settings.filterCategory) {
+            document.getElementById('filterCategory').value = settings.filterCategory;
+            updateFilterValueDropdown(() => {
+                if (settings.filterValue) {
+                    document.getElementById('filterValue').value = settings.filterValue;
+                }
+            });
+        }
+
+        // Apply focus filter
+        if (settings.focusFilter) {
+            document.getElementById('focusFilter').value = settings.focusFilter;
+        }
+
+        // Ensure filterRows is called after all dropdowns have been set
+        filterRows();
+    };
+
+
+    // Function to filter rows based on dropdown selection
+    const filterRows = () => {
+        const filterCategory = document.getElementById('filterCategory').value;
+        const filterValue = document.getElementById('filterValue').value;
+        const focusFilter = document.getElementById('focusFilter').value; // New focus filter
+        const rows = document.querySelectorAll('#ticketsTable tbody tr');
+
+        rows.forEach(row => {
+            let isMatch = true;
+            switch (filterCategory) {
+                case 'company':
+                    isMatch = row.cells[1].textContent.trim() === filterValue;
+                    break;
+                case 'group':
+                    isMatch = row.cells[14].textContent.trim() === filterValue;
+                    break;
+                case 'agent':
+                    isMatch = row.cells[13].textContent.trim() === filterValue;
+                    break;
+                case 'escalated':
+                case 'overdue':
+                    let cellText = row.cells[filterCategory === 'escalated' ? 8 : 9].querySelector('.badge')?.textContent.trim() || 'No';
+                    isMatch = cellText === filterValue;
+                    break;
+                default:
+                    isMatch = true;
+            }
+
+            // Apply focus filter if set to 'focused'
+            if (focusFilter === 'focused') {
+                const status = row.cells[5].textContent.trim(); // Assuming status is in the 6th column
+                isMatch = isMatch && focusedStatuses.has(status);
+            }
+
+            row.style.display = isMatch ? '' : 'none';
+        });
+    };
+
+    // Function to reset filters
+    const resetFilters = () => {
+            // Reset all dropdowns to 'All'
+            document.getElementById('filterCategory').value = 'all';
+        document.getElementById('filterValue').innerHTML = ''; // Clear the second dropdown
+        document.getElementById('focusFilter').value = 'all'; // Reset the third dropdown to 'All'
+
+        // Apply the reset to the table and save the settings
+        filterRows();
+        saveSettingsToCookie();
+    };
+    
+    // Function to update the filter value dropdown based on category selection
+    const updateFilterValueDropdown = (callback) => {
+        const filterCategory = document.getElementById('filterCategory').value;
+        const filterValueDropdown = document.getElementById('filterValue');
+
+        filterValueDropdown.innerHTML = '';
+        let options = [];
+        if (filterCategory === 'company') options = Array.from(companies).sort();
+        if (filterCategory === 'group') options = Array.from(groups).sort();
+        if (filterCategory === 'agent') options = Array.from(agents).sort();
+        if (filterCategory === 'escalated' || filterCategory === 'overdue') options = ['Yes', 'No'];
+
+        if (filterCategory !== 'escalated' && filterCategory !== 'overdue') {
+            filterValueDropdown.add(new Option('', ''));
+        }
+
+        options.forEach(option => {
+            filterValueDropdown.add(new Option(option, option));
+        });
+
+        if (callback) callback();
+    };
+
+    // Populate table with tickets and then apply visibility settings
+    const populateTable = (tickets) => {
+        const tableBody = document.getElementById('ticketsTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = ''; // Clear existing rows
+        companies.clear();
+        groups.clear();
+        agents.clear();
+        escalated.clear();
+        overdue.clear();
+
+        tickets.forEach(ticket => {
+            let row = tableBody.insertRow();
+            row.style.cursor = "pointer";
+            row.onclick = () => window.open(`https://support.cloudblue.com/a/tickets/${ticket.id}`, '_blank');
+
+            let cellId = row.insertCell(0);
+            let cellCompany = row.insertCell(1);
+            let cellTier = row.insertCell(2);
+            let cellSubject = row.insertCell(3);
+            let cellPriority = row.insertCell(4);
+            let cellStatus = row.insertCell(5);
+            let cellType = row.insertCell(6);
+            let cellEnvironment = row.insertCell(7);
+            let cellEscalated = row.insertCell(8);
+            let cellPastDue = row.insertCell(9);
+            let cellCreated = row.insertCell(10);
+            let cellDueBy = row.insertCell(11);
+            let cellLastUpdate = row.insertCell(12);
+            let cellAgent = row.insertCell(13);
+            let cellGroup = row.insertCell(14);
+            let cellScore = row.insertCell(15);
+
+            cellId.innerHTML = ticket.id;
+            cellCompany.innerHTML = ticket.company_name;
+            cellTier.innerHTML = ticket.account_tier;
+            cellSubject.innerHTML = ticket.subject;
+            cellPriority.innerHTML = ticket.priority;
+            cellStatus.innerHTML = ticket.status;
+            cellType.innerHTML = ticket.ticket_type;
+            cellEnvironment.innerHTML = ticket.environment;
+            cellEscalated.innerHTML = formatBadge(ticket.escalated);
+            cellPastDue.innerHTML = formatBadge(ticket.is_past_due);
+            cellCreated.innerHTML = formatDateTime(ticket.created_at);
+            cellDueBy.innerHTML = formatDateTime(ticket.due_by);
+            cellLastUpdate.innerHTML = formatDateTime(ticket.updated_at);
+            cellAgent.innerHTML = ticket.agent_name;
+            cellGroup.innerHTML = ticket.group_name;
+            cellScore.innerHTML = ticket.score;
+
+            companies.add(ticket.company_name);
+            groups.add(ticket.group_name);
+            agents.add(ticket.agent_name);
+            escalated.add(ticket.escalated ? 'Yes' : 'No');
+            overdue.add(ticket.is_past_due ? 'Yes' : 'No');
+        });
+
+        applySettings();
+    };
+
+    document.querySelectorAll('.column-toggle').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            toggleColumnVisibility(checkbox.dataset.column, checkbox.checked);
+            saveSettingsToCookie();
+        });
+    });
+
+    // Event listener for filter category change
+    document.getElementById('filterCategory').addEventListener('change', function() {
+        updateFilterValueDropdown(() => {
+            if (this.value === 'all') {
+                document.getElementById('focusFilter').value = 'all'; // Set the third dropdown to 'All'
+            }
+            filterRows(); // Apply filters based on the new dropdown settings
+            saveSettingsToCookie();
+        });
+    });
+
+    document.getElementById('resetFilters').addEventListener('click', resetFilters);
+
+    document.getElementById('filterValue').addEventListener('change', () => {
+        filterRows();
+        saveSettingsToCookie();
+    });
+
+    // Event listener for focus filter change
+    document.getElementById('focusFilter').addEventListener('change', () => {
+        filterRows();
+        saveSettingsToCookie();
+    });
+
+    // Load settings and fetch tickets on page load
+    window.addEventListener('DOMContentLoaded', (event) => {
+            showLoadingOverlay();
+        fetch('/tickets')
+            .then(response => response.json())
+            .then(tickets => {
+            globalTickets = tickets;
+        populateTable(tickets); // Populate the table with tickets
+        applySettings(); // Apply settings and filters after populating
+            })
+            .catch(error => {
+            console.error('Error:', error);
+            })
+            .finally(() => {
+            hideLoadingOverlay();
+            });
+    });
+
+    // Update the filter value dropdown when the category changes
+    document.getElementById('filterCategory').addEventListener('change', function () {
+        const category = this.value;
+        const valueDropdown = document.getElementById('filterValue');
+        valueDropdown.innerHTML = '';
+
+        let options = [];
+        if (category === 'company') options = Array.from(companies).sort();
+        if (category === 'group') options = Array.from(groups).sort();
+        if (category === 'agent') options = Array.from(agents).sort();
+        if (category === 'escalated' || category === 'overdue') options = ['Yes', 'No'];
+
+        if (category !== 'escalated' && category !== 'overdue') {
+            options.unshift(''); // Add a blank option at the start
+        }
+
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            valueDropdown.appendChild(optionElement);
+        });
+
+        filterRows();
+    });
+
+</script>
+
+
+
+
+<script src="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.min.js') }}"></script>
+
+</body>
+</html>
