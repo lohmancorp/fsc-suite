@@ -112,10 +112,10 @@ const updateDashboardCounts = () => {
     const rows = document.querySelectorAll('#ticketsTable tbody tr:not([style*="display: none"])');
 
     const totalTickets = rows.length;
-    const totalIncidents = Array.from(rows).filter(row => row.cells[6].textContent.trim() === 'Incident or Problem').length;
-    const totalServiceRequests = Array.from(rows).filter(row => row.cells[6].textContent.trim() === 'Service request').length;
-    const totalEscalated = Array.from(rows).filter(row => row.cells[8].textContent.trim().includes('Yes')).length;
-    const totalOverdue = Array.from(rows).filter(row => row.cells[9].textContent.trim().includes('Yes')).length;
+    const totalIncidents = Array.from(rows).filter(row => row.cells[7].textContent.trim() === 'Incident or Problem').length;
+    const totalServiceRequests = Array.from(rows).filter(row => row.cells[7].textContent.trim() === 'Service request').length;
+    const totalEscalated = Array.from(rows).filter(row => row.cells[9].textContent.trim().includes('Yes')).length;
+    const totalOverdue = Array.from(rows).filter(row => row.cells[10].textContent.trim().includes('Yes')).length;
 
     document.getElementById('totalTickets').textContent = totalTickets;
     document.getElementById('totalIncidents').textContent = totalIncidents;
@@ -141,32 +141,32 @@ const filterRows = () => {
         let isMatch = true;
         switch (filterCategory) {
             case 'company':
-                isMatch = row.cells[1].textContent.trim() === filterValue;
-                break;
-            case 'group':
-                isMatch = row.cells[14].textContent.trim() === filterValue;
-                break;
-            case 'agent':
-                isMatch = row.cells[13].textContent.trim() === filterValue;
-                break;
-            case 'tier':
                 isMatch = row.cells[2].textContent.trim() === filterValue;
                 break;
-            case 'priority':
-                isMatch = row.cells[4].textContent.trim() === filterValue;
+            case 'group':
+                isMatch = row.cells[16].textContent.trim() === filterValue;
                 break;
-            case 'status':
+            case 'agent':
+                isMatch = row.cells[14].textContent.trim() === filterValue;
+                break;
+            case 'tier':
+                isMatch = row.cells[3].textContent.trim() === filterValue;
+                break;
+            case 'priority':
                 isMatch = row.cells[5].textContent.trim() === filterValue;
                 break;
-            case 'type':
+            case 'status':
                 isMatch = row.cells[6].textContent.trim() === filterValue;
                 break;
-            case 'environment':
+            case 'type':
                 isMatch = row.cells[7].textContent.trim() === filterValue;
+                break;
+            case 'environment':
+                isMatch = row.cells[8].textContent.trim() === filterValue;
                 break;
             case 'escalated':
             case 'overdue':
-                let cellText = row.cells[filterCategory === 'escalated' ? 8 : 9].querySelector('.badge')?.textContent.trim() || 'No';
+                let cellText = row.cells[filterCategory === 'escalated' ? 9 : 10].querySelector('.badge')?.textContent.trim() || 'No';
                 isMatch = cellText === filterValue;
                 break;
             default:
@@ -175,7 +175,7 @@ const filterRows = () => {
 
         // Apply focus filter if set to 'focused'
         if (focusFilter === 'focused') {
-            const status = row.cells[5].textContent.trim(); // Assuming status is in the 6th column
+            const status = row.cells[6].textContent.trim(); // Assuming status is in the 7th column
             isMatch = isMatch && focusedStatuses.has(status);
         }
 
@@ -224,6 +224,38 @@ const updateFilterValueDropdown = (callback) => {
     if (callback) callback();
 };
 
+// Function to toggle the icon
+const toggleIcon = (cellIcon) => {
+    if (cellIcon.innerHTML.includes('bi-envelope-check')) {
+        cellIcon.innerHTML = '';
+    } else {
+        cellIcon.innerHTML = '<i class="bi bi-envelope-check text-success fw-bold" style="font-size: 1.25rem; font-weight: bold;" data-bs-toggle="tooltip" data-bs-title="Item Reviewed. Swipe left again to mark unreviewed."></i>';
+    }
+};
+
+// Function to apply animation to the icon
+const animateIcon = (iconElement) => {
+    setTimeout(() => {
+        iconElement.style.animation = 'zoomSpin 1s ease-in-out 2';
+    }, 1000); // Delay to ensure the row is back in position
+};
+
+// Function to create a placeholder for the drag effect
+const createDragPlaceholder = (row) => {
+    const rect = row.getBoundingClientRect();
+    const placeholder = document.createElement('div');
+    placeholder.classList.add('drag-placeholder');
+    placeholder.style.height = `${rect.height}px`;
+    placeholder.style.width = '0'; // Start with no width and expand as the row is dragged
+    placeholder.style.position = 'absolute';
+    placeholder.style.top = `${rect.top + window.scrollY}px`; // Adjust for scrolling
+    placeholder.style.left = `${rect.right}px`; // Start from the right side of the row
+    placeholder.style.zIndex = '10'; // Ensure it's under the dragged row
+    placeholder.style.transition = 'width 0.2s'; // Optional: for smooth width transition
+    document.body.appendChild(placeholder);
+    return placeholder;
+};
+
 // Populate table with tickets and then apply visibility settings
 const populateTable = (tickets) => {
     const tableBody = document.getElementById('ticketsTable').getElementsByTagName('tbody')[0];
@@ -241,26 +273,77 @@ const populateTable = (tickets) => {
 
     tickets.forEach(ticket => {
         let row = tableBody.insertRow();
+        row.classList.add('ticket-row'); // Add class for styling and identification
         row.style.cursor = "pointer";
-        row.onclick = () => window.open(`https://support.cloudblue.com/a/tickets/${ticket.id}`, '_blank');
+        row.ondblclick = () => window.open(`https://support.cloudblue.com/a/tickets/${ticket.id}`, '_blank');
 
-        let cellId = row.insertCell(0);
-        let cellCompany = row.insertCell(1);
-        let cellTier = row.insertCell(2);
-        let cellSubject = row.insertCell(3);
-        let cellPriority = row.insertCell(4);
-        let cellStatus = row.insertCell(5);
-        let cellType = row.insertCell(6);
-        let cellEnvironment = row.insertCell(7);
-        let cellEscalated = row.insertCell(8);
-        let cellPastDue = row.insertCell(9);
-        let cellCreated = row.insertCell(10);
-        let cellDueBy = row.insertCell(11);
-        let cellLastUpdate = row.insertCell(12);
-        let cellAgent = row.insertCell(13);
-        let cellGroup = row.insertCell(14);
-        let cellScore = row.insertCell(15);
+        // Event listeners for drag functionality
+        let startX, isDragging = false;
+        let placeholder; // Placeholder for the dragged row's original position
 
+        row.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+            isDragging = false;
+            placeholder = createDragPlaceholder(row); // Create and display the placeholder
+            row.classList.add('row-dragging'); // Add this line to apply the dragging style
+            row.classList.add('no-select');
+        });
+
+        row.addEventListener('mousemove', (e) => {
+            if (e.buttons !== 1) return;
+            let dx = e.clientX - startX;
+            if (dx < 0 && dx > -150) { // Limit dragging to -50px
+                row.style.transform = `translateX(${dx}px)`;
+                placeholder.style.width = `${-dx * 2}px`; // Amplify the width
+                isDragging = true;
+            }
+        });
+
+        row.addEventListener('mouseup', () => {
+            if (isDragging) {
+                toggleIcon(row.cells[0]); // Toggle icon after drag
+                animateIcon(row.cells[0].firstChild); // Animate the icon
+            }
+            row.style.transform = 'translateX(0)';
+            row.style.cursor = "pointer";
+            if (placeholder) placeholder.remove(); // Ensure placeholder is removed
+            isDragging = false;
+            startX = null;
+            row.classList.remove('row-dragging'); // Add this line to remove the dragging style
+            row.classList.remove('no-select');
+        });
+
+        row.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                row.style.transform = 'translateX(0)';
+                row.style.cursor = "pointer";
+                if (placeholder) placeholder.remove(); // Ensure placeholder is removed
+                isDragging = false;
+                startX = null;
+                row.classList.remove('row-dragging'); // Also remove the dragging style here for the leave event
+                row.classList.remove('no-select');
+            }
+        });
+
+        let cellIcon = row.insertCell(0);
+        let cellId = row.insertCell(1);
+        let cellCompany = row.insertCell(2);
+        let cellTier = row.insertCell(3);
+        let cellSubject = row.insertCell(4);
+        let cellPriority = row.insertCell(5);
+        let cellStatus = row.insertCell(6);
+        let cellType = row.insertCell(7);
+        let cellEnvironment = row.insertCell(8);
+        let cellEscalated = row.insertCell(9);
+        let cellPastDue = row.insertCell(10);
+        let cellCreated = row.insertCell(11);
+        let cellDueBy = row.insertCell(12);
+        let cellLastUpdate = row.insertCell(13);
+        let cellAgent = row.insertCell(14);
+        let cellGroup = row.insertCell(15);
+        let cellScore = row.insertCell(16);
+
+        //cellIcon.innerHTML = '<i class="bi bi-envelope"></i>'; // Add envelope icon
         cellId.innerHTML = ticket.id;
         cellCompany.innerHTML = ticket.company_name;
         cellTier.innerHTML = ticket.account_tier;
@@ -288,6 +371,7 @@ const populateTable = (tickets) => {
         environment.add(ticket.environment);
         escalated.add(ticket.escalated ? 'Yes' : 'No');
         overdue.add(ticket.is_past_due ? 'Yes' : 'No');
+        cellIcon.classList.add('text-center');
         cellId.classList.add('text-center');
         cellTier.classList.add('text-center');
         cellPriority.classList.add('text-center');
