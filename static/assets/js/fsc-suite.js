@@ -6,6 +6,7 @@ let type = new Set();
 let status = new Set();
 let priority = new Set();
 let tier = new Set();
+let environment = new Set();
 let escalated = new Set(['Yes', 'No']); // Prepopulate with Yes and No
 let overdue = new Set(['Yes', 'No']); // Prepopulate with Yes and No
 let focusedStatuses = new Set(['Open', 'New', 'Service request triage']); // Prepopulate with focused statuses
@@ -160,6 +161,9 @@ const filterRows = () => {
             case 'type':
                 isMatch = row.cells[6].textContent.trim() === filterValue;
                 break;
+            case 'environment':
+                isMatch = row.cells[7].textContent.trim() === filterValue;
+                break;
             case 'escalated':
             case 'overdue':
                 let cellText = row.cells[filterCategory === 'escalated' ? 8 : 9].querySelector('.badge')?.textContent.trim() || 'No';
@@ -206,6 +210,7 @@ const updateFilterValueDropdown = (callback) => {
     if (filterCategory === 'priority') options = Array.from(priority).sort();
     if (filterCategory === 'status') options = Array.from(status).sort();
     if (filterCategory === 'type') options = Array.from(type).sort();
+    if (filterCategory === 'environment') options = Array.from(environment).sort();
     if (filterCategory === 'escalated' || filterCategory === 'overdue') options = ['Yes', 'No'];
     if (filterCategory !== 'escalated' && filterCategory !== 'overdue') {
         filterValueDropdown.add(new Option('', ''));
@@ -230,6 +235,7 @@ const populateTable = (tickets) => {
     priority.clear();
     status.clear();
     type.clear();
+    environment.clear();
     escalated.clear();
     overdue.clear();
 
@@ -279,6 +285,7 @@ const populateTable = (tickets) => {
         priority.add(ticket.priority);
         status.add(ticket.status);
         type.add(ticket.ticket_type);
+        environment.add(ticket.environment);
         escalated.add(ticket.escalated ? 'Yes' : 'No');
         overdue.add(ticket.is_past_due ? 'Yes' : 'No');
         cellId.classList.add('text-center');
@@ -361,6 +368,7 @@ document.getElementById('filterCategory').addEventListener('change', function ()
     if (category === 'priority') options = Array.from(priority).sort();
     if (category === 'status') options = Array.from(status).sort();
     if (category === 'type') options = Array.from(type).sort();
+    if (category === 'environment') options = Array.from(environment).sort();
     if (category === 'escalated' || category === 'overdue') options = ['Yes', 'No'];
 
     if (category !== 'escalated' && category !== 'overdue') {
