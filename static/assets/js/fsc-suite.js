@@ -144,7 +144,7 @@ const filterRows = () => {
                 isMatch = row.cells[2].textContent.trim() === filterValue;
                 break;
             case 'group':
-                isMatch = row.cells[16].textContent.trim() === filterValue;
+                isMatch = row.cells[15].textContent.trim() === filterValue;
                 break;
             case 'agent':
                 isMatch = row.cells[14].textContent.trim() === filterValue;
