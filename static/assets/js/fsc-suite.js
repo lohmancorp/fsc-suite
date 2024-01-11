@@ -632,7 +632,7 @@ document.getElementById('toggleDashboard').addEventListener('change', function (
 
 // Additional handling for internal navigation (if needed)
 // Replace 'logoElement' and 'homeButton' with the actual IDs or classes of your elements
-document.getElementById('logoElement').addEventListener('click', handleInternalNavigation);
+//document.getElementById('logoElement').addEventListener('click', handleLogoInternalNavigation);
 document.getElementById('homeButton').addEventListener('click', handleInternalNavigation);
 
 function handleInternalNavigation(event) {
@@ -640,6 +640,11 @@ function handleInternalNavigation(event) {
     applySettings();
     // Refresh the page
     location.reload();
+}
+function handleLogoInternalNavigation(event) {
+    event.preventDefault(); // Prevent default link behavior
+    applySettings();
+    // Refresh the page
 }
 
 // Update the filter value dropdown when the category changes

@@ -238,7 +238,7 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: #070354;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='assets/logos/cloudblue-logo-white.png') }}" style="max-height: 30px;" id="logoElement"></a>
+            <span class="navbar-brand"><img src="{{ url_for('static', filename='assets/logos/cloudblue-logo-white.png') }}" style="max-height: 30px;" id="logoElement"></span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -259,7 +259,7 @@
                 </ul>
                 <!-- Dropdown for Filter Category -->
                 <div class="input-group" style="max-width: 40%;">
-                    <span class="input-group-text"> Ticket Filters <i class="bi bi-funnel-fill"></i></span>
+                    <span class="input-group-text"> <i class="bi bi-funnel-fill"></i> Ticket Filters</span>
                     <select id="filterCategory" class="form-control me-2" style="padding-left: 10px;">
                         <option value="all">All</option>
                         <option value="company">Company</option>
