@@ -11,21 +11,7 @@ let escalated = new Set(['Yes', 'No']); // Prepopulate with Yes and No
 let overdue = new Set(['Yes', 'No']); // Prepopulate with Yes and No
 let focusedStatuses = new Set(['Open', 'New', 'Service request triage']); // Prepopulate with focused statuses
 
-// Function to get a random MP3 file
-const getRandomLoadingAudio = () => {
-    const audios = ['/static/assets/music/loading_1.mp3', '/static/assets/music/loading_2.mp3', '/static/assets/music/loading_3.mp3', '/static/assets/music/loading_4.mp3'];
-    const randomIndex = Math.floor(Math.random() * audios.length);
-    return new Audio(audios[randomIndex]);
-};
 
-// Initialize loading audio with a random MP3
-const loadingAudio = getRandomLoadingAudio();
-
-// Show loading overlay
-const showLoadingOverlay = () => {
-    document.getElementById('loadingOverlay').style.display = 'flex';
-    loadingAudio.play();
-};
 
 // Hide loading overlay
 const hideLoadingOverlay = () => {
@@ -42,6 +28,19 @@ const formatDateTime = (dateTimeStr) => {
     const time = dateTime.toTimeString().split(' ')[0].substring(0, 5);
     return `${date} - ${time}`;
 };
+
+function isDateEqual(date1Str, date2Str) {
+    const date1 = new Date(date1Str);
+    const date2 = new Date(date2Str);
+    return date1.getTime() === date2.getTime();
+}
+
+function has24HoursPassedSince(dateStr) {
+    const date = new Date(dateStr);
+    const now = new Date();
+    return (now.getTime() - date.getTime()) > 24 * 60 * 60 * 1000;
+}
+
 
 // Function to format escalated and past due fields
 const formatBadge = (value) => {
@@ -61,7 +60,9 @@ const saveSettingsToCookie = () => {
         columnVisibility: {},
         filterCategory: document.getElementById('filterCategory').value,
         filterValue: document.getElementById('filterValue').value,
-        focusFilter: document.getElementById('focusFilter').value // Adding focus filter to settings
+        focusFilter: document.getElementById('focusFilter').value, // Adding focus filter to settings
+        musicEnabled: document.getElementById('toggleMusic').checked,
+        dashboardVisible: document.getElementById('toggleDashboard').checked
     };
     document.querySelectorAll('.column-toggle').forEach(checkbox => {
         settings.columnVisibility[checkbox.dataset.column] = checkbox.checked;
@@ -103,9 +104,120 @@ const applySettings = () => {
         document.getElementById('focusFilter').value = settings.focusFilter;
     }
 
+    if (settings.dashboardVisible !== undefined) {
+        document.getElementById('toggleDashboard').checked = settings.dashboardVisible;
+        document.getElementById('topDashboard').style.display = settings.dashboardVisible ? '' : 'none';
+    }
+
     // Ensure filterRows is called after all dropdowns have been set
     filterRows();
 };
+
+// Function to get a random MP3 file
+const getRandomLoadingAudio = () => {
+    const audios = ['/static/assets/music/loading_1.mp3', '/static/assets/music/loading_2.mp3', '/static/assets/music/loading_3.mp3', '/static/assets/music/loading_4.mp3', '/static/assets/music/loading_5.mp3'];
+    const randomIndex = Math.floor(Math.random() * audios.length);
+    return new Audio(audios[randomIndex]);
+};
+
+// Initialize loading audio with a random MP3
+const loadingAudio = getRandomLoadingAudio();
+
+// Show loading overlay
+const showLoadingOverlay = () => {
+    document.getElementById('loadingOverlay').style.display = 'flex';
+    if (document.getElementById('toggleMusic').checked) {
+        loadingAudio.play();
+    } else {
+        loadingAudio.pause();
+        loadingAudio.currentTime = 0;
+    }
+};
+
+// Helper function to get a cookie by name
+function getCookie(name) {
+    let cookieArray = document.cookie.split(';');
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookiePair = cookieArray[i].split('=');
+        if (name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+}
+
+// Helper function to set a cookie
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+const updateFscTicketsCookie = (ticketId, cellPriority, cellStatus, cellLastUpdate, readStatus) => {
+    let fscTickets = JSON.parse(getCookie('fsc-tickets') || '[]');
+    let ticketIndex = fscTickets.findIndex(ticket => ticket.ticketId === ticketId);
+
+    if (readStatus === 'unread') {
+        // Remove entry if it's marked as unread
+        if (ticketIndex !== -1) {
+            fscTickets.splice(ticketIndex, 1);
+        }
+    } else {
+        // Update or add new entry
+        const ticketData = { ticketId, cellPriority, cellStatus, cellLastUpdate, read_status: readStatus };
+        if (ticketIndex !== -1) {
+            fscTickets[ticketIndex] = ticketData;
+        } else {
+            fscTickets.push(ticketData);
+        }
+    }
+
+    // Update the cookie
+    setCookie('fsc-tickets', JSON.stringify(fscTickets), 7); // Expires in 7 days
+};
+
+function evaluateReadStatus(tickets) {
+    let fscTickets = JSON.parse(getCookie('fsc-tickets') || '[]');
+    let currentTime = new Date();
+    let isCookieUpdated = false;
+
+    tickets.forEach(ticket => {
+        let storedTicket = fscTickets.find(fscTicket => fscTicket.ticketId === ticket.id.toString());
+        const ticketUpdated = formatDateTime(ticket.updated_at);
+
+        if (!storedTicket) {
+            ticket.read_status = 'unread'; // Not found in cookie
+        } else {
+            let updatedTime = new Date(storedTicket.cellLastUpdate);
+            console.log(`Ticket ID: ${ticket.id}, Updated in ticket: ${ticketUpdated}, Stored Updated: ${storedTicket.cellLastUpdate}`);
+
+            if (ticketUpdated !== storedTicket.cellLastUpdate ||
+                storedTicket.cellPriority !== ticket.priority ||
+                storedTicket.cellStatus !== ticket.status) {
+                ticket.read_status = 'readUpdated'; // Data mismatch
+                storedTicket.read_status = 'readUpdated';
+                isCookieUpdated = true;
+            } else if ((currentTime - updatedTime) >= 24 * 60 * 60 * 1000) { // More than 24 hours
+                ticket.read_status = 'readRecheck'; // More than 24 hours
+                storedTicket.read_status = 'readRecheck';
+                isCookieUpdated = true;
+            } else {
+                ticket.read_status = 'read'; // Less than 24 hours
+                storedTicket.read_status = 'read';
+            }
+        }
+    });
+
+    // Update the cookie if any changes were made
+    if (isCookieUpdated) {
+        setCookie('fsc-tickets', JSON.stringify(fscTickets), 7); // Expires in 7 days
+    }
+}
+
 
 // Function to update dashboard counts
 const updateDashboardCounts = () => {
@@ -225,18 +337,23 @@ const updateFilterValueDropdown = (callback) => {
 };
 
 // Function to toggle the icon
-const toggleIcon = (cellIcon) => {
-    if (cellIcon.innerHTML.includes('bi-envelope-check')) {
-        cellIcon.innerHTML = '';
-    } else {
+const toggleIcon = (cellIcon, cellId, cellPriority, cellStatus, cellLastUpdate) => {
+    let isCurrentlyRead = cellIcon.innerHTML.includes('bi-envelope-check');
+    let newReadStatus = isCurrentlyRead ? 'unread' : 'read';
+
+    if (newReadStatus === 'read') {
         cellIcon.innerHTML = '<i class="bi bi-envelope-check text-success fw-bold" style="font-size: 1.25rem; font-weight: bold;" data-bs-toggle="tooltip" data-bs-title="Item Reviewed. Swipe left again to mark unreviewed."></i>';
+    } else {
+        cellIcon.innerHTML = '-';
     }
+
+    updateFscTicketsCookie(cellId.textContent, cellPriority.textContent, cellStatus.textContent, cellLastUpdate.textContent, newReadStatus);
 };
 
 // Function to apply animation to the icon
 const animateIcon = (iconElement) => {
     setTimeout(() => {
-        iconElement.style.animation = 'zoomSpin 1s ease-in-out 2';
+        //iconElement.style.animation = 'zoomSpin 1s ease-in-out 2';
     }, 1000); // Delay to ensure the row is back in position
 };
 
@@ -270,12 +387,15 @@ const populateTable = (tickets) => {
     environment.clear();
     escalated.clear();
     overdue.clear();
+    evaluateReadStatus(tickets); // Evaluate read statuses
+    let fscTickets = JSON.parse(getCookie('fsc-tickets') || '[]');
 
     tickets.forEach(ticket => {
         let row = tableBody.insertRow();
         row.classList.add('ticket-row'); // Add class for styling and identification
         row.style.cursor = "pointer";
         row.ondblclick = () => window.open(`https://support.cloudblue.com/a/tickets/${ticket.id}`, '_blank');
+        console.log(`Ticket ID: ${ticket.id}, Read Status: ${ticket.read_status}`);
 
         // Event listeners for drag functionality
         let startX, isDragging = false;
@@ -301,7 +421,8 @@ const populateTable = (tickets) => {
 
         row.addEventListener('mouseup', () => {
             if (isDragging) {
-                toggleIcon(row.cells[0]); // Toggle icon after drag
+                //toggleIcon(row.cells[0]); // Toggle icon after drag
+                toggleIcon(row.cells[0], row.cells[1], row.cells[5], row.cells[6], row.cells[13]);
                 animateIcon(row.cells[0].firstChild); // Animate the icon
             }
             row.style.transform = 'translateX(0)';
@@ -344,6 +465,41 @@ const populateTable = (tickets) => {
         let cellScore = row.insertCell(16);
 
         //cellIcon.innerHTML = '<i class="bi bi-envelope"></i>'; // Add envelope icon
+        let matchedTicket = fscTickets.find(fscTicket => fscTicket.ticketId === ticket.id);
+        let readStatus = ticket.read_status;
+        console.log(`Ticket ID: ${ticket.id}, Read Status: ${readStatus}`);
+
+        if (matchedTicket) {
+            const ticketUpdated = formatDateTime(ticket.updated_at);
+            if (!isDateEqual(ticketUpdated, matchedTicket.cellLastUpdate) ||
+                matchedTicket.cellPriority !== ticket.priority ||
+                matchedTicket.cellStatus !== ticket.status) {
+                readStatus = 'readUpdated';
+            } else if (has24HoursPassedSince(matchedTicket.cellLastUpdate)) {
+                readStatus = 'readRecheck';
+            } else {
+                readStatus = 'read';
+            }
+            console.log(`Ticket ID: ${ticket.id}, Read Status: ${readStatus}`);
+        }
+
+        // Set the icon based on readStatus
+        switch (readStatus) {
+            case 'read':
+                cellIcon.innerHTML = '<i class="bi bi-envelope-check text-success fw-bold" style="font-size: 1.25rem; font-weight: bold;"></i>';
+                break;
+            case 'readUpdated':
+                cellIcon.innerHTML = '<i class="bi bi-envelope-exclamation text-warning fw-bold" style="font-size: 1.25rem; font-weight: bold;"></i>';
+                break;
+            case 'readRecheck':
+                cellIcon.innerHTML = '<i class="bi bi-envelope-heart text-warning fw-bold" style="font-size: 1.25rem; font-weight: bold;"></i>';
+                break;
+            default:
+                cellIcon.innerHTML = '-';
+        }
+
+        console.log(`Ticket ID: ${ticket.id}, Icon HTML: ${cellIcon.innerHTML}`);
+
         cellId.innerHTML = ticket.id;
         cellCompany.innerHTML = ticket.company_name;
         cellTier.innerHTML = ticket.account_tier;
@@ -422,21 +578,69 @@ document.getElementById('focusFilter').addEventListener('change', () => {
 
 // Load settings and fetch tickets on page load
 window.addEventListener('DOMContentLoaded', (event) => {
-        showLoadingOverlay();
+    showLoadingOverlay();
     fetch('/tickets')
         .then(response => response.json())
         .then(tickets => {
-        globalTickets = tickets;
-    populateTable(tickets); // Populate the table with tickets
-    applySettings(); // Apply settings and filters after populating
+            globalTickets = tickets;
+            populateTable(tickets);
+            applySettings(); // Ensure settings are applied on initial load
         })
         .catch(error => {
-        console.error('Error:', error);
+            console.error('Error:', error);
         })
         .finally(() => {
-        hideLoadingOverlay();
+            hideLoadingOverlay();
         });
 });
+
+document.getElementById('toggleMusic').addEventListener('change', function () {
+    if (this.checked) {
+        // Code to enable music
+        //loadingAudio.play();
+        saveSettingsToCookie(); // Save settings after change
+        applySettings();
+    } else {
+        // Code to disable music
+        loadingAudio.pause();
+        loadingAudio.currentTime = 0;
+        saveSettingsToCookie();
+        applySettings();
+    }
+});
+
+document.getElementById('toggleDashboard').addEventListener('change', function () {
+    const dashboard = document.getElementById('topDashboard');
+    if (this.checked) {
+        dashboard.style.display = ''; // Show the dashboard
+    } else {
+        dashboard.style.display = 'none'; // Hide the dashboard
+    }
+});
+
+// Event listeners for the new toggles
+document.getElementById('toggleMusic').addEventListener('change', function () {
+    // Existing code to handle music toggle...
+    saveSettingsToCookie(); // Save settings after change
+    applySettings();
+});
+
+document.getElementById('toggleDashboard').addEventListener('change', function () {
+    // Existing code to handle dashboard visibility toggle...
+    saveSettingsToCookie(); // Save settings after change
+});
+
+// Additional handling for internal navigation (if needed)
+// Replace 'logoElement' and 'homeButton' with the actual IDs or classes of your elements
+document.getElementById('logoElement').addEventListener('click', handleInternalNavigation);
+document.getElementById('homeButton').addEventListener('click', handleInternalNavigation);
+
+function handleInternalNavigation(event) {
+    event.preventDefault(); // Prevent default link behavior
+    applySettings();
+    // Refresh the page
+    location.reload();
+}
 
 // Update the filter value dropdown when the category changes
 document.getElementById('filterCategory').addEventListener('change', function () {

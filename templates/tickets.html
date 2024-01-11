@@ -9,6 +9,7 @@
     <meta name="author" content="Taylor Giddens">
     <meta name="generator" content="Hugo 0.118.2">
     <title>CloudBlue - FS Commander Suite</title>
+    <link rel="icon" type="image/x-icon" href="static/assets/images/favicon.ico">
 
     <link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -168,6 +169,44 @@
       -ms-user-select: none; /* IE/Edge */
     }
 
+    #offcanvasConfig {
+        z-index: 9999;
+    }
+
+    .form-switch .form-check-input:checked {
+        background-color: black; /* Change background color when active */
+        border-color: black; /* Change border color when active */
+    }
+
+    .form-switch .form-check-input:focus {
+        outline: 1px solid black; /* Keep the focus outline color black */
+        box-shadow: 0 0 0 0.25rem grey; /* Set the focus box-shadow to grey */
+        border-color: black; /* Keep border color black when active */
+    }
+
+    a {
+        border: none; /* Removes any border */
+        box-shadow: none; /* Removes any box-shadow */
+        outline: none; /* Removes the outline */
+    }
+    .config-option:focus,
+    .config-option:active,
+    .config-option:focus-visible {
+        outline: none !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    .config-option input:focus,
+    .config-option label:focus {
+        outline: none !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    .config-option::-moz-focus-inner {
+        border: 0;
+    }
+
+
 </style>
     
   </head>
@@ -194,63 +233,12 @@
     </div>
   </div>
 </div>
-
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-      <symbol id="check2" viewBox="0 0 16 16">
-        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-      </symbol>
-      <symbol id="circle-half" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
-      </symbol>
-      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
-        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
-      </symbol>
-      <symbol id="sun-fill" viewBox="0 0 16 16">
-        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
-      </symbol>
-    </svg>
-
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-              id="bd-theme"
-              type="button"
-              aria-expanded="false"
-              data-bs-toggle="dropdown"
-              aria-label="Toggle theme (auto)">
-        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-            Light
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-            Dark
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
-            Auto
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-      </ul>
-    </div>
     
 <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: #070354;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='assets/logos/cloudblue-logo-white.png') }}" style="max-height: 30px;"></a>
+            <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='assets/logos/cloudblue-logo-white.png') }}" style="max-height: 30px;" id="logoElement"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -258,107 +246,16 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                      <a class="btn btn-dark active" aria-expanded="false" role="button" href="/">
+                      <a class="btn btn-dark active" aria-expanded="false" role="button" href="/" id="homeButton">
                         Home
                       </a>
                     </li>
-                    <li class="nav-item dropdown">
-                      <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="padding-left: 10px;">
-                        Columns
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="3" data-column="3" checked>
-                                      <label class="form-check-label" for="3"> Company</label>
-                                    </div>
-                                  </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="4" data-column="4" checked>
-                                      <label class="form-check-label" for="4"> Tier</label>
-                                    </div>
-                                  </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="5" data-column="5" checked>
-                                      <label class="form-check-label" for="5"> Subject</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="6" data-column="6" checked>
-                                      <label class="form-check-label" for="6"> Priority</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="7" data-column="7" checked>
-                                      <label class="form-check-label" for="7"> Status</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="8" data-column="8" checked>
-                                      <label class="form-check-label" for="8"> Type</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="9" data-column="9" checked>
-                                      <label class="form-check-label" for="9"> Environment</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="10" data-column="10" checked>
-                                      <label class="form-check-label" for="10"> Escalated</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="11" data-column="11" checked>
-                                      <label class="form-check-label" for="11"> Past Due</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="12" data-column="12" checked>
-                                      <label class="form-check-label" for="12"> Created</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="13" data-column="13" checked>
-                                      <label class="form-check-label" for="13"> Due Bye</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="14" data-column="14" checked>
-                                      <label class="form-check-label" for="14"> Updated</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="15" data-column="15" checked>
-                                      <label class="form-check-label" for="15"> Agent</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="16" data-column="16" checked>
-                                      <label class="form-check-label" for="16"> Group</label>
-                                    </div>
-                                </a></li>
-                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2">
-                                    <div class="form-check form-switch">
-                                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="17" data-column="17" checked>
-                                      <label class="form-check-label" for="17"> Score</label>
-                                    </div>
-                                </a></li>
-                      </ul>
+                    <li class="nav-item" style="padding-left: 5px;">
+                        <button class="btn btn-dark active" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasConfig" aria-controls="offcanvasConfig">
+                          Configuration
+                        </button>
                     </li>
+                    
                 </ul>
                 <!-- Dropdown for Filter Category -->
                 <div class="input-group" style="max-width: 40%;">
@@ -392,13 +289,214 @@
     </nav>
 </header>
 
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasConfig" aria-labelledby="offcanvasConfigLabel">
+  <div class="offcanvas-header bg-dark">
+    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasConfigLabel">FSC Suite Configurations</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+    <nav class="col-lg-8">
+      <ul class="list-unstyled d-flex flex-column gap-2">
+        <li>
+          <a class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start config-option">
+            <i class="bi bi-card-heading" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">View Header Dashboard?</strong>
+              <small>
+                <div class="form-check form-switch" style="padding-top: 20px;">
+                    <input class="form-check-input  " type="checkbox" role="switch" id="toggleDashboard" checked style="form-switch-checked-color: black;">
+                    <label class="form-check-label" for="toggleDashboard"> Dashboard</label>
+                </div>
+              </small>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start">
+            <i class="bi bi-boombox" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">Listen to Tunes While Waiting?</strong>
+              <small>
+                    <div class="form-check form-switch" style="padding-top: 20px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="toggleMusic" checked>
+                        <label class="form-check-label" for="toggleMusic"> Music</label>
+                    </div>
+              </small>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="btn rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start" disabled>
+            <i class="bi bi-back" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">What Look Do You Want?</strong>
+              <small style="padding-top: 20px;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+                  <symbol id="check2" viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                  </symbol>
+                  <symbol id="circle-half" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                  </symbol>
+                  <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+                    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                    <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+                  </symbol>
+                  <symbol id="sun-fill" viewBox="0 0 16 16">
+                    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                  </symbol>
+                </svg>
+
+                <div class="dropdown bd-mode-toggle" style="padding-top: 20px;">
+                  <button class="btn btn-sm btn-dark dropdown-toggle d-flex align-items-center"
+                          id="bd-theme"
+                          type="button"
+                          aria-expanded="false"
+                          data-bs-toggle="dropdown"
+                          aria-label="Toggle theme (auto)">
+                    <svg class="bi my-1 theme-icon-active" width=".75em" height=".75em"><use href="#circle-half"></use></svg>
+                    <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                    <li>
+                      <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                        <svg class="bi me-2 opacity-50 theme-icon" width=".5em" height=".5em"><use href="#sun-fill"></use></svg>
+                        Light
+                        <svg class="bi ms-auto d-none" width=".5em" height=".5em"><use href="#check2"></use></svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                        <svg class="bi me-2 opacity-50 theme-icon" width=".5em" height=".5em"><use href="#moon-stars-fill"></use></svg>
+                        Dark
+                        <svg class="bi ms-auto d-none" width=".5em" height=".5em"><use href="#check2"></use></svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                        <svg class="bi me-2 opacity-50 theme-icon" width=".5em" height=".5em"><use href="#circle-half"></use></svg>
+                        Auto
+                        <svg class="bi ms-auto d-none" width=".5em" height=".5em"><use href="#check2"></use></svg>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </small>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start">
+            <i class="bi bi-table" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">Fine Tune Your Columns?</strong>
+              <small>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="3" data-column="3" checked>
+                      <label class="form-check-label" for="3"> Company</label>
+                    </div>
+                  </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="4" data-column="4" checked>
+                      <label class="form-check-label" for="4"> Tier</label>
+                    </div>
+                  </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="5" data-column="5" checked>
+                      <label class="form-check-label" for="5"> Subject</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="6" data-column="6" checked>
+                      <label class="form-check-label" for="6"> Priority</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="7" data-column="7" checked>
+                      <label class="form-check-label" for="7"> Status</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="8" data-column="8" checked>
+                      <label class="form-check-label" for="8"> Type</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="9" data-column="9" checked>
+                      <label class="form-check-label" for="9"> Environment</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="10" data-column="10" checked>
+                      <label class="form-check-label" for="10"> Escalated</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="11" data-column="11" checked>
+                      <label class="form-check-label" for="11"> Past Due</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="12" data-column="12" checked>
+                      <label class="form-check-label" for="12"> Created</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="13" data-column="13" checked>
+                      <label class="form-check-label" for="13"> Due Bye</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="14" data-column="14" checked>
+                      <label class="form-check-label" for="14"> Updated</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="15" data-column="15" checked>
+                      <label class="form-check-label" for="15"> Agent</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="16" data-column="16" checked>
+                      <label class="form-check-label" for="16"> Group</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="17" data-column="17" checked>
+                      <label class="form-check-label" for="17"> Score</label>
+                    </div>
+                </a></li>
+              </small>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    </div>
+  </div>
+</div>
 
 <!-- Begin page content -->
 <main class="flex-shrink-0" style="padding-top: 45px;">
   <div class="container-fluid">
     <p class="lead">
-      <div class="row">
-        
+      <div class="row" id="topDashboard">
         <div class="card-group">
           <div class="card mb-2">
               <div class="card-header bg-dark">
@@ -520,6 +618,7 @@
 </script>
 
 <script src="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.min.js') }}"></script>
+
 
 </body>
 </html>
