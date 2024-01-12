@@ -249,8 +249,8 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
                 filtered_ticket = {
                     'id': ticket['id'],
                     'subject': ticket['subject'],
-                    'group_name': groups.get(ticket['group_id'], 'Unknown Group'),
-                    'company_name': companies.get(ticket['department_id'], 'Unknown Department'),
+                    'group_name': groups.get(ticket['group_id'], '* Unassigned *'),
+                    'company_name': companies.get(ticket['department_id'], 'Unknown Company'),
                     'priority': ticket['priority'],
                     'status': ticket['status'],
                     'created_at': ticket['created_at'],
