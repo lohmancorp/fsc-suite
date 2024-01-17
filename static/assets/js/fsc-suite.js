@@ -20,26 +20,29 @@ const completionAudio = new Audio('/static/assets/music/100_percent.mp3');
 
 // Function to start auto-refresh
 function startAutoRefresh() {
-    if (!isFetchAndUpdateRunning && isRefreshIntervalElapsed()) {
-        isFetchAndUpdateRunning = true;
-        lastFetchAndUpdateTimestamp = new Date();
-        //fetchAndUpdateTickets();
-    } else {
-        // Schedule to check again after some time
-        autoRefreshIntervalId = setTimeout(startAutoRefresh, 1000); // Check again in 1 second
+    console.log('Attempting to start auto-refresh');
+    if (autoRefreshIntervalId !== null) {
+        clearInterval(autoRefreshIntervalId); // Clear existing interval if any
     }
+    autoRefreshIntervalId = setInterval(() => {
+        if (!isFetchAndUpdateRunning) {
+            console.log('Starting auto-refresh');
+            fetchAndUpdateTickets();
+        } else {
+            console.log('Auto-refresh is already running');
+        }
+    }, autoRefreshInterval);
 }
-
-// Check if the refresh interval has elapsed
-function isRefreshIntervalElapsed() {
-    if (!lastFetchAndUpdateTimestamp) return true;
-    const now = new Date();
-    return (now - lastFetchAndUpdateTimestamp) >= autoRefreshInterval;
-}
-
 
 // Function to fetch and update tickets
 function fetchAndUpdateTickets() {
+    if (isFetchAndUpdateRunning) {
+        console.log('fetchAndUpdateTickets is already running');
+        return; // Exit if already running
+    }
+    console.log('fetchAndUpdateTickets started');
+    isFetchAndUpdateRunning = true;
+
     // Start spinning the icon and show start toast
     document.querySelector('#homeButton i').classList.add('rotating');
     showStartToast();
@@ -54,10 +57,6 @@ function fetchAndUpdateTickets() {
             document.querySelector('#homeButton i').classList.remove('rotating');
             showEndToast();
 
-            // Schedule the next refresh
-            if (document.getElementById('toggleAutoRefresh').checked) {
-                autoRefreshIntervalId = setTimeout(startAutoRefresh, autoRefreshInterval);
-            }
         })
         .catch(error => {
             console.error('Error:', error);
@@ -65,15 +64,18 @@ function fetchAndUpdateTickets() {
             // Stop spinning the icon and show end toast even if there's an error
             document.querySelector('#homeButton i').classList.remove('rotating');
             showEndToast();
-
-            // Schedule the next refresh even if there is an error
-            if (document.getElementById('toggleAutoRefresh').checked) {
-                autoRefreshIntervalId = setTimeout(startAutoRefresh, autoRefreshInterval);
-            }
         })
-        .finally(() => {
-            isFetchAndUpdateRunning = false; // Set to false when the function is complete
-        });
+    .finally(() => {
+        console.log('fetchAndUpdateTickets completed');
+        isFetchAndUpdateRunning = false; // Set to false when done
+    });
+}
+
+// Check if the refresh interval has elapsed
+function isRefreshIntervalElapsed() {
+    if (!lastFetchAndUpdateTimestamp) return true;
+    const now = new Date();
+    return (now - lastFetchAndUpdateTimestamp) >= autoRefreshInterval;
 }
 
 // Show loading overlay
@@ -656,7 +658,6 @@ const populateTable = (tickets) => {
         row.style.position = "relative"; // Add position property
         row.style.zIndex = "500"; // Apply z-index
         row.ondblclick = () => window.open(`https://support.cloudblue.com/a/tickets/${ticket.id}`, '_blank');
-        console.log(`Ticket ID: ${ticket.id}, Read Status: ${ticket.read_status}`);
         // Calculate and set popover content for cellPastDue, cellCreated, and cellDueBy
         const pastDuePopoverContent = calculateTimeDifference(ticket.due_by); // Assuming ticket object has past_due_date
         const createdPopoverContent = calculateTimeDifference(ticket.created_at);
@@ -733,7 +734,6 @@ const populateTable = (tickets) => {
 
         let matchedTicket = fscTickets.find(fscTicket => fscTicket.ticketId === ticket.id);
         let readStatus = ticket.read_status;
-        console.log(`Ticket ID: ${ticket.id}, Read Status: ${readStatus}`);
 
         if (matchedTicket) {
             const ticketUpdated = formatDateTime(ticket.updated_at);
@@ -746,7 +746,6 @@ const populateTable = (tickets) => {
             } else {
                 readStatus = 'read';
             }
-            console.log(`Ticket ID: ${ticket.id}, Read Status: ${readStatus}`);
         }
 
         // Set the icon based on readStatus
@@ -763,8 +762,6 @@ const populateTable = (tickets) => {
             default:
                 cellIcon.innerHTML = '-';
         }
-
-        console.log(`Ticket ID: ${ticket.id}, Icon HTML: ${cellIcon.innerHTML}`);
 
         cellId.innerHTML = ticket.id;
         cellCompany.innerHTML = ticket.company_name;
@@ -878,7 +875,7 @@ function showEndToast() {
             refreshToastStart.hide();
             refreshToastEnd.hide();
 
-        }, 5000); // Hide both toasts after 5 seconds
+        }, 10000); // Hide both toasts after 5 seconds
     } else {
         console.error('End toast element, icon, or button text not found');
     }
@@ -918,30 +915,14 @@ document.getElementById('focusFilter').addEventListener('change', () => {
     saveSettingsToCookie();
 });
 
-// Load settings and fetch tickets on page load
+// Main Event Listener for Page Load - DOMContentLoaded listener
 window.addEventListener('DOMContentLoaded', (event) => {
     applySettings();
-    //showLoadingOverlay();
-    fetchAndUpdateTickets();
-    // fetch('/tickets')
-    //     .then(response => response.json())
-    //     .then(tickets => {
-    //         globalTickets = tickets;
-    //         populateTable(tickets);
-    //         applySettings();
-    //     })
-    //     .catch(error => {
-    //         console.error('Error:', error);
-    //     })
-    //     .finally(() => {
-    //         //hideLoadingOverlay();
-    //     });
+    fetchAndUpdateTickets(); // Fetch tickets immediately on load
 
     if (document.getElementById('toggleAutoRefresh').checked) {
-        //startAutoRefresh();
-        applySettings();
+        startAutoRefresh(); // Start auto-refresh if enabled
     }
-    applySettings();
 });
 
 
@@ -988,15 +969,12 @@ document.getElementById('toggleAutoRefresh').addEventListener('change', function
     if (this.checked) {
         startAutoRefresh();
     } else {
-        if (autoRefreshIntervalId !== null) {
-            clearTimeout(autoRefreshIntervalId);
-            autoRefreshIntervalId = null;
-        }
-        isFetchAndUpdateRunning = false;
+        clearTimeout(autoRefreshIntervalId);
+        autoRefreshIntervalId = null;
     }
     saveSettingsToCookie();
-    applySettings();
 });
+
 
 
 document.getElementById('refreshTime').addEventListener('input', function () {
@@ -1004,7 +982,7 @@ document.getElementById('refreshTime').addEventListener('input', function () {
     const form = this.closest('form');
 
     // Check if input is within the allowed range
-    if (!isNaN(inputValue) && inputValue >= 10 && inputValue <= 60) {
+    if (!isNaN(inputValue) && inputValue >= 2 && inputValue <= 60) {
         this.classList.remove('is-invalid');
         autoRefreshInterval = inputValue * 60 * 1000; // Convert minutes to milliseconds
 

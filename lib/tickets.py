@@ -216,7 +216,7 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
     while True:
         url = f"{base_url}tickets/filter?query=\"status: 2 OR status: 3 OR status: 6 OR status: 7 OR status: 8 OR status: 9 OR status: 10 OR status: 11 OR status: 12\"&per_page=100&page={page}"
         logging.info(f"Requesting page {page} of tickets.")
-        print(f"Requesting page {page} of tickets.")
+        print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Requesting page {page} of tickets.")
         response = make_api_request("GET", url, headers)
         data = response.json()
         
@@ -269,7 +269,14 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
                 tickets.append(filtered_ticket)
 
             logging.info(f"Page {page} of tickets retrieved. Count: {len(data['tickets'])}")
-            print(f"Page {page} of tickets retrieved. Count: {len(data['tickets'])}")
+            print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Page {page} of tickets retrieved. Count: {len(data['tickets'])}")
+
+            # Check if the number of tickets is 99 or less and exit the loop if so
+            if len(data['tickets']) <= 99:
+                logging.info("Less than 100 tickets retrieved. No more tickets to retrieve.")
+                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - No more tickets to retrieve.")
+                break
+
             page += 1
         else:
             if page == 1:
@@ -283,5 +290,5 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
     logging.info('#' * 50)
     logging.info(f"Total tickets retrieved: {len(tickets)}")
     logging.info('#' * 50)
-    print(f"Total tickets retrieved: {len(tickets)}")
+    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Total tickets retrieved: {len(tickets)}")
     return tickets
