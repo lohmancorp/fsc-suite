@@ -982,7 +982,7 @@ document.getElementById('refreshTime').addEventListener('input', function () {
     const form = this.closest('form');
 
     // Check if input is within the allowed range
-    if (!isNaN(inputValue) && inputValue >= 2 && inputValue <= 60) {
+    if (!isNaN(inputValue) && inputValue >= 10 && inputValue <= 60) {
         this.classList.remove('is-invalid');
         autoRefreshInterval = inputValue * 60 * 1000; // Convert minutes to milliseconds
 
