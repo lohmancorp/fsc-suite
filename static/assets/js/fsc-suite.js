@@ -23,7 +23,7 @@ function startAutoRefresh() {
     if (!isFetchAndUpdateRunning && isRefreshIntervalElapsed()) {
         isFetchAndUpdateRunning = true;
         lastFetchAndUpdateTimestamp = new Date();
-        fetchAndUpdateTickets();
+        //fetchAndUpdateTickets();
     } else {
         // Schedule to check again after some time
         autoRefreshIntervalId = setTimeout(startAutoRefresh, 1000); // Check again in 1 second
@@ -919,22 +919,23 @@ document.getElementById('focusFilter').addEventListener('change', () => {
 window.addEventListener('DOMContentLoaded', (event) => {
     applySettings();
     //showLoadingOverlay();
-    fetch('/tickets')
-        .then(response => response.json())
-        .then(tickets => {
-            globalTickets = tickets;
-            populateTable(tickets);
-            applySettings();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        })
-        .finally(() => {
-            //hideLoadingOverlay();
-        });
+    fetchAndUpdateTickets();
+    // fetch('/tickets')
+    //     .then(response => response.json())
+    //     .then(tickets => {
+    //         globalTickets = tickets;
+    //         populateTable(tickets);
+    //         applySettings();
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error);
+    //     })
+    //     .finally(() => {
+    //         //hideLoadingOverlay();
+    //     });
 
     if (document.getElementById('toggleAutoRefresh').checked) {
-        startAutoRefresh();
+        //startAutoRefresh();
         applySettings();
     }
     applySettings();
