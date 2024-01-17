@@ -498,10 +498,8 @@ const updateFilterValueDropdown = (callback) => {
                 value = row.cells[2].textContent.trim();
                 break;
             case 'group':
-                value = row.cells[15].textContent.trim();
-                break;
             case 'agent':
-                value = row.cells[14].textContent.trim();
+                value = row.cells[filterCategory === 'group' ? 15 : 14].textContent.trim() || '* Unassigned *';
                 break;
             case 'tier':
                 value = row.cells[3].textContent.trim();
@@ -519,40 +517,45 @@ const updateFilterValueDropdown = (callback) => {
                 value = row.cells[8].textContent.trim();
                 break;
             case 'escalated':
-                value = row.cells[9].textContent.trim().includes('Yes') ? 'Yes' : 'No';
-                break;
             case 'overdue':
-                value = row.cells[10].textContent.trim().includes('Yes') ? 'Yes' : 'No';
+                value = row.cells[filterCategory === 'escalated' ? 9 : 10].textContent.trim().includes('Yes') ? 'Yes' : 'No';
                 break;
             default:
-                return;
+                value = ''; // Default case to catch any unforeseen categories
+                break;
         }
 
+        if (!options.includes(value)) {
+            options.push(value);
+        }
         counts[value] = (counts[value] || 0) + 1;
     });
 
-    if (filterCategory === 'company') options = Array.from(companies).sort();
-    if (filterCategory === 'group') options = Array.from(groups).sort();
-    if (filterCategory === 'agent') options = Array.from(agents).sort();
-    if (filterCategory === 'tier') options = Array.from(tier).sort();
-    if (filterCategory === 'priority') options = Array.from(priority).sort();
-    if (filterCategory === 'status') options = Array.from(status).sort();
-    if (filterCategory === 'type') options = Array.from(type).sort();
-    if (filterCategory === 'environment') options = Array.from(environment).sort();
-    if (filterCategory === 'escalated' || filterCategory === 'overdue') options = ['Yes', 'No'];
+    // Sort options and ensure '* Unassigned *' is at the top for 'group' and 'agent'
+    if (filterCategory === 'group' || filterCategory === 'agent') {
+        options = options.filter(option => option !== '* Unassigned *').sort();
+        options.unshift('* Unassigned *');
+    } else {
+        options.sort();
+    }
 
-    if (filterCategory !== 'escalated' && filterCategory !== 'overdue') {
+    // Add a blank option at the start for other categories
+    if (filterCategory !== 'escalated' && filterCategory !== 'overdue' && filterCategory !== 'group' && filterCategory !== 'agent') {
         options.unshift('');
     }
 
+    // Create dropdown options
     options.forEach(option => {
         const count = counts[option] || 0;
         const optionText = option ? `${option} (${count})` : '';
-        filterValueDropdown.add(new Option(optionText, option));
+        const newOption = new Option(optionText, option);
+        filterValueDropdown.add(newOption);
     });
 
     if (callback) callback();
 };
+
+
 
 const toggleIcon = (cellIcon, cellId, cellPriority, cellStatus, cellLastUpdate) => {
     let isCurrentlyRead = cellIcon.innerHTML.includes('bi-envelope-check');
