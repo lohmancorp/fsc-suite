@@ -285,5 +285,3 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
     logging.info('#' * 50)
     print(f"Total tickets retrieved: {len(tickets)}")
     return tickets
-
-

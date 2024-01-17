@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <style>
+        /* Add some basic styling */
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tickets</h2>
+    <table id="ticketsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company</th>
+                <th>Tier</th>
+                <th>Subject</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Environment</th>
+                <th>Escalated</th>
+                <th>Past Due</th>
+                <th>Created</th>
+                <th>Due By</th>
+                <th>Last Update</th>
+                <th>Agent</th>
+                <th>Group</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Ticket rows will go here -->
+        </tbody>
+    </table>
+
+    <script>
+        fetch('/tickets')
+            .then(response => response.json())
+            .then(tickets => {
+                const tableBody = document.getElementById('ticketsTable').getElementsByTagName('tbody')[0];
+                tickets.forEach(ticket => {
+                    let row = tableBody.insertRow();
+                    let cellId = row.insertCell(0);
+                    let cellCompany = row.insertCell(1);
+                    let cellTier = row.insertCell(2);
+                    let cellSubject = row.insertCell(3);
+                    let cellPriority = row.insertCell(4);
+                    let cellStatus = row.insertCell(5);
+                    let cellType = row.insertCell(6);
+                    let cellEnvironment = row.insertCell(7);
+                    let cellEscalated = row.insertCell(8);
+                    let cellPastDue = row.insertCell(9);
+                    let cellCreated = row.insertCell(10);
+                    let cellDueBy = row.insertCell(11);
+                    let cellLastUpdate = row.insertCell(12);
+                    let cellAgent = row.insertCell(13);
+                    let cellGroup = row.insertCell(14);
+                    let cellScore = row.insertCell(15);
+
+                    cellId.innerHTML = ticket.id;
+                    cellCompany.innerHTML = ticket.company_name;
+                    cellTier.innerHTML = ticket.account_tier;
+                    cellSubject.innerHTML = ticket.subject;
+                    cellPriority.innerHTML = ticket.priority;
+                    cellStatus.innerHTML = ticket.status;
+                    cellType.innerHTML = ticket.ticket_type;
+                    cellEnvironment.innerHTML = ticket.environment;
+                    cellEscalated.innerHTML = ticket.escalated;
+                    cellPastDue.innerHTML = ticket.is_past_due;
+                    cellCreated.innerHTML = ticket.created_at;
+                    cellDueBy.innerHTML = ticket.due_by;
+                    cellLastUpdate.innerHTML = ticket.updated_at;
+                    cellAgent.innerHTML = ticket.agent_name;
+                    cellGroup.innerHTML = ticket.group_name;
+                    cellScore.innerHTML = ticket.score;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

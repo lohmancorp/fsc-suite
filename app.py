@@ -52,7 +52,7 @@ def parse_arguments():
     return parser.parse_args()
 
 # Environment variables
-API_KEY = os.getenv('API_KEY')
+API_KEY = input("Enter your API key: ")
 FRESH_SERVICE_ENDPOINTS = {
     'staging': os.getenv('STAGING_ENDPOINT'),
     'production': os.getenv('PRODUCTION_ENDPOINT'),
