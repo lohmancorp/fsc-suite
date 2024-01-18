@@ -1046,4 +1046,3 @@ function handleLogoInternalNavigation(event) {
     event.preventDefault(); // Prevent default link behavior
     // Refresh the page
 }
-

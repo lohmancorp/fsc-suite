@@ -14,11 +14,10 @@ import os
 import logging
 import requests
 import base64
-import json
+#import json
 import time
 import signal
 import sys
-import threading
 from datetime import datetime
 from dotenv import load_dotenv
 from pathlib import Path
@@ -27,12 +26,6 @@ from lib.tickets import get_all_tickets, make_status_priority_readable, sort_tic
 
 # Flask app initialization
 app = Flask(__name__)
-
-# Construct the path to the .env file
-env_path = Path(__file__).resolve().parent / '.env'
-
-# Load environment variables from the specified .env file
-load_dotenv(dotenv_path=env_path)
 
 # Script Variables:
 SCRIPT_NAME = 'app.py'
@@ -45,20 +38,18 @@ interrupted = False
 # Argument Parsing 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Script to read and sort FreshService tickets.\n')
-    parser.add_argument('-m', '--mode', required=True, choices=['staging', 'production', 'test'], help='API mode: staging, production, or test.')
-    parser.add_argument('-t', '--time-wait', type=int, required=True, help='Time in milliseconds to wait between API calls.')
+    parser.add_argument('-m', '--mode', default='production', choices=['staging', 'production', 'test'], help='API mode: staging, production, or test.')
+    parser.add_argument('-t', '--time-wait', type=int, default=200, help='Time in milliseconds to wait between API calls.')
     parser.add_argument('-l', '--log-level', choices=['INFO', 'WARNING', 'DEBUG'], default='INFO', help='Logging level')
-    parser.add_argument('-v', '--version', default=SCRIPT_VERSION, help='Version of the script to use.')
     return parser.parse_args()
 
 # Environment variables
 API_KEY = input("Enter your API key: ")
 FRESH_SERVICE_ENDPOINTS = {
-    'staging': os.getenv('STAGING_ENDPOINT'),
-    'production': os.getenv('PRODUCTION_ENDPOINT'),
+    'staging': 'cbportal-fs-sandbox',
+    'production': 'cbportal',
 }
-LOG_DIRECTORY = os.getenv('LOG_DIRECTORY')
-ERROR_PAYLOAD_DIRECTORY = os.getenv('ERROR_PAYLOAD_DIRECTORY')
+LOG_DIRECTORY = './logs/'
 
 # Logging Configuration with Iteration
 def setup_logging(args):
@@ -103,6 +94,10 @@ def setup_logging(args):
         logging.getLogger().setLevel(logging.WARNING)
     else:
         logging.getLogger().setLevel(logging.INFO)
+        
+def signal_handler(sig, frame):
+    print('Exiting gracefully...')
+    sys.exit(0)        
 
 # Generate the authorization header for API requests
 def generate_auth_header(api_key):
@@ -161,7 +156,7 @@ def get_company_names(base_url, headers):
     companies = {}
     page = 1
     while True:
-        url = f"{base_url}/departments?per_page=100&page={page}"
+        url = f"https://{base_url}.freshservice.com/api/v2/departments?per_page=100&page={page}"
         response = make_api_request("GET", url, headers)
         data = response.json()
 
@@ -178,7 +173,7 @@ def get_agents(base_url, headers):
     agents = {}
     page = 1
     while True:
-        url = f"{base_url}/agents?per_page=100&page={page}"
+        url = f"https://{base_url}.freshservice.com/api/v2/agents?per_page=100&page={page}"
         response = make_api_request("GET", url, headers)
         data = response.json()
 
@@ -198,7 +193,7 @@ def get_groups(base_url, headers):
     groups = {}
     page = 1
     while True:
-        url = f"{base_url}/groups?per_page=100&page={page}"
+        url = f"https://{base_url}.freshservice.com/api/v2/groups?per_page=100&page={page}"
         response = make_api_request("GET", url, headers)
         data = response.json()
 
@@ -234,6 +229,7 @@ def get_tickets():
 if __name__ == "__main__":
     args = parse_arguments()
     setup_logging(args)
-    app.run()
-    debug_mode = True if args.log_level.upper() == 'DEBUG' else False
-    app.run(debug=debug_mode, host='127.0.0.1', port=5000)
+    # Register the signal handler
+    signal.signal(signal.SIGINT, signal_handler)
+    debug_mode = False if args.log_level.upper() == 'DEBUG' else False
+    app.run(debug=False, use_reloader=False, host='127.0.0.1', port=5000)

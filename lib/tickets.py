@@ -214,7 +214,7 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
     logging.info(f"Starting to retrieve tickets from {base_url}")
     
     while True:
-        url = f"{base_url}tickets/filter?query=\"status: 2 OR status: 3 OR status: 6 OR status: 7 OR status: 8 OR status: 9 OR status: 10 OR status: 11 OR status: 12\"&per_page=100&page={page}"
+        url = f"https://{base_url}.freshservice.com/api/v2/tickets/filter?query=\"status: 2 OR status: 3 OR status: 6 OR status: 7 OR status: 8 OR status: 9 OR status: 10 OR status: 11 OR status: 12\"&per_page=100&page={page}"
         logging.info(f"Requesting page {page} of tickets.")
         print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Requesting page {page} of tickets.")
         response = make_api_request("GET", url, headers)
