@@ -108,7 +108,7 @@ The following instructions are meant to be used after the initial virtual enviro
 1. In your command prompt, navigate to the root directory folder of FSC Suite
 2. Start the application
 ```
-py -m app.py
+py -m app
 ```
 3. Enter your API key
 
