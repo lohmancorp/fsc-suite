@@ -29,7 +29,7 @@ pip install flask
 # Run instructions 
 Please find the appropriate situation and follow the instructions.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**1** If you have not already been provided with the key to run this application, contact your local CBTS or TAM leader.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**1** If you do not have an API_KEY to run this application, contact your local CBTS or TAM leader.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**2** Depending on your environment setup, you may have to run _pip3_ & _python3_ vs. _pip_ & _python_
 
