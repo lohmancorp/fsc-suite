@@ -771,8 +771,8 @@ const populateTable = (tickets) => {
         cellStatus.textContent = ticket.status;
         cellType.textContent = ticket.ticket_type;
         cellEnvironment.textContent = ticket.environment;
-        cellEscalated.textContent = formatBadge(ticket.escalated);
-        cellPastDue.textContent = formatBadge(ticket.is_past_due);
+        cellEscalated.innerHTML = formatBadge(ticket.escalated);
+        cellPastDue.innerHTML = formatBadge(ticket.is_past_due);
         cellCreated.textContent = formatDateTime(ticket.created_at);
         cellDueBy.textContent = formatDateTime(ticket.due_by);
         cellLastUpdate.textContent = formatDateTime(ticket.updated_at);
