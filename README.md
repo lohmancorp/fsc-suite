@@ -69,7 +69,7 @@ Please find the appropriate situation and follow the instructions.
 2. Run the following commands in your command prompt to setup your virutal environment:
 
 ```
-python -m venv venv
+py -m venv venv
 ```
 ```
 venv\Scripts\activate
