@@ -1,6 +1,11 @@
 # fsc-suite
 The FSC-suite script is a collection of tools that is to be used on-top of an existing FreshService instance.
 
+## Releases
+ - v1.0.0 - Alpha Proof of Concept - EOL
+ - v1.0.1 - Beta Proof of Concept - EOL
+ - v1.0.2 - Public Internal POC - Current
+
 ## Setup Instructions
 1. Contact local IT to have them install Python 3.6+ on your profile on your local machine.
 2. Verify the version of Python installed and that it is available in your profile.
