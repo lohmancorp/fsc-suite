@@ -27,35 +27,10 @@ python --version
    
 5. Install dependencies
    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Note:** _It is best to run this script in a local virtual environment.  If you are comfortable running virtual environments, please skip this step._
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This application is designed to run within a virtual environment.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In your terminal, navigate to the root directory folder of the unzipped download.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Note:** _You may have to run the commands as pip3 vs. pip._
-
-### Windows
-```
-py -m pip install --upgrade pip
-```
-```
-py -m pip install requests
-```
-```
-py -m pip install flask
-```
-
-### Mac & Linux
-```
-pip install --upgrade pip
-```
-```
-pip install requests
-```
-```
-pip install flask
-```
-
-# Run instructions 
+# First Run instructions 
 Please find the appropriate situation and follow the instructions.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**1** If you do not have an API_KEY to run this application, contact your local CBTS or TAM leader.
@@ -83,8 +58,7 @@ py -m pip install flask
 ```
 py -m pip install requests
 ```
-
-3.Start the application
+3. Start the application
 ```
 py -m app.py
 ```
@@ -92,6 +66,7 @@ py -m app.py
 
 5. Open your browser and enter the following url: http://127.0.0.1:5000/
 
+To stop the application, use ctrl+c on your keyboard.
 
 
 ### Virtual environment Mac & Linux
@@ -120,14 +95,32 @@ python app.py
 
 5. Open your browser and enter the following url: http://127.0.0.1:5000/
 
+To stop the application, use ctrl+c on your keyboard.
 
 
-### No virtual environment Mac & Windows
+# Second Run + instructions 
+The following instructions are meant to be used after the initial virtual environment has been setup, but the application has been stopped.
+
+### Virtual environment Windows
+1. In your command prompt, navigate to the root directory folder of FSC Suite
+2. Start the application
+```
+py -m app.py
+```
+3. Enter your API key
+
+4. Open your browser and enter the following url: http://127.0.0.1:5000/
+
+To stop the application, use ctrl+c on your keyboard.
+
+### Virtual environment Mac & Linux
 1. In your terminal, navigate to the root directory folder of FSC Suite
-2. Run the following command
+2. Start the application
 ```
 python app.py
 ```
 3. Enter your API key
-   
+
 4. Open your browser and enter the following url: http://127.0.0.1:5000/
+
+To stop the application, use ctrl+c on your keyboard.
