@@ -43,9 +43,7 @@ def parse_arguments():
     return parser.parse_args()
 
 # Environment variables
-# Environment variables
-print(f"Enter your API Key: ")
-API_KEY = sys.stdin.readline()
+API_KEY = input("Enter your API key: ")
 FRESH_SERVICE_ENDPOINTS = {
     'staging': 'cbportal-fs-sandbox',
     'production': 'cbportal',
