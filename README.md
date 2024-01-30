@@ -62,7 +62,7 @@ py -m pip install requests
 ```
 3. Start the application
 ```
-py -m app.py
+py -m app
 ```
 4. Enter your API key
 
