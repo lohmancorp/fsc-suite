@@ -61,7 +61,7 @@ Please find the appropriate situation and follow the instructions.
 
 ### Virtual environment Windows
 1. In your command prompt, navigate to the root directory folder of FSC Suite
-2. Run the following commands in your command prompt:
+2. Run the following commands in your command prompt to setup your virutal environment:
 
 ```
 python -m venv venv
@@ -78,19 +78,20 @@ py -m pip install flask
 ```
 py -m pip install requests
 ```
-```
-python app.py
-```
 
-3. Enter your API key
+3.Start the application
+```
+py -m app.py
+```
+4. Enter your API key
 
-4. Open your browser and enter the following url: http://127.0.0.1:5000/
+5. Open your browser and enter the following url: http://127.0.0.1:5000/
 
 
 
 ### Virtual environment Mac & Linux
 1. In your terminal, navigate to the root directory folder of FSC Suite
-2. Run the following commands in your terminal:
+2. Run the following commands in your command prompt to setup your virutal environment:
 ```
 python -m venv venv
 ```
@@ -106,12 +107,13 @@ pip install flask
 ```
 pip install requests
 ```
+3. Start the application
 ```
 python app.py
 ```
-3. Enter your API key
+4. Enter your API key
 
-4. Open your browser and enter the following url: http://127.0.0.1:5000/
+5. Open your browser and enter the following url: http://127.0.0.1:5000/
 
 
 
