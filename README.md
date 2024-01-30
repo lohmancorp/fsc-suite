@@ -22,7 +22,7 @@ python --version
    
 5. Install dependencies
    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Note:** _It is best to run this script in a local virtual environment.  If you are comfortable, please skip this step._
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Note:** _It is best to run this script in a local virtual environment.  If you are comfortable running virtual environments, please skip this step._
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In your terminal, navigate to the root directory folder of the unzipped download.
 
