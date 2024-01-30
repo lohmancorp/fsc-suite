@@ -16,6 +16,19 @@ The FSC-suite script is a collection of tools that is to be used on-top of an ex
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In your terminal, navigate to the root directory folder of the unzipped download.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Note:** _You may have to run the commands as pip3 vs. pip._
+
+### Windows
+```
+py -m pip install --upgrade pip
+```
+```
+py -m pip install requests
+```
+```
+py -m pip install flask
+```
+
+### Mac & Linux
 ```
 pip install --upgrade pip
 ```
@@ -46,13 +59,13 @@ python -m venv venv
 venv\Scripts\activate
 ```
 ```
-pip install --upgrade pip
+py -m pip install --upgrade pip
 ```
 ```
-pip install flask
+py -m pip install flask
 ```
 ```
-pip install requests
+py -m pip install requests
 ```
 ```
 python app.py
