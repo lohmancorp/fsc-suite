@@ -14,13 +14,11 @@ import os
 import logging
 import requests
 import base64
-#import json
 import time
 import signal
 import sys
 import string
 from datetime import datetime
-# from dotenv import load_dotenv
 from pathlib import Path
 from flask import Flask, jsonify, render_template
 from lib.tickets import get_all_tickets, make_status_priority_readable, sort_tickets
@@ -45,7 +43,9 @@ def parse_arguments():
     return parser.parse_args()
 
 # Environment variables
-API_KEY = input("Enter your API key: ")
+# Environment variables
+print(f"Enter your API Key: ")
+API_KEY = sys.stdin.readline()
 FRESH_SERVICE_ENDPOINTS = {
     'staging': 'cbportal-fs-sandbox',
     'production': 'cbportal',
