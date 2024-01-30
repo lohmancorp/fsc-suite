@@ -24,8 +24,10 @@ python --version
 ![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](static/assets/images/download_instructions.jpg)
 
 4. Move the downloaded zip file to a directory of your preference and unzip it.
+5. Change directory to the newly unzipped folder (root folder).
+6. Create directory named "logs" in the root folder.
    
-5. Install dependencies
+7. Install dependencies
    
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This application is designed to run within a virtual environment.
 
