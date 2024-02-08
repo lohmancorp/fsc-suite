@@ -21,3 +21,16 @@ Date: February 8th, 2024
 7. **UI Improvement** - Created Dates greater than 20 days appear as red.  Last Update Dates greater than 5 days appear as read.  All Due By dates in the past appear as red.
 8. **UI Improvements** - Various CSS & text updates were applied to save space and promote readability. 
 9. **Logging Improvement** - Script version is now captured in the log header.
+
+## Setup
+Setup is similar as previous versions, but an additional Python library, "Pandas", must be installed.
+
+### Windows ###
+```
+py -m pip install pandas
+```
+
+### Mac & Linux
+```
+pip install pandas
+```
