@@ -3,7 +3,7 @@ Date: February 8th, 2024
 
 ## New Features
 
-1. **Scoring Map Script** - score_map.py is a script to generate a default list of rules in CSV format, based on a number of values and their enums. After, a manager can generate a new rule set from scratch.
+1. **Scoring Map Script** - score_map.py is a script to generate a default list of rules in CSV format, based on a number of values and their enums. After, a manager can generate a new rule set from scratch.  The script can be found in the /lib directory.
 2. **Scoring Map Config File** - SCORE_MAP no longer exists within the code and is now loaded from score_map.csv, located in static/assets/config/.
 3. **Filter by TAM** - Now a TAM can see all of their customer tickets in a single view.
 4. **First Response Due By** - Is now visible as a datapoint in the table.  If the first response is past due, the text will appear in red.  If the text is black, this is the time remaining.  If the value is "--", then the first response has been provided.  Note, this is not a filterable item.
