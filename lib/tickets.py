@@ -4,10 +4,12 @@
 # - Ticket Sorting
 #
 # Author: Taylor Giddens - taylor.giddens@ingrammicro.com
-# Version: 1.0.3
+# Version: 1.1.0-a
 ################################################################################
 import requests
 import logging
+import os
+import pandas as pd
 from datetime import datetime
 
 def check_past_due(ticket):
@@ -66,117 +68,116 @@ def make_status_priority_readable(tickets):
 
     return tickets   
 
-#Scoring map used to sort tickets in a finute order. 
-SCORING_MAP = {
-    ('A', 'Urgent', 'Production', 'Incident or Problem'): 76,
-    ('A', 'Urgent', 'Lab', 'Incident or Problem'): 75,
-    ('B', 'Urgent', 'Production', 'Incident or Problem'): 74,
-    ('B', 'Urgent', 'Lab', 'Incident or Problem'): 73,
-    ('C', 'Urgent', 'Production', 'Incident or Problem'): 72,
-    ('C', 'Urgent', 'Lab', 'Incident or Problem'): 71,
-    ('D', 'Urgent', 'Production', 'Incident or Problem'): 70,
-    ('D', 'Urgent', 'Lab', 'Incident or Problem'): 69,
-    ('E', 'Urgent', 'Production', 'Incident or Problem'): 68,
-    ('E', 'Urgent', 'Lab', 'Incident or Problem'): 67,
-    ('A', 'escalated', 'Production'): 66,
-    ('A', 'escalated', 'Lab'): 65,
-    ('B', 'escalated', 'Production'): 64,
-    ('B', 'escalated', 'Lab'): 63,
-    ('C', 'escalated', 'Production'): 62,
-    ('C', 'escalated', 'Lab'): 61,
-    ('A', 'High', 'Production', 'Incident or Problem'): 60,
-    ('A', 'High', 'Lab', 'Incident or Problem'): 59,
-    ('B', 'High', 'Production', 'Incident or Problem'): 58,
-    ('B', 'High', 'Lab', 'Incident or Problem'): 57,
-    ('C', 'High', 'Production', 'Incident or Problem'): 56,
-    ('C', 'High', 'Lab', 'Incident or Problem'): 55,
-    ('A', 'High', 'Production', 'Service request'): 54,
-    ('A', 'High', 'Lab', 'Service request'): 53,
-    ('B', 'High', 'Production', 'Service request'): 52,
-    ('B', 'High', 'Lab', 'Service request'): 51,
-    ('C', 'High', 'Production', 'Service request'): 50,
-    ('C', 'High', 'Lab', 'Service request'): 49,
-    ('D', 'High', 'Production', 'Incident or Problem'): 48,
-    ('D', 'High', 'Lab', 'Incident or Problem'): 47,
-    ('E', 'High', 'Production', 'Incident or Problem'): 46,
-    ('E', 'High', 'Lab', 'Incident or Problem'): 45,
-    ('A', 'Medium', 'Production', 'Incident or Problem'): 44,
-    ('A', 'Medium', 'Lab', 'Incident or Problem'): 43,
-    ('B', 'Medium', 'Production', 'Incident or Problem'): 42,
-    ('B', 'Medium', 'Lab', 'Incident or Problem'): 41,
-    ('D', 'escalated', 'Production'): 40,
-    ('D', 'escalated', 'Lab'): 39,
-    ('C', 'Medium', 'Production', 'Incident or Problem'): 38,
-    ('C', 'Medium', 'Lab', 'Incident or Problem'): 37,
-    ('A', 'Medium', 'Production', 'Service request'): 36,
-    ('A', 'Medium', 'Lab', 'Service request'): 35,
-    ('B', 'Medium', 'Production', 'Service request'): 34,
-    ('B', 'Medium', 'Lab', 'Service request'): 33,
-    ('C', 'Medium', 'Production', 'Service request'): 32,
-    ('C', 'Medium', 'Lab', 'Service request'): 31,
-    ('E', 'escalated', 'Production'): 30,
-    ('E', 'escalated', 'Lab'): 29,
-    ('D', 'Medium', 'Production', 'Incident or Problem'): 28,
-    ('D', 'Medium', 'Lab', 'Incident or Problem'): 27,
-    ('D', 'Medium', 'Production', 'Service request'): 26,
-    ('D', 'Medium', 'Lab', 'Service request'): 25,
-    ('E', 'Medium', 'Production', 'Incident or Problem'): 24,
-    ('E', 'Medium', 'Lab', 'Incident or Problem'): 23,
-    ('E', 'Medium', 'Production', 'Service request'): 22,
-    ('E', 'Medium', 'Lab', 'Service request'): 21,
-    ('A', 'Low', 'Production', 'Incident or Problem'): 20,
-    ('A', 'Low', 'Lab', 'Incident or Problem'): 19,
-    ('B', 'Low', 'Production', 'Incident or Problem'): 18,
-    ('B', 'Low', 'Lab', 'Incident or Problem'): 17,
-    ('C', 'Low', 'Production', 'Incident or Problem'): 16,
-    ('C', 'Low', 'Lab', 'Incident or Problem'): 15,
-    ('A', 'Low', 'Production', 'Service request'): 14,
-    ('A', 'Low', 'Lab', 'Service request'): 13,
-    ('B', 'Low', 'Production', 'Service request'): 12,
-    ('B', 'Low', 'Lab', 'Service request'): 11,
-    ('C', 'Low', 'Production', 'Service request'): 10,
-    ('C', 'Low', 'Lab', 'Service request'): 9,
-    ('D', 'Low', 'Production', 'Incident or Problem'): 8,
-    ('D', 'Low', 'Lab', 'Incident or Problem'): 7,
-    ('D', 'Low', 'Production', 'Service request'): 6,
-    ('D', 'Low', 'Lab', 'Service request'): 5,
-    ('E', 'Low', 'Production', 'Incident or Problem'): 4,
-    ('E', 'Low', 'Lab', 'Incident or Problem'): 3,
-    ('E', 'Low', 'Production', 'Service request'): 2,
-    ('E', 'Low', 'Lab', 'Service request'): 1
-}
-
 # Function that performs the scoring against the SCORING_MAP
+#Scoring map used to sort tickets in a finute order. 
+
+def load_scoring_map_from_csv(csv_file_path):
+    """
+    Securely load the scoring configuration from a CSV file and return a dictionary
+    for score lookup based on ticket attributes.
+    """
+    # Base directory where the CSV files are stored - adjust as per your application's directory structure
+    base_dir = 'static/assets/config/'
+
+    # Sanitize the csv_file_path to prevent path traversal
+    safe_file_name = os.path.basename(csv_file_path)
+
+    # Construct the full, safe path
+    full_path = os.path.join(base_dir, safe_file_name)
+
+    # Check if the file exists to avoid FileNotFoundError
+    if not os.path.isfile(full_path):
+        raise FileNotFoundError(f"CSV file not found: {safe_file_name}")
+
+    # Load the CSV file
+    df = pd.read_csv(full_path)
+    
+    # Validate and sanitize data
+    expected_columns = {'account_tier', 'priority', 'status', 'environment', 'ticket_type', 'escalated', 'past_due', 'Score'}
+    if not set(df.columns).issubset(expected_columns):
+        raise ValueError("Unexpected columns in the CSV file.")
+
+    # Convert the DataFrame into a scoring map dictionary
+    scoring_map = {}
+    for _, row in df.iterrows():
+        key = (
+            str(row['account_tier']).strip(), 
+            str(row['priority']).strip(), 
+            str(row['status']).strip(), 
+            str(row['environment']).strip(), 
+            str(row['ticket_type']).strip(), 
+            str(row['escalated']).strip(), 
+            str(row['past_due']).strip()
+        )
+        scoring_map[key] = int(row['Score'])
+    
+    return scoring_map
+
+# Example usage
+csv_file_path = 'score_map.csv'  # Only the file name
+try:
+    SCORING_MAP = load_scoring_map_from_csv(csv_file_path)
+except (FileNotFoundError, ValueError) as e:
+    print(f"Error loading scoring map: {e}")
+    # Handle the error appropriately
+
+
+# def calculate_sort_key(ticket):
+#     # Check if 'custom_fields' exists in the ticket, assign default if not
+#     #custom_fields = ticket.get('custom_fields', {})
+
+#     # Extract values from ticket or use defaults
+#     account_tier = ticket.get('account_tier', 'C')  # Default to 'C' if not present
+#     environment = ticket.get('environment', 'Production')  # Default to 'Production' if not present
+#     priority = ticket.get('priority', 'Urgent')  # Default to 'Urgent' if not present
+#     ticket_type = ticket.get('ticket_type', 'Incident or Problem')  # Default to 'Incident or Problem' if not present
+#     escalated = ticket.get('escalated', False)  # Default to False if not present
+
+#     # Handle 'MISSING' account_tier
+#     if account_tier == 'MISSING':
+#         # Define how to handle 'MISSING' account_tier, if different from 'C'
+#         # For example, you might want to log this or assign a different default
+#         logging.warning(f"Ticket ID: {ticket['id']} has 'MISSING' account tier. Handling as per logic.")
+
+#     # Determine score key based on whether the ticket is escalated
+#     if escalated:
+#         score_key = (account_tier, 'escalated', environment)
+#     else:
+#         score_key = (account_tier, priority, environment, ticket_type)
+
+#     # Get the score from the map
+#     score = SCORING_MAP.get(score_key, 0)
+
+#     # Log for debugging
+#     logging.debug(f"Calculated score key for Ticket ID {ticket['id']}: {score_key}, Score: {score}")
+
+#     return (-score, ticket['created_at'])
+
 def calculate_sort_key(ticket):
-    # Check if 'custom_fields' exists in the ticket, assign default if not
-    #custom_fields = ticket.get('custom_fields', {})
-
     # Extract values from ticket or use defaults
-    account_tier = ticket.get('account_tier', 'C')  # Default to 'C' if not present
-    environment = ticket.get('environment', 'Production')  # Default to 'Production' if not present
-    priority = ticket.get('priority', 'Urgent')  # Default to 'Urgent' if not present
-    ticket_type = ticket.get('ticket_type', 'Incident or Problem')  # Default to 'Incident or Problem' if not present
-    escalated = ticket.get('escalated', False)  # Default to False if not present
+    account_tier = ticket.get('account_tier', 'C')
+    priority = ticket.get('priority', 'Urgent')
+    status = ticket.get('status', 'New')  # Assuming 'status' is directly available
+    environment = ticket.get('environment', 'Production')
+    ticket_type = ticket.get('ticket_type', 'Incident or Problem')
+    escalated = ticket.get('escalated', False)
+    past_due = ticket.get('past_due', False)
+    
+    # Convert some statuses to OTHER
+    status = "Other" if ticket.get('status', 'New') in ["Pending access", "Waiting for RnD", "Pending other ticket", "Waiting for maintenance", "Waiting for bugfix"] else ticket.get('status', 'New')
 
-    # Handle 'MISSING' account_tier
-    if account_tier == 'MISSING':
-        # Define how to handle 'MISSING' account_tier, if different from 'C'
-        # For example, you might want to log this or assign a different default
-        logging.warning(f"Ticket ID: {ticket['id']} has 'MISSING' account tier. Handling as per logic.")
+    # Convert Boolean to expected string representation for lookup
+    escalated_str = 'True' if escalated else 'False'
+    past_due_str = 'True' if past_due else 'False'
 
-    # Determine score key based on whether the ticket is escalated
-    if escalated:
-        score_key = (account_tier, 'escalated', environment)
-    else:
-        score_key = (account_tier, priority, environment, ticket_type)
+    # Construct the key for lookup in the SCORING_MAP
+    score_key = (account_tier, priority, status, environment, ticket_type, escalated_str, past_due_str)
 
-    # Get the score from the map
+    # Look up the score based on the constructed key; default to 0 if not found
     score = SCORING_MAP.get(score_key, 0)
 
-    # Log for debugging
-    logging.debug(f"Calculated score key for Ticket ID {ticket['id']}: {score_key}, Score: {score}")
-
     return (-score, ticket['created_at'])
+
 
 #Function to perform final sorting based on the final scoring (Sort Key).
 def sort_tickets(tickets):
@@ -192,8 +193,8 @@ def sort_tickets(tickets):
     # Debug logging if needed
     if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
         for ticket in tickets:
-            logging.debug(f"Ticket ID: {ticket['id']}, Score: {ticket['score']}, Created At: {ticket['created_at']}, Tier: {ticket['account_tier']}, Priority: {ticket['priority']}, Is Escalated: {ticket['escalated']}, Environment: {ticket['environment']}, Type: {ticket['ticket_type']}")
-
+            logging.debug(f"Ticket ID: {ticket['id']}, Score: {ticket['score']}, Created At: {ticket['created_at']}, Company Name: {ticket['company_name']}, TAM Name: {ticket['tam_name']}, Tier: {ticket['account_tier']}, Priority: {ticket['priority']}, Is Escalated: {ticket['escalated']}, Environment: {ticket['environment']}, Type: {ticket['ticket_type']}")
+            
     return tickets
 
 def make_api_request(method, url, headers, data=None, retries=2):
@@ -231,12 +232,12 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
         if 'tickets' in data and data['tickets']:
             for ticket in data['tickets']:
                 # Gathering agent information
-                agent_info = agents.get(ticket['responder_id'], {'name': '* Unassigned *', 'email': 'N/A'})
+                agent_info = agents.get(ticket['responder_id'], {'name': 'Unassigned', 'email': 'N/A'})
                 
                 # Check if account_tier is None (null in JSON) and set it to 'MISSING' if it is
-                account_tier = ticket['custom_fields'].get('account_tier')
-                if account_tier is None:
-                    account_tier = 'C'
+                #account_tier = ticket['custom_fields'].get('account_tier')
+                #if account_tier is None:
+                #    account_tier = 'C'
                     
                 # Check if environment is None (null in JSON) and set it to 'MISSING' if it is
                 environment = ticket['custom_fields'].get('environment')
@@ -252,13 +253,21 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
                 is_past_due = check_past_due(ticket)
                 if is_past_due is None:    
                     is_past_due = False 
+                    
+                # Retrieve company information, including tam_name
+                company_id = ticket['department_id']
+                company_info = companies.get(company_id, {'name': 'Unknown Company', 'tam_name': 'Unknown TAM', 'account_tier': 'Unknown Tier'})
+                company_name = company_info['name']
+                tam_name = company_info['tam_name']  # Extract tam_name for the company    
+                account_tier = company_info['account_tier'] # Extract account_tier for the company
 
                 # Filtering and transforming ticket data
                 filtered_ticket = {
                     'id': ticket['id'],
                     'subject': ticket['subject'],
-                    'group_name': groups.get(ticket['group_id'], '* Unassigned *'),
-                    'company_name': companies.get(ticket['department_id'], 'Unknown Company'),
+                    'group_name': groups.get(ticket['group_id'], 'Unassigned'),
+                    'company_name': company_name,
+                    'tam_name': tam_name, 
                     'priority': ticket['priority'],
                     'status': ticket['status'],
                     'created_at': ticket['created_at'],

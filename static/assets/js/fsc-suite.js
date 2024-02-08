@@ -2,6 +2,7 @@ let globalTickets = [];
 let companies = new Set();
 let groups = new Set();
 let agents = new Set();
+let tam = new Set();
 let type = new Set();
 let status = new Set();
 let priority = new Set();
@@ -316,6 +317,27 @@ function evaluateReadStatus(tickets) {
     }
 }
 
+// Function to calculate total engineers needed for load/backload open within 5 days.
+function calculateEngineersRequired(N) {
+    const AHT = 2.55; // Average handle time in hours  (SHOULD BE INPUT VALUE)
+    //const N = 500; // Average tickets number per month (SHOULD BE INPUT VALUE)
+    const Nh = AHT * N; // Active hours per month 
+    const U1 = 1.0; // Meal and rest periods
+    const U2 = 0.75; // Ticket processing utilization
+    const U3 = 0.99; // Education and RnD coefficient
+    const S = 1.03; // Sickness coefficient
+    const V = 1.08; // Vacation coefficient
+    const WHPAM = 40; // Working hours per week
+
+    // Calculate total hours needed
+    const Htotal = (Nh / (U1 * U2 * U3)) * V * S;
+
+    // Calculate total engineers required, assuming 168 working hours per month per engineer
+    const Etotal = Htotal / WHPAM;
+
+    // Round up to the nearest whole number since we can't have a fraction of an engineer
+    return Math.ceil(Etotal);
+}
 
 
 // Function to update dashboard counts & progress bar
@@ -323,13 +345,16 @@ const updateDashboardCounts = () => {
     const rows = document.querySelectorAll('#ticketsTable tbody tr:not([style*="display: none"])');
 
     const totalTickets = rows.length;
-    const totalIncidents = Array.from(rows).filter(row => row.cells[7].textContent.trim() === 'Incident or Problem').length;
+    const totalPending = Array.from(rows).filter(row => row.cells[6].textContent.trim() === 'Pending').length;
+    const totalPendingIncidents = Array.from(rows).filter(row => row.cells[6].textContent.trim() === 'Pending' && row.cells[7].textContent.trim() === 'Incident').length;
+    const totalPendingServiceRequests = Array.from(rows).filter(row => row.cells[6].textContent.trim() === 'Pending' && row.cells[7].textContent.trim() === 'Service request').length;
+    const totalIncidents = Array.from(rows).filter(row => row.cells[7].textContent.trim() === 'Incident').length;
     const totalServiceRequests = Array.from(rows).filter(row => row.cells[7].textContent.trim() === 'Service request').length;
     const totalEscalated = Array.from(rows).filter(row => row.cells[9].textContent.trim().includes('Yes')).length;
     const totalOverdue = Array.from(rows).filter(row => row.cells[10].textContent.trim().includes('Yes')).length;
     const totalDone = Array.from(rows).filter(row => {
-        const status = row.cells[6].textContent.trim(); // Ticket status in column 8
-        const cellIconHTML = row.cells[0].innerHTML; // Read status icon in column 1
+        const status = row.cells[6].textContent.trim(); // Ticket status in column 6
+        const cellIconHTML = row.cells[0].innerHTML; // Read status icon in column 0
 
         // Check if the row is marked as 'read'
         const isRead = cellIconHTML.includes('bi-envelope-check');
@@ -337,11 +362,21 @@ const updateDashboardCounts = () => {
         return ['Pending', 'Resolved', 'Closed', 'Rejected', 'Duplicate'].includes(status) || isRead;
     }).length;
 
-    document.getElementById('totalTickets').textContent = totalTickets;
-    document.getElementById('totalIncidents').textContent = totalIncidents;
-    document.getElementById('totalServiceRequests').textContent = totalServiceRequests;
-    document.getElementById('totalEscalated').textContent = totalEscalated;
-    document.getElementById('totalOverdue').textContent = totalOverdue;
+    // Calculate engineers required for Incidents and Service Requests
+    const totalTicketsLeft = totalTickets - totalPending;
+    const totalIncidentsLeft = totalIncidents - totalPendingIncidents;
+    const totalServiceRequestsLeft = totalServiceRequests - totalPendingServiceRequests;
+    const escalatedPercent = Math.ceil((totalEscalated / totalTickets) * 100);
+    const overduePercent = Math.ceil((totalOverdue / totalTickets) * 100);
+    const engineersRequiredForTotal = calculateEngineersRequired(totalTicketsLeft);
+    const engineersRequiredForIncidents = calculateEngineersRequired(totalIncidentsLeft);
+    const engineersRequiredForServiceRequests = calculateEngineersRequired(totalServiceRequestsLeft);
+
+    document.getElementById('totalTickets').textContent = `${totalTickets} (HC: ${engineersRequiredForTotal})`;
+    document.getElementById('totalIncidents').textContent = `${totalIncidents} (HC: ${engineersRequiredForIncidents})`;
+    document.getElementById('totalServiceRequests').textContent = `${totalServiceRequests} (HC: ${engineersRequiredForServiceRequests})`;
+    document.getElementById('totalEscalated').textContent = `${totalEscalated} (${escalatedPercent}%)`;
+    document.getElementById('totalOverdue').textContent = `${totalOverdue} (${overduePercent}%)`;
 
     // Calculate fraction for progress bar and text
     let progressBarFraction = totalTickets > 0 ? (totalDone / totalTickets) : 0;
@@ -354,8 +389,6 @@ const updateDashboardCounts = () => {
     const progressBar = document.getElementById('progressBar');
     progressBar.style.width = progressWidth;
     progressBar.textContent = `Total Done: ${totalDone} / ${totalTickets} - ${progressWidth}`;
-
-
 
     // Update progress bar class based on progressBarFraction
     if (progressBarFraction < 0.5) {
@@ -378,8 +411,8 @@ const updateDashboardCounts = () => {
             setTimeout(() => hideVictoryOverlay(true), 8000);
         }
     }
-
 };
+
 
 // Show victory overlay
 const showVictoryOverlay = () => {
@@ -429,10 +462,13 @@ const filterRows = () => {
                 isMatch = row.cells[2].textContent.trim() === filterValue;
                 break;
             case 'group':
-                isMatch = row.cells[15].textContent.trim() === filterValue;
+                isMatch = row.cells[16].textContent.trim() === filterValue;
+                break;
+            case 'tam':
+                isMatch = row.cells[17].textContent.trim() === filterValue;
                 break;
             case 'agent':
-                isMatch = row.cells[14].textContent.trim() === filterValue;
+                isMatch = row.cells[15].textContent.trim() === filterValue;
                 break;
             case 'tier':
                 isMatch = row.cells[3].textContent.trim() === filterValue;
@@ -501,8 +537,11 @@ const updateFilterValueDropdown = (callback) => {
                 break;
             case 'group':
             case 'agent':
-                value = row.cells[filterCategory === 'group' ? 15 : 14].textContent.trim() || '* Unassigned *';
+                value = row.cells[filterCategory === 'group' ? 16 : 15].textContent.trim() || 'Unassigned';
                 break;
+            case 'tam':
+                value = row.cells[17].textContent.trim();
+                break;    
             case 'tier':
                 value = row.cells[3].textContent.trim();
                 break;
@@ -533,10 +572,10 @@ const updateFilterValueDropdown = (callback) => {
         counts[value] = (counts[value] || 0) + 1;
     });
 
-    // Sort options and ensure '* Unassigned *' is at the top for 'group' and 'agent'
+    // Sort options and ensure 'Unassigned' is at the top for 'group' and 'agent'
     if (filterCategory === 'group' || filterCategory === 'agent') {
-        options = options.filter(option => option !== '* Unassigned *').sort();
-        options.unshift('* Unassigned *');
+        options = options.filter(option => option !== 'Unassigned').sort();
+        options.unshift('Unassigned');
     } else {
         options.sort();
     }
@@ -609,30 +648,23 @@ const isDarkMode = () => {
     return document.body.classList.contains('dark-mode');
 };
 
-// Function to calculate the difference in days & hours.
-const calculateTimeDifference = (dateStr) => {
+// Function to calculate the difference in days & hours, and to color code red based on threshold days
+const calculateTimeDifference = (dateStr, redThresholdDays) => {
     const now = new Date();
     const date = new Date(dateStr);
     const diff = date - now;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const days = Math.floor(Math.abs(diff) / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((Math.abs(diff) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-    let textClass = 'text-light'; // Default class for future dates
-    let dayWord = Math.abs(days) === 1 ? 'day' : 'days'; // Singular or plural for days
-    let hourWord = Math.abs(hours) === 1 ? 'hour' : 'hours'; // Singular or plural for hours
-    let timeDiffText = `${Math.abs(days)} ${dayWord} and ${Math.abs(hours)} ${hourWord}`;
+    let dayWord = days === 1 ? 'day' : 'days'; // Singular or plural for days
+    let hourWord = hours === 1 ? 'hr' : 'hrs'; // Singular or plural for hours
+    let timeDiffText = (days > 0 ? `${days} ${dayWord} ` : '') + `${hours} ${hourWord}`;
 
-    if (diff < 0) { // If the date is in the past
-        textClass = 'text-light';
-        timeDiffText += ' ago';
-    } else {
-        timeDiffText += ' to go';
-    }
+    let textClass = diff < 0 && days >= redThresholdDays ? 'text-danger' : 'text-dark';
 
-    let popoverClass = isDarkMode() ? 'bg-light' : 'bg-dark';
-    return `<span class="${textClass}">${timeDiffText}</span>`;
-
+    return `<span class="${textClass}" style="white-space:nowrap;">${timeDiffText}</span>`;
 };
+
 
 // Populate table with tickets and then apply visibility settings
 const populateTable = (tickets) => {
@@ -648,6 +680,7 @@ const populateTable = (tickets) => {
     environment.clear();
     escalated.clear();
     overdue.clear();
+    tam.clear();
     evaluateReadStatus(tickets); // Evaluate read statuses
     let fscTickets = JSON.parse(getCookie('fsc-tickets') || '[]');
 
@@ -659,10 +692,10 @@ const populateTable = (tickets) => {
         row.style.zIndex = "500"; // Apply z-index
         row.ondblclick = () => window.open(`https://support.cloudblue.com/a/tickets/${ticket.id}`, '_blank');
         // Calculate and set popover content for cellPastDue, cellCreated, and cellDueBy
-        const pastDuePopoverContent = calculateTimeDifference(ticket.due_by); // Assuming ticket object has past_due_date
-        const createdPopoverContent = calculateTimeDifference(ticket.created_at);
-        const dueByPopoverContent = calculateTimeDifference(ticket.due_by);
-        const lastUpdatePopoverContent = calculateTimeDifference(ticket.updated_at);
+        const pastDuePopoverContent = calculateTimeDifference(ticket.due_by, 0); // Assuming ticket object has past_due_date
+        //const createdPopoverContent = calculateTimeDifference(ticket.created_at);
+        //const dueByPopoverContent = calculateTimeDifference(ticket.due_by);
+        //const lastUpdatePopoverContent = calculateTimeDifference(ticket.updated_at);
 
 
         // Event listeners for drag functionality
@@ -726,11 +759,13 @@ const populateTable = (tickets) => {
         let cellEscalated = row.insertCell(9);
         let cellPastDue = row.insertCell(10);
         let cellCreated = row.insertCell(11);
-        let cellDueBy = row.insertCell(12);
-        let cellLastUpdate = row.insertCell(13);
-        let cellAgent = row.insertCell(14);
-        let cellGroup = row.insertCell(15);
-        let cellScore = row.insertCell(16);
+        let cellFrDueBy = row.insertCell(12);
+        let cellDueBy = row.insertCell(13);
+        let cellLastUpdate = row.insertCell(14);
+        let cellAgent = row.insertCell(15);
+        let cellGroup = row.insertCell(16);
+        let cellTam = row.insertCell(17);
+        let cellScore = row.insertCell(18);
 
         let matchedTicket = fscTickets.find(fscTicket => fscTicket.ticketId === ticket.id);
         let readStatus = ticket.read_status;
@@ -763,6 +798,23 @@ const populateTable = (tickets) => {
                 cellIcon.innerHTML = '-';
         }
 
+        // Modify the environment attribute for each ticket
+        if (ticket.environment === "Production") {
+            ticket.environment = "Prod"; // Adjust the environment value
+        }
+
+        // Modify the type attribute for each ticket
+        if (ticket.ticket_type === "Incident or Problem") {
+            ticket.ticket_type = "Incident"; // Adjust the environment value
+        }
+
+        // Modify FR Due if status is not new.
+        if (ticket.status === "New") {
+            fr_due_by = calculateTimeDifference(ticket.fr_due_by, 0);
+        } else {
+            fr_due_by = '--';
+        }
+
         cellId.textContent = ticket.id;
         cellCompany.textContent = ticket.company_name;
         cellTier.textContent = ticket.account_tier;
@@ -773,11 +825,13 @@ const populateTable = (tickets) => {
         cellEnvironment.textContent = ticket.environment;
         cellEscalated.innerHTML = formatBadge(ticket.escalated);
         cellPastDue.innerHTML = formatBadge(ticket.is_past_due);
-        cellCreated.textContent = formatDateTime(ticket.created_at);
-        cellDueBy.textContent = formatDateTime(ticket.due_by);
-        cellLastUpdate.textContent = formatDateTime(ticket.updated_at);
+        cellCreated.innerHTML = calculateTimeDifference(ticket.created_at, 20);
+        cellFrDueBy.innerHTML = fr_due_by;   
+        cellDueBy.innerHTML = calculateTimeDifference(ticket.due_by, 0);
+        cellLastUpdate.innerHTML = calculateTimeDifference(ticket.updated_at, 5);
         cellAgent.textContent = ticket.agent_name;
         cellGroup.textContent = ticket.group_name;
+        cellTam.textContent = ticket.tam_name;
         cellScore.textContent = ticket.score;
 
         companies.add(ticket.company_name);
@@ -798,32 +852,35 @@ const populateTable = (tickets) => {
         cellEscalated.classList.add('text-center');
         cellPastDue.classList.add('text-center');
         cellCreated.classList.add('text-center');
+        cellFrDueBy.classList.add('text-center');
         cellDueBy.classList.add('text-center');
         cellLastUpdate.classList.add('text-center');
+        cellTam.classList.add('no-wrap');
         cellScore.classList.add('text-center');
 
-        // Initialize popovers for these cells
-        [cellPastDue, cellCreated, cellDueBy, cellLastUpdate].forEach((cell, index) => {
-            let popoverClass = isDarkMode() ? 'bg-light' : 'bg-dark';
+        // Initialize popovers for these cells with detailed datetime information
+        [cellPastDue, cellCreated, cellDueBy, cellLastUpdate, cellFrDueBy].forEach((cell, index) => {
+            let popoverClass = isDarkMode() ? 'bg-light' : 'bg-light';
             const popoverContent =
                 index === 0 ? pastDuePopoverContent :
-                    index === 1 ? createdPopoverContent :
-                        index === 2 ? dueByPopoverContent :
-                            lastUpdatePopoverContent;
+                    index === 1 ? formatDateTime(ticket.created_at) :
+                        index === 2 ? formatDateTime(ticket.due_by) :
+                            index === 3 ? formatDateTime(ticket.updated_at) :
+                                formatDateTime(ticket.fr_due_by);
 
-            // Dispose of any existing popover instances
+            // Dispose of any existing popover instances and initialize a new popover with detailed datetime
             let existingPopover = bootstrap.Popover.getInstance(cell);
             if (existingPopover) {
                 existingPopover.dispose();
             }
 
-            // Now set attributes and initialize a new popover
             cell.setAttribute('data-bs-toggle', 'popover');
             cell.setAttribute('data-bs-html', 'true');
             cell.setAttribute('data-bs-content', popoverContent);
+            let popoverTextClass = isDarkMode() ? 'text-light' : 'text-dark';
             new bootstrap.Popover(cell, {
                 trigger: 'hover',
-                template: `<div class="popover ${popoverClass}" role="tooltip"><div class="popover-arrow"></div><div class="popover-header"></div><div class="popover-body"></div></div>`
+                template: `<div class="popover ${popoverClass}" role="tooltip"><div class="popover-arrow"></div><div class="popover-header"></div><div class="popover-body ${popoverTextClass}"></div></div>`
             });
         });
 

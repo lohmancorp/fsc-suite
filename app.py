@@ -5,7 +5,7 @@
 # - Ticket Sorting
 #
 # Author: Taylor Giddens - taylor.giddens@ingrammicro.com
-# Version: 1.0.3
+# Version: 1.1.0-a
 ################################################################################
 
 # Import necessary libraries
@@ -28,7 +28,7 @@ app = Flask(__name__)
 
 # Script Variables:
 SCRIPT_NAME = 'app.py'
-SCRIPT_VERSION = '1.0.3'  # Update with each release.
+SCRIPT_VERSION = '1.1.0-a'  # Update with each release.
 
 # Global variables for tracking
 original_time_wait = None
@@ -83,6 +83,7 @@ def setup_logging(args):
     # Start logging with script details
     logging.info('#' * 50)
     logging.info(f"Script Name: {SCRIPT_NAME}")
+    logging.info(f"Script Version: {SCRIPT_VERSION}")
     logging.info(f"Script Start Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
     # Log the input parameters
@@ -172,7 +173,10 @@ def get_company_names(base_url, headers):
         # Check if there are departments in the response
         if 'departments' in data and data['departments']:
             for company in data['departments']:
-                companies[company['id']] = company['name']
+                # Access tam_name from custom_fields, with a fallback if it's not present
+                account_tier = company['custom_fields'].get('account_tier', 'Unknown Tier')
+                tam_name = company['custom_fields'].get('tam_name', 'Unknown TAM')
+                companies[company['id']] = {'name': company['name'], 'tam_name': tam_name, 'account_tier': account_tier}
             page += 1
         else:
             break

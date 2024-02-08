@@ -1,0 +1,1601 @@
+﻿account_tier,priority,status,environment,ticket_type,escalated,past_due,Score
+A,Urgent,New,Production,Incident or Problem,TRUE,TRUE,1600
+A,Urgent,New,Production,Incident or Problem,TRUE,FALSE,1599
+A,Urgent,New,Production,Incident or Problem,FALSE,TRUE,1598
+A,Urgent,New,Production,Incident or Problem,FALSE,FALSE,1597
+A,Urgent,New,Lab,Incident or Problem,TRUE,TRUE,1596
+A,Urgent,New,Lab,Incident or Problem,TRUE,FALSE,1595
+A,Urgent,New,Lab,Incident or Problem,FALSE,TRUE,1594
+A,Urgent,New,Lab,Incident or Problem,FALSE,FALSE,1593
+B,Urgent,New,Production,Incident or Problem,TRUE,TRUE,1592
+B,Urgent,New,Production,Incident or Problem,TRUE,FALSE,1591
+B,Urgent,New,Production,Incident or Problem,FALSE,TRUE,1590
+B,Urgent,New,Production,Incident or Problem,FALSE,FALSE,1589
+B,Urgent,New,Lab,Incident or Problem,TRUE,TRUE,1588
+B,Urgent,New,Lab,Incident or Problem,TRUE,FALSE,1587
+B,Urgent,New,Lab,Incident or Problem,FALSE,TRUE,1586
+B,Urgent,New,Lab,Incident or Problem,FALSE,FALSE,1585
+C,Urgent,New,Production,Incident or Problem,TRUE,TRUE,1584
+C,Urgent,New,Production,Incident or Problem,TRUE,FALSE,1583
+C,Urgent,New,Production,Incident or Problem,FALSE,TRUE,1582
+C,Urgent,New,Production,Incident or Problem,FALSE,FALSE,1581
+C,Urgent,New,Lab,Incident or Problem,TRUE,TRUE,1580
+C,Urgent,New,Lab,Incident or Problem,TRUE,FALSE,1579
+C,Urgent,New,Lab,Incident or Problem,FALSE,TRUE,1578
+C,Urgent,New,Lab,Incident or Problem,FALSE,FALSE,1577
+D,Urgent,New,Production,Incident or Problem,TRUE,TRUE,1576
+D,Urgent,New,Production,Incident or Problem,TRUE,FALSE,1575
+D,Urgent,New,Production,Incident or Problem,FALSE,TRUE,1574
+D,Urgent,New,Production,Incident or Problem,FALSE,FALSE,1573
+D,Urgent,New,Lab,Incident or Problem,TRUE,TRUE,1572
+D,Urgent,New,Lab,Incident or Problem,TRUE,FALSE,1571
+D,Urgent,New,Lab,Incident or Problem,FALSE,TRUE,1570
+D,Urgent,New,Lab,Incident or Problem,FALSE,FALSE,1569
+E,Urgent,New,Production,Incident or Problem,TRUE,TRUE,1568
+E,Urgent,New,Production,Incident or Problem,TRUE,FALSE,1567
+E,Urgent,New,Production,Incident or Problem,FALSE,TRUE,1566
+E,Urgent,New,Production,Incident or Problem,FALSE,FALSE,1565
+E,Urgent,New,Lab,Incident or Problem,TRUE,TRUE,1564
+E,Urgent,New,Lab,Incident or Problem,TRUE,FALSE,1563
+E,Urgent,New,Lab,Incident or Problem,FALSE,TRUE,1562
+E,Urgent,New,Lab,Incident or Problem,FALSE,FALSE,1561
+A,Urgent,New,Production,Service request,TRUE,TRUE,1560
+A,Urgent,New,Production,Service request,TRUE,FALSE,1559
+A,Urgent,New,Production,Service request,FALSE,TRUE,1558
+A,Urgent,New,Production,Service request,FALSE,FALSE,1557
+A,Urgent,New,Lab,Service request,TRUE,TRUE,1556
+A,Urgent,New,Lab,Service request,TRUE,FALSE,1555
+A,Urgent,New,Lab,Service request,FALSE,TRUE,1554
+A,Urgent,New,Lab,Service request,FALSE,FALSE,1553
+B,Urgent,New,Production,Service request,TRUE,TRUE,1552
+B,Urgent,New,Production,Service request,TRUE,FALSE,1551
+B,Urgent,New,Production,Service request,FALSE,TRUE,1550
+B,Urgent,New,Production,Service request,FALSE,FALSE,1549
+B,Urgent,New,Lab,Service request,TRUE,TRUE,1548
+B,Urgent,New,Lab,Service request,TRUE,FALSE,1547
+B,Urgent,New,Lab,Service request,FALSE,TRUE,1546
+B,Urgent,New,Lab,Service request,FALSE,FALSE,1545
+C,Urgent,New,Production,Service request,TRUE,TRUE,1544
+C,Urgent,New,Production,Service request,TRUE,FALSE,1543
+C,Urgent,New,Production,Service request,FALSE,TRUE,1542
+C,Urgent,New,Production,Service request,FALSE,FALSE,1541
+C,Urgent,New,Lab,Service request,TRUE,TRUE,1540
+C,Urgent,New,Lab,Service request,TRUE,FALSE,1539
+C,Urgent,New,Lab,Service request,FALSE,TRUE,1538
+C,Urgent,New,Lab,Service request,FALSE,FALSE,1537
+D,Urgent,New,Production,Service request,TRUE,TRUE,1536
+D,Urgent,New,Production,Service request,TRUE,FALSE,1535
+D,Urgent,New,Production,Service request,FALSE,TRUE,1534
+D,Urgent,New,Production,Service request,FALSE,FALSE,1533
+D,Urgent,New,Lab,Service request,TRUE,TRUE,1532
+D,Urgent,New,Lab,Service request,TRUE,FALSE,1531
+D,Urgent,New,Lab,Service request,FALSE,TRUE,1530
+D,Urgent,New,Lab,Service request,FALSE,FALSE,1529
+E,Urgent,New,Production,Service request,TRUE,TRUE,1528
+E,Urgent,New,Production,Service request,TRUE,FALSE,1527
+E,Urgent,New,Production,Service request,FALSE,TRUE,1526
+E,Urgent,New,Production,Service request,FALSE,FALSE,1525
+E,Urgent,New,Lab,Service request,TRUE,TRUE,1524
+E,Urgent,New,Lab,Service request,TRUE,FALSE,1523
+E,Urgent,New,Lab,Service request,FALSE,TRUE,1522
+E,Urgent,New,Lab,Service request,FALSE,FALSE,1521
+A,Urgent,Open,Production,Incident or Problem,TRUE,TRUE,1520
+A,Urgent,Open,Production,Incident or Problem,TRUE,FALSE,1519
+A,Urgent,Open,Production,Incident or Problem,FALSE,TRUE,1518
+A,Urgent,Open,Production,Incident or Problem,FALSE,FALSE,1517
+A,Urgent,Open,Lab,Incident or Problem,TRUE,TRUE,1516
+A,Urgent,Open,Lab,Incident or Problem,TRUE,FALSE,1515
+A,Urgent,Open,Lab,Incident or Problem,FALSE,TRUE,1514
+A,Urgent,Open,Lab,Incident or Problem,FALSE,FALSE,1513
+B,Urgent,Open,Production,Incident or Problem,TRUE,TRUE,1512
+B,Urgent,Open,Production,Incident or Problem,TRUE,FALSE,1511
+B,Urgent,Open,Production,Incident or Problem,FALSE,TRUE,1510
+B,Urgent,Open,Production,Incident or Problem,FALSE,FALSE,1509
+B,Urgent,Open,Lab,Incident or Problem,TRUE,TRUE,1508
+B,Urgent,Open,Lab,Incident or Problem,TRUE,FALSE,1507
+B,Urgent,Open,Lab,Incident or Problem,FALSE,TRUE,1506
+B,Urgent,Open,Lab,Incident or Problem,FALSE,FALSE,1505
+C,Urgent,Open,Production,Incident or Problem,TRUE,TRUE,1504
+C,Urgent,Open,Production,Incident or Problem,TRUE,FALSE,1503
+C,Urgent,Open,Production,Incident or Problem,FALSE,TRUE,1502
+C,Urgent,Open,Production,Incident or Problem,FALSE,FALSE,1501
+C,Urgent,Open,Lab,Incident or Problem,TRUE,TRUE,1500
+C,Urgent,Open,Lab,Incident or Problem,TRUE,FALSE,1499
+C,Urgent,Open,Lab,Incident or Problem,FALSE,TRUE,1498
+C,Urgent,Open,Lab,Incident or Problem,FALSE,FALSE,1497
+D,Urgent,Open,Production,Incident or Problem,TRUE,TRUE,1496
+D,Urgent,Open,Production,Incident or Problem,TRUE,FALSE,1495
+D,Urgent,Open,Production,Incident or Problem,FALSE,TRUE,1494
+D,Urgent,Open,Production,Incident or Problem,FALSE,FALSE,1493
+E,Urgent,Open,Production,Incident or Problem,TRUE,TRUE,1492
+E,Urgent,Open,Production,Incident or Problem,TRUE,FALSE,1491
+E,Urgent,Open,Production,Incident or Problem,FALSE,TRUE,1490
+E,Urgent,Open,Production,Incident or Problem,FALSE,FALSE,1489
+A,Urgent,Open,Production,Service request,TRUE,TRUE,1488
+A,Urgent,Open,Production,Service request,TRUE,FALSE,1487
+A,Urgent,Service request triage,Production,Incident or Problem,TRUE,TRUE,1486
+A,Urgent,Service request triage,Production,Incident or Problem,TRUE,FALSE,1485
+A,Urgent,Service request triage,Production,Service request,TRUE,TRUE,1484
+A,Urgent,Service request triage,Production,Service request,TRUE,FALSE,1483
+A,Urgent,Other,Production,Incident or Problem,TRUE,TRUE,1482
+A,Urgent,Other,Production,Incident or Problem,TRUE,FALSE,1481
+A,Urgent,Other,Production,Service request,TRUE,TRUE,1480
+A,Urgent,Other,Production,Service request,TRUE,FALSE,1479
+B,Urgent,Open,Production,Service request,TRUE,TRUE,1478
+B,Urgent,Open,Production,Service request,TRUE,FALSE,1477
+B,Urgent,Service request triage,Production,Incident or Problem,TRUE,TRUE,1476
+B,Urgent,Service request triage,Production,Incident or Problem,TRUE,FALSE,1475
+B,Urgent,Service request triage,Production,Service request,TRUE,TRUE,1474
+B,Urgent,Service request triage,Production,Service request,TRUE,FALSE,1473
+B,Urgent,Other,Production,Incident or Problem,TRUE,TRUE,1472
+B,Urgent,Other,Production,Incident or Problem,TRUE,FALSE,1471
+B,Urgent,Other,Production,Service request,TRUE,TRUE,1470
+B,Urgent,Other,Production,Service request,TRUE,FALSE,1469
+C,Urgent,Open,Production,Service request,TRUE,TRUE,1468
+C,Urgent,Open,Production,Service request,TRUE,FALSE,1467
+C,Urgent,Service request triage,Production,Incident or Problem,TRUE,TRUE,1466
+C,Urgent,Service request triage,Production,Incident or Problem,TRUE,FALSE,1465
+C,Urgent,Service request triage,Production,Service request,TRUE,TRUE,1464
+C,Urgent,Service request triage,Production,Service request,TRUE,FALSE,1463
+C,Urgent,Other,Production,Incident or Problem,TRUE,TRUE,1462
+C,Urgent,Other,Production,Incident or Problem,TRUE,FALSE,1461
+C,Urgent,Other,Production,Service request,TRUE,TRUE,1460
+C,Urgent,Other,Production,Service request,TRUE,FALSE,1459
+D,Urgent,Open,Production,Service request,TRUE,TRUE,1458
+D,Urgent,Open,Production,Service request,TRUE,FALSE,1457
+D,Urgent,Service request triage,Production,Incident or Problem,TRUE,TRUE,1456
+D,Urgent,Service request triage,Production,Incident or Problem,TRUE,FALSE,1455
+D,Urgent,Service request triage,Production,Service request,TRUE,TRUE,1454
+D,Urgent,Service request triage,Production,Service request,TRUE,FALSE,1453
+D,Urgent,Other,Production,Incident or Problem,TRUE,TRUE,1452
+D,Urgent,Other,Production,Incident or Problem,TRUE,FALSE,1451
+D,Urgent,Other,Production,Service request,TRUE,TRUE,1450
+D,Urgent,Other,Production,Service request,TRUE,FALSE,1449
+E,Urgent,Open,Production,Service request,TRUE,TRUE,1448
+E,Urgent,Open,Production,Service request,TRUE,FALSE,1447
+E,Urgent,Service request triage,Production,Incident or Problem,TRUE,TRUE,1446
+E,Urgent,Service request triage,Production,Incident or Problem,TRUE,FALSE,1445
+E,Urgent,Service request triage,Production,Service request,TRUE,TRUE,1444
+E,Urgent,Service request triage,Production,Service request,TRUE,FALSE,1443
+E,Urgent,Other,Production,Incident or Problem,TRUE,TRUE,1442
+E,Urgent,Other,Production,Incident or Problem,TRUE,FALSE,1441
+E,Urgent,Other,Production,Service request,TRUE,TRUE,1440
+E,Urgent,Other,Production,Service request,TRUE,FALSE,1439
+A,Urgent,Open,Lab,Service request,TRUE,TRUE,1438
+A,Urgent,Open,Lab,Service request,TRUE,FALSE,1437
+A,Urgent,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1436
+A,Urgent,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1435
+A,Urgent,Service request triage,Lab,Service request,TRUE,TRUE,1434
+A,Urgent,Service request triage,Lab,Service request,TRUE,FALSE,1433
+A,Urgent,Other,Lab,Incident or Problem,TRUE,TRUE,1432
+A,Urgent,Other,Lab,Incident or Problem,TRUE,FALSE,1431
+A,Urgent,Other,Lab,Service request,TRUE,TRUE,1430
+A,Urgent,Other,Lab,Service request,TRUE,FALSE,1429
+B,Urgent,Open,Lab,Service request,TRUE,TRUE,1428
+B,Urgent,Open,Lab,Service request,TRUE,FALSE,1427
+B,Urgent,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1426
+B,Urgent,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1425
+B,Urgent,Service request triage,Lab,Service request,TRUE,TRUE,1424
+B,Urgent,Service request triage,Lab,Service request,TRUE,FALSE,1423
+B,Urgent,Other,Lab,Incident or Problem,TRUE,TRUE,1422
+B,Urgent,Other,Lab,Incident or Problem,TRUE,FALSE,1421
+B,Urgent,Other,Lab,Service request,TRUE,TRUE,1420
+B,Urgent,Other,Lab,Service request,TRUE,FALSE,1419
+C,Urgent,Open,Lab,Service request,TRUE,TRUE,1418
+C,Urgent,Open,Lab,Service request,TRUE,FALSE,1417
+C,Urgent,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1416
+C,Urgent,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1415
+C,Urgent,Service request triage,Lab,Service request,TRUE,TRUE,1414
+C,Urgent,Service request triage,Lab,Service request,TRUE,FALSE,1413
+C,Urgent,Other,Lab,Incident or Problem,TRUE,TRUE,1412
+C,Urgent,Other,Lab,Incident or Problem,TRUE,FALSE,1411
+C,Urgent,Other,Lab,Service request,TRUE,TRUE,1410
+C,Urgent,Other,Lab,Service request,TRUE,FALSE,1409
+D,Urgent,Open,Lab,Incident or Problem,TRUE,TRUE,1408
+D,Urgent,Open,Lab,Incident or Problem,TRUE,FALSE,1407
+D,Urgent,Open,Lab,Service request,TRUE,TRUE,1406
+D,Urgent,Open,Lab,Service request,TRUE,FALSE,1405
+D,Urgent,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1404
+D,Urgent,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1403
+D,Urgent,Service request triage,Lab,Service request,TRUE,TRUE,1402
+D,Urgent,Service request triage,Lab,Service request,TRUE,FALSE,1401
+D,Urgent,Other,Lab,Incident or Problem,TRUE,TRUE,1400
+D,Urgent,Other,Lab,Incident or Problem,TRUE,FALSE,1399
+D,Urgent,Other,Lab,Service request,TRUE,TRUE,1398
+D,Urgent,Other,Lab,Service request,TRUE,FALSE,1397
+E,Urgent,Open,Lab,Incident or Problem,TRUE,TRUE,1396
+E,Urgent,Open,Lab,Incident or Problem,TRUE,FALSE,1395
+E,Urgent,Open,Lab,Service request,TRUE,TRUE,1394
+E,Urgent,Open,Lab,Service request,TRUE,FALSE,1393
+E,Urgent,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1392
+E,Urgent,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1391
+E,Urgent,Service request triage,Lab,Service request,TRUE,TRUE,1390
+E,Urgent,Service request triage,Lab,Service request,TRUE,FALSE,1389
+E,Urgent,Other,Lab,Incident or Problem,TRUE,TRUE,1388
+E,Urgent,Other,Lab,Incident or Problem,TRUE,FALSE,1387
+E,Urgent,Other,Lab,Service request,TRUE,TRUE,1386
+E,Urgent,Other,Lab,Service request,TRUE,FALSE,1385
+A,Urgent,Open,Production,Service request,FALSE,TRUE,1384
+A,Urgent,Open,Production,Service request,FALSE,FALSE,1383
+A,Urgent,Open,Lab,Service request,FALSE,TRUE,1382
+A,Urgent,Open,Lab,Service request,FALSE,FALSE,1381
+A,Urgent,Service request triage,Production,Incident or Problem,FALSE,TRUE,1380
+A,Urgent,Service request triage,Production,Incident or Problem,FALSE,FALSE,1379
+A,Urgent,Service request triage,Production,Service request,FALSE,TRUE,1378
+A,Urgent,Service request triage,Production,Service request,FALSE,FALSE,1377
+A,Urgent,Service request triage,Lab,Incident or Problem,FALSE,TRUE,1376
+A,Urgent,Service request triage,Lab,Incident or Problem,FALSE,FALSE,1375
+A,Urgent,Service request triage,Lab,Service request,FALSE,TRUE,1374
+A,Urgent,Service request triage,Lab,Service request,FALSE,FALSE,1373
+A,Urgent,Other,Production,Incident or Problem,FALSE,TRUE,1372
+A,Urgent,Other,Production,Incident or Problem,FALSE,FALSE,1371
+A,Urgent,Other,Production,Service request,FALSE,TRUE,1370
+A,Urgent,Other,Production,Service request,FALSE,FALSE,1369
+A,Urgent,Other,Lab,Incident or Problem,FALSE,TRUE,1368
+A,Urgent,Other,Lab,Incident or Problem,FALSE,FALSE,1367
+A,Urgent,Other,Lab,Service request,FALSE,TRUE,1366
+A,Urgent,Other,Lab,Service request,FALSE,FALSE,1365
+B,Urgent,Open,Production,Service request,FALSE,TRUE,1364
+B,Urgent,Open,Production,Service request,FALSE,FALSE,1363
+B,Urgent,Open,Lab,Service request,FALSE,TRUE,1362
+B,Urgent,Open,Lab,Service request,FALSE,FALSE,1361
+B,Urgent,Service request triage,Production,Incident or Problem,FALSE,TRUE,1360
+B,Urgent,Service request triage,Production,Incident or Problem,FALSE,FALSE,1359
+B,Urgent,Service request triage,Production,Service request,FALSE,TRUE,1358
+B,Urgent,Service request triage,Production,Service request,FALSE,FALSE,1357
+B,Urgent,Service request triage,Lab,Incident or Problem,FALSE,TRUE,1356
+B,Urgent,Service request triage,Lab,Incident or Problem,FALSE,FALSE,1355
+B,Urgent,Service request triage,Lab,Service request,FALSE,TRUE,1354
+B,Urgent,Service request triage,Lab,Service request,FALSE,FALSE,1353
+B,Urgent,Other,Production,Incident or Problem,FALSE,TRUE,1352
+B,Urgent,Other,Production,Incident or Problem,FALSE,FALSE,1351
+B,Urgent,Other,Production,Service request,FALSE,TRUE,1350
+B,Urgent,Other,Production,Service request,FALSE,FALSE,1349
+B,Urgent,Other,Lab,Incident or Problem,FALSE,TRUE,1348
+B,Urgent,Other,Lab,Incident or Problem,FALSE,FALSE,1347
+B,Urgent,Other,Lab,Service request,FALSE,TRUE,1346
+B,Urgent,Other,Lab,Service request,FALSE,FALSE,1345
+C,Urgent,Open,Production,Service request,FALSE,TRUE,1344
+C,Urgent,Open,Production,Service request,FALSE,FALSE,1343
+C,Urgent,Open,Lab,Service request,FALSE,TRUE,1342
+C,Urgent,Open,Lab,Service request,FALSE,FALSE,1341
+C,Urgent,Service request triage,Production,Incident or Problem,FALSE,TRUE,1340
+C,Urgent,Service request triage,Production,Incident or Problem,FALSE,FALSE,1339
+C,Urgent,Service request triage,Production,Service request,FALSE,TRUE,1338
+C,Urgent,Service request triage,Production,Service request,FALSE,FALSE,1337
+C,Urgent,Service request triage,Lab,Incident or Problem,FALSE,TRUE,1336
+C,Urgent,Service request triage,Lab,Incident or Problem,FALSE,FALSE,1335
+C,Urgent,Service request triage,Lab,Service request,FALSE,TRUE,1334
+C,Urgent,Service request triage,Lab,Service request,FALSE,FALSE,1333
+C,Urgent,Other,Production,Incident or Problem,FALSE,TRUE,1332
+C,Urgent,Other,Production,Incident or Problem,FALSE,FALSE,1331
+C,Urgent,Other,Production,Service request,FALSE,TRUE,1330
+C,Urgent,Other,Production,Service request,FALSE,FALSE,1329
+C,Urgent,Other,Lab,Incident or Problem,FALSE,TRUE,1328
+C,Urgent,Other,Lab,Incident or Problem,FALSE,FALSE,1327
+C,Urgent,Other,Lab,Service request,FALSE,TRUE,1326
+C,Urgent,Other,Lab,Service request,FALSE,FALSE,1325
+D,Urgent,Open,Production,Service request,FALSE,TRUE,1324
+D,Urgent,Open,Production,Service request,FALSE,FALSE,1323
+D,Urgent,Open,Lab,Incident or Problem,FALSE,TRUE,1322
+D,Urgent,Open,Lab,Incident or Problem,FALSE,FALSE,1321
+D,Urgent,Open,Lab,Service request,FALSE,TRUE,1320
+D,Urgent,Open,Lab,Service request,FALSE,FALSE,1319
+D,Urgent,Service request triage,Production,Incident or Problem,FALSE,TRUE,1318
+D,Urgent,Service request triage,Production,Incident or Problem,FALSE,FALSE,1317
+D,Urgent,Service request triage,Production,Service request,FALSE,TRUE,1316
+D,Urgent,Service request triage,Production,Service request,FALSE,FALSE,1315
+D,Urgent,Service request triage,Lab,Incident or Problem,FALSE,TRUE,1314
+D,Urgent,Service request triage,Lab,Incident or Problem,FALSE,FALSE,1313
+D,Urgent,Service request triage,Lab,Service request,FALSE,TRUE,1312
+D,Urgent,Service request triage,Lab,Service request,FALSE,FALSE,1311
+D,Urgent,Other,Production,Incident or Problem,FALSE,TRUE,1310
+D,Urgent,Other,Production,Incident or Problem,FALSE,FALSE,1309
+D,Urgent,Other,Production,Service request,FALSE,TRUE,1308
+D,Urgent,Other,Production,Service request,FALSE,FALSE,1307
+D,Urgent,Other,Lab,Incident or Problem,FALSE,TRUE,1306
+D,Urgent,Other,Lab,Incident or Problem,FALSE,FALSE,1305
+D,Urgent,Other,Lab,Service request,FALSE,TRUE,1304
+D,Urgent,Other,Lab,Service request,FALSE,FALSE,1303
+E,Urgent,Open,Production,Service request,FALSE,TRUE,1302
+E,Urgent,Open,Production,Service request,FALSE,FALSE,1301
+E,Urgent,Open,Lab,Incident or Problem,FALSE,TRUE,1300
+E,Urgent,Open,Lab,Incident or Problem,FALSE,FALSE,1299
+E,Urgent,Open,Lab,Service request,FALSE,TRUE,1298
+E,Urgent,Open,Lab,Service request,FALSE,FALSE,1297
+E,Urgent,Service request triage,Production,Incident or Problem,FALSE,TRUE,1296
+E,Urgent,Service request triage,Production,Incident or Problem,FALSE,FALSE,1295
+E,Urgent,Service request triage,Production,Service request,FALSE,TRUE,1294
+E,Urgent,Service request triage,Production,Service request,FALSE,FALSE,1293
+E,Urgent,Service request triage,Lab,Incident or Problem,FALSE,TRUE,1292
+E,Urgent,Service request triage,Lab,Incident or Problem,FALSE,FALSE,1291
+E,Urgent,Service request triage,Lab,Service request,FALSE,TRUE,1290
+E,Urgent,Service request triage,Lab,Service request,FALSE,FALSE,1289
+E,Urgent,Other,Production,Incident or Problem,FALSE,TRUE,1288
+E,Urgent,Other,Production,Incident or Problem,FALSE,FALSE,1287
+E,Urgent,Other,Production,Service request,FALSE,TRUE,1286
+E,Urgent,Other,Production,Service request,FALSE,FALSE,1285
+E,Urgent,Other,Lab,Incident or Problem,FALSE,TRUE,1284
+E,Urgent,Other,Lab,Incident or Problem,FALSE,FALSE,1283
+E,Urgent,Other,Lab,Service request,FALSE,TRUE,1282
+E,Urgent,Other,Lab,Service request,FALSE,FALSE,1281
+A,High,New,Production,Incident or Problem,TRUE,TRUE,1280
+A,High,New,Production,Incident or Problem,TRUE,FALSE,1279
+A,High,New,Production,Service request,TRUE,TRUE,1278
+A,High,New,Production,Service request,TRUE,FALSE,1277
+A,High,New,Lab,Incident or Problem,TRUE,TRUE,1276
+A,High,New,Lab,Incident or Problem,TRUE,FALSE,1275
+A,High,New,Lab,Service request,TRUE,TRUE,1274
+A,High,New,Lab,Service request,TRUE,FALSE,1273
+B,High,New,Production,Incident or Problem,TRUE,TRUE,1272
+B,High,New,Production,Incident or Problem,TRUE,FALSE,1271
+B,High,New,Production,Service request,TRUE,TRUE,1270
+B,High,New,Production,Service request,TRUE,FALSE,1269
+B,High,New,Lab,Incident or Problem,TRUE,TRUE,1268
+B,High,New,Lab,Incident or Problem,TRUE,FALSE,1267
+B,High,New,Lab,Service request,TRUE,TRUE,1266
+B,High,New,Lab,Service request,TRUE,FALSE,1265
+C,High,New,Production,Incident or Problem,TRUE,TRUE,1264
+C,High,New,Production,Incident or Problem,TRUE,FALSE,1263
+C,High,New,Production,Service request,TRUE,TRUE,1262
+C,High,New,Production,Service request,TRUE,FALSE,1261
+C,High,New,Lab,Incident or Problem,TRUE,TRUE,1260
+C,High,New,Lab,Incident or Problem,TRUE,FALSE,1259
+C,High,New,Lab,Service request,TRUE,TRUE,1258
+C,High,New,Lab,Service request,TRUE,FALSE,1257
+D,High,New,Production,Incident or Problem,TRUE,TRUE,1256
+D,High,New,Production,Incident or Problem,TRUE,FALSE,1255
+D,High,New,Production,Service request,TRUE,TRUE,1254
+D,High,New,Production,Service request,TRUE,FALSE,1253
+D,High,New,Lab,Incident or Problem,TRUE,TRUE,1252
+D,High,New,Lab,Incident or Problem,TRUE,FALSE,1251
+D,High,New,Lab,Service request,TRUE,TRUE,1250
+D,High,New,Lab,Service request,TRUE,FALSE,1249
+E,High,New,Production,Incident or Problem,TRUE,TRUE,1248
+E,High,New,Production,Incident or Problem,TRUE,FALSE,1247
+E,High,New,Production,Service request,TRUE,TRUE,1246
+E,High,New,Production,Service request,TRUE,FALSE,1245
+E,High,New,Lab,Incident or Problem,TRUE,TRUE,1244
+E,High,New,Lab,Incident or Problem,TRUE,FALSE,1243
+E,High,New,Lab,Service request,TRUE,TRUE,1242
+E,High,New,Lab,Service request,TRUE,FALSE,1241
+A,High,New,Production,Incident or Problem,FALSE,TRUE,1240
+A,High,New,Production,Incident or Problem,FALSE,FALSE,1239
+A,High,New,Production,Service request,FALSE,TRUE,1238
+A,High,New,Production,Service request,FALSE,FALSE,1237
+A,High,New,Lab,Incident or Problem,FALSE,TRUE,1236
+A,High,New,Lab,Incident or Problem,FALSE,FALSE,1235
+A,High,New,Lab,Service request,FALSE,TRUE,1234
+A,High,New,Lab,Service request,FALSE,FALSE,1233
+B,High,New,Production,Incident or Problem,FALSE,TRUE,1232
+B,High,New,Production,Incident or Problem,FALSE,FALSE,1231
+B,High,New,Production,Service request,FALSE,TRUE,1230
+B,High,New,Production,Service request,FALSE,FALSE,1229
+B,High,New,Lab,Incident or Problem,FALSE,TRUE,1228
+B,High,New,Lab,Incident or Problem,FALSE,FALSE,1227
+B,High,New,Lab,Service request,FALSE,TRUE,1226
+B,High,New,Lab,Service request,FALSE,FALSE,1225
+C,High,New,Production,Incident or Problem,FALSE,TRUE,1224
+C,High,New,Production,Incident or Problem,FALSE,FALSE,1223
+C,High,New,Production,Service request,FALSE,TRUE,1222
+C,High,New,Production,Service request,FALSE,FALSE,1221
+C,High,New,Lab,Incident or Problem,FALSE,TRUE,1220
+C,High,New,Lab,Incident or Problem,FALSE,FALSE,1219
+C,High,New,Lab,Service request,FALSE,TRUE,1218
+C,High,New,Lab,Service request,FALSE,FALSE,1217
+D,High,New,Production,Incident or Problem,FALSE,TRUE,1216
+D,High,New,Production,Incident or Problem,FALSE,FALSE,1215
+D,High,New,Production,Service request,FALSE,TRUE,1214
+D,High,New,Production,Service request,FALSE,FALSE,1213
+D,High,New,Lab,Incident or Problem,FALSE,TRUE,1212
+D,High,New,Lab,Incident or Problem,FALSE,FALSE,1211
+D,High,New,Lab,Service request,FALSE,TRUE,1210
+D,High,New,Lab,Service request,FALSE,FALSE,1209
+E,High,New,Production,Incident or Problem,FALSE,TRUE,1208
+E,High,New,Production,Incident or Problem,FALSE,FALSE,1207
+E,High,New,Production,Service request,FALSE,TRUE,1206
+E,High,New,Production,Service request,FALSE,FALSE,1205
+E,High,New,Lab,Incident or Problem,FALSE,TRUE,1204
+E,High,New,Lab,Incident or Problem,FALSE,FALSE,1203
+E,High,New,Lab,Service request,FALSE,TRUE,1202
+E,High,New,Lab,Service request,FALSE,FALSE,1201
+A,High,Open,Production,Incident or Problem,TRUE,TRUE,1200
+A,High,Open,Production,Incident or Problem,TRUE,FALSE,1199
+A,High,Open,Production,Service request,TRUE,TRUE,1198
+A,High,Open,Production,Service request,TRUE,FALSE,1197
+A,High,Service request triage,Production,Incident or Problem,TRUE,TRUE,1196
+A,High,Service request triage,Production,Incident or Problem,TRUE,FALSE,1195
+A,High,Service request triage,Production,Service request,TRUE,TRUE,1194
+A,High,Service request triage,Production,Service request,TRUE,FALSE,1193
+A,High,Other,Production,Incident or Problem,TRUE,TRUE,1192
+A,High,Other,Production,Incident or Problem,TRUE,FALSE,1191
+A,High,Other,Production,Service request,TRUE,TRUE,1190
+A,High,Other,Production,Service request,TRUE,FALSE,1189
+B,High,Open,Production,Incident or Problem,TRUE,TRUE,1188
+B,High,Open,Production,Incident or Problem,TRUE,FALSE,1187
+B,High,Open,Production,Service request,TRUE,TRUE,1186
+B,High,Open,Production,Service request,TRUE,FALSE,1185
+B,High,Service request triage,Production,Incident or Problem,TRUE,TRUE,1184
+B,High,Service request triage,Production,Incident or Problem,TRUE,FALSE,1183
+B,High,Service request triage,Production,Service request,TRUE,TRUE,1182
+B,High,Service request triage,Production,Service request,TRUE,FALSE,1181
+B,High,Other,Production,Incident or Problem,TRUE,TRUE,1180
+B,High,Other,Production,Incident or Problem,TRUE,FALSE,1179
+B,High,Other,Production,Service request,TRUE,TRUE,1178
+B,High,Other,Production,Service request,TRUE,FALSE,1177
+C,High,Open,Production,Incident or Problem,TRUE,TRUE,1176
+C,High,Open,Production,Incident or Problem,TRUE,FALSE,1175
+C,High,Open,Production,Service request,TRUE,TRUE,1174
+C,High,Open,Production,Service request,TRUE,FALSE,1173
+C,High,Service request triage,Production,Incident or Problem,TRUE,TRUE,1172
+C,High,Service request triage,Production,Incident or Problem,TRUE,FALSE,1171
+C,High,Service request triage,Production,Service request,TRUE,TRUE,1170
+C,High,Service request triage,Production,Service request,TRUE,FALSE,1169
+C,High,Other,Production,Incident or Problem,TRUE,TRUE,1168
+C,High,Other,Production,Incident or Problem,TRUE,FALSE,1167
+C,High,Other,Production,Service request,TRUE,TRUE,1166
+C,High,Other,Production,Service request,TRUE,FALSE,1165
+D,High,Open,Production,Incident or Problem,TRUE,TRUE,1164
+D,High,Open,Production,Incident or Problem,TRUE,FALSE,1163
+D,High,Open,Production,Service request,TRUE,TRUE,1162
+D,High,Open,Production,Service request,TRUE,FALSE,1161
+D,High,Service request triage,Production,Incident or Problem,TRUE,TRUE,1160
+D,High,Service request triage,Production,Incident or Problem,TRUE,FALSE,1159
+D,High,Service request triage,Production,Service request,TRUE,TRUE,1158
+D,High,Service request triage,Production,Service request,TRUE,FALSE,1157
+D,High,Other,Production,Incident or Problem,TRUE,TRUE,1156
+D,High,Other,Production,Incident or Problem,TRUE,FALSE,1155
+D,High,Other,Production,Service request,TRUE,TRUE,1154
+D,High,Other,Production,Service request,TRUE,FALSE,1153
+E,High,Open,Production,Incident or Problem,TRUE,TRUE,1152
+E,High,Open,Production,Incident or Problem,TRUE,FALSE,1151
+E,High,Open,Production,Service request,TRUE,TRUE,1150
+E,High,Open,Production,Service request,TRUE,FALSE,1149
+E,High,Service request triage,Production,Incident or Problem,TRUE,TRUE,1148
+E,High,Service request triage,Production,Incident or Problem,TRUE,FALSE,1147
+E,High,Service request triage,Production,Service request,TRUE,TRUE,1146
+E,High,Service request triage,Production,Service request,TRUE,FALSE,1145
+E,High,Other,Production,Incident or Problem,TRUE,TRUE,1144
+E,High,Other,Production,Incident or Problem,TRUE,FALSE,1143
+E,High,Other,Production,Service request,TRUE,TRUE,1142
+E,High,Other,Production,Service request,TRUE,FALSE,1141
+A,High,Open,Lab,Incident or Problem,TRUE,TRUE,1140
+A,High,Open,Lab,Incident or Problem,TRUE,FALSE,1139
+A,High,Open,Lab,Service request,TRUE,TRUE,1138
+A,High,Open,Lab,Service request,TRUE,FALSE,1137
+A,High,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1136
+A,High,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1135
+A,High,Service request triage,Lab,Service request,TRUE,TRUE,1134
+A,High,Service request triage,Lab,Service request,TRUE,FALSE,1133
+A,High,Other,Lab,Incident or Problem,TRUE,TRUE,1132
+A,High,Other,Lab,Incident or Problem,TRUE,FALSE,1131
+A,High,Other,Lab,Service request,TRUE,TRUE,1130
+A,High,Other,Lab,Service request,TRUE,FALSE,1129
+B,High,Open,Lab,Incident or Problem,TRUE,TRUE,1128
+B,High,Open,Lab,Incident or Problem,TRUE,FALSE,1127
+B,High,Open,Lab,Service request,TRUE,TRUE,1126
+B,High,Open,Lab,Service request,TRUE,FALSE,1125
+B,High,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1124
+B,High,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1123
+B,High,Service request triage,Lab,Service request,TRUE,TRUE,1122
+B,High,Service request triage,Lab,Service request,TRUE,FALSE,1121
+B,High,Other,Lab,Incident or Problem,TRUE,TRUE,1120
+B,High,Other,Lab,Incident or Problem,TRUE,FALSE,1119
+B,High,Other,Lab,Service request,TRUE,TRUE,1118
+B,High,Other,Lab,Service request,TRUE,FALSE,1117
+C,High,Open,Lab,Incident or Problem,TRUE,TRUE,1116
+C,High,Open,Lab,Incident or Problem,TRUE,FALSE,1115
+C,High,Open,Lab,Service request,TRUE,TRUE,1114
+C,High,Open,Lab,Service request,TRUE,FALSE,1113
+C,High,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1112
+C,High,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1111
+C,High,Service request triage,Lab,Service request,TRUE,TRUE,1110
+C,High,Service request triage,Lab,Service request,TRUE,FALSE,1109
+C,High,Other,Lab,Incident or Problem,TRUE,TRUE,1108
+C,High,Other,Lab,Incident or Problem,TRUE,FALSE,1107
+C,High,Other,Lab,Service request,TRUE,TRUE,1106
+C,High,Other,Lab,Service request,TRUE,FALSE,1105
+D,High,Open,Lab,Incident or Problem,TRUE,TRUE,1104
+D,High,Open,Lab,Incident or Problem,TRUE,FALSE,1103
+D,High,Open,Lab,Service request,TRUE,TRUE,1102
+D,High,Open,Lab,Service request,TRUE,FALSE,1101
+D,High,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1100
+D,High,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1099
+D,High,Service request triage,Lab,Service request,TRUE,TRUE,1098
+D,High,Service request triage,Lab,Service request,TRUE,FALSE,1097
+D,High,Other,Lab,Incident or Problem,TRUE,TRUE,1096
+D,High,Other,Lab,Incident or Problem,TRUE,FALSE,1095
+D,High,Other,Lab,Service request,TRUE,TRUE,1094
+D,High,Other,Lab,Service request,TRUE,FALSE,1093
+E,High,Open,Lab,Incident or Problem,TRUE,TRUE,1092
+E,High,Open,Lab,Incident or Problem,TRUE,FALSE,1091
+E,High,Open,Lab,Service request,TRUE,TRUE,1090
+E,High,Open,Lab,Service request,TRUE,FALSE,1089
+E,High,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1088
+E,High,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1087
+E,High,Service request triage,Lab,Service request,TRUE,TRUE,1086
+E,High,Service request triage,Lab,Service request,TRUE,FALSE,1085
+E,High,Other,Lab,Incident or Problem,TRUE,TRUE,1084
+E,High,Other,Lab,Incident or Problem,TRUE,FALSE,1083
+E,High,Other,Lab,Service request,TRUE,TRUE,1082
+E,High,Other,Lab,Service request,TRUE,FALSE,1081
+A,Medium,New,Production,Incident or Problem,TRUE,TRUE,1080
+A,Medium,New,Production,Incident or Problem,TRUE,FALSE,1079
+A,Medium,New,Production,Service request,TRUE,TRUE,1078
+A,Medium,New,Production,Service request,TRUE,FALSE,1077
+A,Medium,New,Lab,Incident or Problem,TRUE,TRUE,1076
+A,Medium,New,Lab,Incident or Problem,TRUE,FALSE,1075
+A,Medium,New,Lab,Service request,TRUE,TRUE,1074
+A,Medium,New,Lab,Service request,TRUE,FALSE,1073
+B,Medium,New,Production,Incident or Problem,TRUE,TRUE,1072
+B,Medium,New,Production,Incident or Problem,TRUE,FALSE,1071
+B,Medium,New,Production,Service request,TRUE,TRUE,1070
+B,Medium,New,Production,Service request,TRUE,FALSE,1069
+B,Medium,New,Lab,Incident or Problem,TRUE,TRUE,1068
+B,Medium,New,Lab,Incident or Problem,TRUE,FALSE,1067
+B,Medium,New,Lab,Service request,TRUE,TRUE,1066
+B,Medium,New,Lab,Service request,TRUE,FALSE,1065
+C,Medium,New,Production,Incident or Problem,TRUE,TRUE,1064
+C,Medium,New,Production,Incident or Problem,TRUE,FALSE,1063
+C,Medium,New,Production,Service request,TRUE,TRUE,1062
+C,Medium,New,Production,Service request,TRUE,FALSE,1061
+C,Medium,New,Lab,Incident or Problem,TRUE,TRUE,1060
+C,Medium,New,Lab,Incident or Problem,TRUE,FALSE,1059
+C,Medium,New,Lab,Service request,TRUE,TRUE,1058
+C,Medium,New,Lab,Service request,TRUE,FALSE,1057
+A,Medium,New,Production,Incident or Problem,FALSE,TRUE,1056
+A,Medium,New,Production,Incident or Problem,FALSE,FALSE,1055
+A,Medium,New,Production,Service request,FALSE,TRUE,1054
+A,Medium,New,Production,Service request,FALSE,FALSE,1053
+A,Medium,New,Lab,Incident or Problem,FALSE,TRUE,1052
+A,Medium,New,Lab,Incident or Problem,FALSE,FALSE,1051
+A,Medium,New,Lab,Service request,FALSE,TRUE,1050
+A,Medium,New,Lab,Service request,FALSE,FALSE,1049
+B,Medium,New,Production,Incident or Problem,FALSE,TRUE,1048
+B,Medium,New,Production,Incident or Problem,FALSE,FALSE,1047
+B,Medium,New,Production,Service request,FALSE,TRUE,1046
+B,Medium,New,Production,Service request,FALSE,FALSE,1045
+B,Medium,New,Lab,Incident or Problem,FALSE,TRUE,1044
+B,Medium,New,Lab,Incident or Problem,FALSE,FALSE,1043
+B,Medium,New,Lab,Service request,FALSE,TRUE,1042
+B,Medium,New,Lab,Service request,FALSE,FALSE,1041
+C,Medium,New,Production,Incident or Problem,FALSE,TRUE,1040
+C,Medium,New,Production,Incident or Problem,FALSE,FALSE,1039
+C,Medium,New,Production,Service request,FALSE,TRUE,1038
+C,Medium,New,Production,Service request,FALSE,FALSE,1037
+C,Medium,New,Lab,Incident or Problem,FALSE,TRUE,1036
+C,Medium,New,Lab,Incident or Problem,FALSE,FALSE,1035
+C,Medium,New,Lab,Service request,FALSE,TRUE,1034
+C,Medium,New,Lab,Service request,FALSE,FALSE,1033
+A,Urgent,Pending,Production,Incident or Problem,TRUE,TRUE,1032
+A,Urgent,Pending,Production,Incident or Problem,TRUE,FALSE,1031
+A,Urgent,Pending,Production,Service request,TRUE,TRUE,1030
+A,Urgent,Pending,Production,Service request,TRUE,FALSE,1029
+A,Urgent,Pending,Lab,Incident or Problem,TRUE,TRUE,1028
+A,Urgent,Pending,Lab,Incident or Problem,TRUE,FALSE,1027
+A,Urgent,Pending,Lab,Service request,TRUE,TRUE,1026
+A,Urgent,Pending,Lab,Service request,TRUE,FALSE,1025
+A,High,Pending,Production,Incident or Problem,TRUE,TRUE,1024
+A,High,Pending,Production,Incident or Problem,TRUE,FALSE,1023
+A,High,Pending,Production,Service request,TRUE,TRUE,1022
+A,High,Pending,Production,Service request,TRUE,FALSE,1021
+A,High,Pending,Lab,Incident or Problem,TRUE,TRUE,1020
+A,High,Pending,Lab,Incident or Problem,TRUE,FALSE,1019
+A,High,Pending,Lab,Service request,TRUE,TRUE,1018
+A,High,Pending,Lab,Service request,TRUE,FALSE,1017
+A,Medium,Open,Production,Incident or Problem,TRUE,TRUE,1016
+A,Medium,Open,Production,Incident or Problem,TRUE,FALSE,1015
+A,Medium,Open,Production,Service request,TRUE,TRUE,1014
+A,Medium,Open,Production,Service request,TRUE,FALSE,1013
+A,Medium,Open,Lab,Incident or Problem,TRUE,TRUE,1012
+A,Medium,Open,Lab,Incident or Problem,TRUE,FALSE,1011
+A,Medium,Open,Lab,Service request,TRUE,TRUE,1010
+A,Medium,Open,Lab,Service request,TRUE,FALSE,1009
+A,Medium,Service request triage,Production,Incident or Problem,TRUE,TRUE,1008
+A,Medium,Service request triage,Production,Incident or Problem,TRUE,FALSE,1007
+A,Medium,Service request triage,Production,Service request,TRUE,TRUE,1006
+A,Medium,Service request triage,Production,Service request,TRUE,FALSE,1005
+A,Medium,Service request triage,Lab,Incident or Problem,TRUE,TRUE,1004
+A,Medium,Service request triage,Lab,Incident or Problem,TRUE,FALSE,1003
+A,Medium,Service request triage,Lab,Service request,TRUE,TRUE,1002
+A,Medium,Service request triage,Lab,Service request,TRUE,FALSE,1001
+A,Medium,Other,Production,Incident or Problem,TRUE,TRUE,1000
+A,Medium,Other,Production,Incident or Problem,TRUE,FALSE,999
+A,Medium,Other,Production,Service request,TRUE,TRUE,998
+A,Medium,Other,Production,Service request,TRUE,FALSE,997
+A,Medium,Other,Lab,Incident or Problem,TRUE,TRUE,996
+A,Medium,Other,Lab,Incident or Problem,TRUE,FALSE,995
+A,Medium,Other,Lab,Service request,TRUE,TRUE,994
+A,Medium,Other,Lab,Service request,TRUE,FALSE,993
+A,Medium,Pending,Production,Incident or Problem,TRUE,TRUE,992
+A,Medium,Pending,Production,Incident or Problem,TRUE,FALSE,991
+A,Medium,Pending,Production,Service request,TRUE,TRUE,990
+A,Medium,Pending,Production,Service request,TRUE,FALSE,989
+A,Medium,Pending,Lab,Incident or Problem,TRUE,TRUE,988
+A,Medium,Pending,Lab,Incident or Problem,TRUE,FALSE,987
+A,Medium,Pending,Lab,Service request,TRUE,TRUE,986
+A,Medium,Pending,Lab,Service request,TRUE,FALSE,985
+A,Low,New,Production,Incident or Problem,TRUE,TRUE,984
+A,Low,New,Production,Incident or Problem,TRUE,FALSE,983
+A,Low,New,Production,Service request,TRUE,TRUE,982
+A,Low,New,Production,Service request,TRUE,FALSE,981
+A,Low,New,Lab,Incident or Problem,TRUE,TRUE,980
+A,Low,New,Lab,Incident or Problem,TRUE,FALSE,979
+A,Low,New,Lab,Service request,TRUE,TRUE,978
+A,Low,New,Lab,Service request,TRUE,FALSE,977
+A,Low,Open,Production,Incident or Problem,TRUE,TRUE,976
+A,Low,Open,Production,Incident or Problem,TRUE,FALSE,975
+A,Low,Open,Production,Service request,TRUE,TRUE,974
+A,Low,Open,Production,Service request,TRUE,FALSE,973
+A,Low,Open,Lab,Incident or Problem,TRUE,TRUE,972
+A,Low,Open,Lab,Incident or Problem,TRUE,FALSE,971
+A,Low,Open,Lab,Service request,TRUE,TRUE,970
+A,Low,Open,Lab,Service request,TRUE,FALSE,969
+A,Low,Service request triage,Production,Incident or Problem,TRUE,TRUE,968
+A,Low,Service request triage,Production,Incident or Problem,TRUE,FALSE,967
+A,Low,Service request triage,Production,Service request,TRUE,TRUE,966
+A,Low,Service request triage,Production,Service request,TRUE,FALSE,965
+A,Low,Service request triage,Lab,Incident or Problem,TRUE,TRUE,964
+A,Low,Service request triage,Lab,Incident or Problem,TRUE,FALSE,963
+A,Low,Service request triage,Lab,Service request,TRUE,TRUE,962
+A,Low,Service request triage,Lab,Service request,TRUE,FALSE,961
+A,Low,Other,Production,Incident or Problem,TRUE,TRUE,960
+A,Low,Other,Production,Incident or Problem,TRUE,FALSE,959
+A,Low,Other,Production,Service request,TRUE,TRUE,958
+A,Low,Other,Production,Service request,TRUE,FALSE,957
+A,Low,Other,Lab,Incident or Problem,TRUE,TRUE,956
+A,Low,Other,Lab,Incident or Problem,TRUE,FALSE,955
+A,Low,Other,Lab,Service request,TRUE,TRUE,954
+A,Low,Other,Lab,Service request,TRUE,FALSE,953
+A,Low,Pending,Production,Incident or Problem,TRUE,TRUE,952
+A,Low,Pending,Production,Incident or Problem,TRUE,FALSE,951
+A,Low,Pending,Production,Service request,TRUE,TRUE,950
+A,Low,Pending,Production,Service request,TRUE,FALSE,949
+A,Low,Pending,Lab,Incident or Problem,TRUE,TRUE,948
+A,Low,Pending,Lab,Incident or Problem,TRUE,FALSE,947
+A,Low,Pending,Lab,Service request,TRUE,TRUE,946
+A,Low,Pending,Lab,Service request,TRUE,FALSE,945
+B,Urgent,Pending,Production,Incident or Problem,TRUE,TRUE,944
+B,Urgent,Pending,Production,Incident or Problem,TRUE,FALSE,943
+B,Urgent,Pending,Production,Service request,TRUE,TRUE,942
+B,Urgent,Pending,Production,Service request,TRUE,FALSE,941
+B,Urgent,Pending,Lab,Incident or Problem,TRUE,TRUE,940
+B,Urgent,Pending,Lab,Incident or Problem,TRUE,FALSE,939
+B,Urgent,Pending,Lab,Service request,TRUE,TRUE,938
+B,Urgent,Pending,Lab,Service request,TRUE,FALSE,937
+B,High,Pending,Production,Incident or Problem,TRUE,TRUE,936
+B,High,Pending,Production,Incident or Problem,TRUE,FALSE,935
+B,High,Pending,Production,Service request,TRUE,TRUE,934
+B,High,Pending,Production,Service request,TRUE,FALSE,933
+B,High,Pending,Lab,Incident or Problem,TRUE,TRUE,932
+B,High,Pending,Lab,Incident or Problem,TRUE,FALSE,931
+B,High,Pending,Lab,Service request,TRUE,TRUE,930
+B,High,Pending,Lab,Service request,TRUE,FALSE,929
+B,Medium,Open,Production,Incident or Problem,TRUE,TRUE,928
+B,Medium,Open,Production,Incident or Problem,TRUE,FALSE,927
+B,Medium,Open,Production,Service request,TRUE,TRUE,926
+B,Medium,Open,Production,Service request,TRUE,FALSE,925
+B,Medium,Open,Lab,Incident or Problem,TRUE,TRUE,924
+B,Medium,Open,Lab,Incident or Problem,TRUE,FALSE,923
+B,Medium,Open,Lab,Service request,TRUE,TRUE,922
+B,Medium,Open,Lab,Service request,TRUE,FALSE,921
+B,Medium,Service request triage,Production,Incident or Problem,TRUE,TRUE,920
+B,Medium,Service request triage,Production,Incident or Problem,TRUE,FALSE,919
+B,Medium,Service request triage,Production,Service request,TRUE,TRUE,918
+B,Medium,Service request triage,Production,Service request,TRUE,FALSE,917
+B,Medium,Service request triage,Lab,Incident or Problem,TRUE,TRUE,916
+B,Medium,Service request triage,Lab,Incident or Problem,TRUE,FALSE,915
+B,Medium,Service request triage,Lab,Service request,TRUE,TRUE,914
+B,Medium,Service request triage,Lab,Service request,TRUE,FALSE,913
+B,Medium,Other,Production,Incident or Problem,TRUE,TRUE,912
+B,Medium,Other,Production,Incident or Problem,TRUE,FALSE,911
+B,Medium,Other,Production,Service request,TRUE,TRUE,910
+B,Medium,Other,Production,Service request,TRUE,FALSE,909
+B,Medium,Other,Lab,Incident or Problem,TRUE,TRUE,908
+B,Medium,Other,Lab,Incident or Problem,TRUE,FALSE,907
+B,Medium,Other,Lab,Service request,TRUE,TRUE,906
+B,Medium,Other,Lab,Service request,TRUE,FALSE,905
+B,Medium,Pending,Production,Incident or Problem,TRUE,TRUE,904
+B,Medium,Pending,Production,Incident or Problem,TRUE,FALSE,903
+B,Medium,Pending,Production,Service request,TRUE,TRUE,902
+B,Medium,Pending,Production,Service request,TRUE,FALSE,901
+B,Medium,Pending,Lab,Incident or Problem,TRUE,TRUE,900
+B,Medium,Pending,Lab,Incident or Problem,TRUE,FALSE,899
+B,Medium,Pending,Lab,Service request,TRUE,TRUE,898
+B,Medium,Pending,Lab,Service request,TRUE,FALSE,897
+B,Low,New,Production,Incident or Problem,TRUE,TRUE,896
+B,Low,New,Production,Incident or Problem,TRUE,FALSE,895
+B,Low,New,Production,Service request,TRUE,TRUE,894
+B,Low,New,Production,Service request,TRUE,FALSE,893
+B,Low,New,Lab,Incident or Problem,TRUE,TRUE,892
+B,Low,New,Lab,Incident or Problem,TRUE,FALSE,891
+B,Low,New,Lab,Service request,TRUE,TRUE,890
+B,Low,New,Lab,Service request,TRUE,FALSE,889
+B,Low,Open,Production,Incident or Problem,TRUE,TRUE,888
+B,Low,Open,Production,Incident or Problem,TRUE,FALSE,887
+B,Low,Open,Production,Service request,TRUE,TRUE,886
+B,Low,Open,Production,Service request,TRUE,FALSE,885
+B,Low,Open,Lab,Incident or Problem,TRUE,TRUE,884
+B,Low,Open,Lab,Incident or Problem,TRUE,FALSE,883
+B,Low,Open,Lab,Service request,TRUE,TRUE,882
+B,Low,Open,Lab,Service request,TRUE,FALSE,881
+B,Low,Service request triage,Production,Incident or Problem,TRUE,TRUE,880
+B,Low,Service request triage,Production,Incident or Problem,TRUE,FALSE,879
+B,Low,Service request triage,Production,Service request,TRUE,TRUE,878
+B,Low,Service request triage,Production,Service request,TRUE,FALSE,877
+B,Low,Service request triage,Lab,Incident or Problem,TRUE,TRUE,876
+B,Low,Service request triage,Lab,Incident or Problem,TRUE,FALSE,875
+B,Low,Service request triage,Lab,Service request,TRUE,TRUE,874
+B,Low,Service request triage,Lab,Service request,TRUE,FALSE,873
+B,Low,Other,Production,Incident or Problem,TRUE,TRUE,872
+B,Low,Other,Production,Incident or Problem,TRUE,FALSE,871
+B,Low,Other,Production,Service request,TRUE,TRUE,870
+B,Low,Other,Production,Service request,TRUE,FALSE,869
+B,Low,Other,Lab,Incident or Problem,TRUE,TRUE,868
+B,Low,Other,Lab,Incident or Problem,TRUE,FALSE,867
+B,Low,Other,Lab,Service request,TRUE,TRUE,866
+B,Low,Other,Lab,Service request,TRUE,FALSE,865
+B,Low,Pending,Production,Incident or Problem,TRUE,TRUE,864
+B,Low,Pending,Production,Incident or Problem,TRUE,FALSE,863
+B,Low,Pending,Production,Service request,TRUE,TRUE,862
+B,Low,Pending,Production,Service request,TRUE,FALSE,861
+B,Low,Pending,Lab,Incident or Problem,TRUE,TRUE,860
+B,Low,Pending,Lab,Incident or Problem,TRUE,FALSE,859
+B,Low,Pending,Lab,Service request,TRUE,TRUE,858
+B,Low,Pending,Lab,Service request,TRUE,FALSE,857
+C,Urgent,Pending,Production,Incident or Problem,TRUE,TRUE,856
+C,Urgent,Pending,Production,Incident or Problem,TRUE,FALSE,855
+C,Urgent,Pending,Production,Service request,TRUE,TRUE,854
+C,Urgent,Pending,Production,Service request,TRUE,FALSE,853
+C,Urgent,Pending,Lab,Incident or Problem,TRUE,TRUE,852
+C,Urgent,Pending,Lab,Incident or Problem,TRUE,FALSE,851
+C,Urgent,Pending,Lab,Service request,TRUE,TRUE,850
+C,Urgent,Pending,Lab,Service request,TRUE,FALSE,849
+C,High,Pending,Production,Incident or Problem,TRUE,TRUE,848
+C,High,Pending,Production,Incident or Problem,TRUE,FALSE,847
+C,High,Pending,Production,Service request,TRUE,TRUE,846
+C,High,Pending,Production,Service request,TRUE,FALSE,845
+C,High,Pending,Lab,Incident or Problem,TRUE,TRUE,844
+C,High,Pending,Lab,Incident or Problem,TRUE,FALSE,843
+C,High,Pending,Lab,Service request,TRUE,TRUE,842
+C,High,Pending,Lab,Service request,TRUE,FALSE,841
+C,Medium,Open,Production,Incident or Problem,TRUE,TRUE,840
+C,Medium,Open,Production,Incident or Problem,TRUE,FALSE,839
+C,Medium,Open,Production,Service request,TRUE,TRUE,838
+C,Medium,Open,Production,Service request,TRUE,FALSE,837
+C,Medium,Open,Lab,Incident or Problem,TRUE,TRUE,836
+C,Medium,Open,Lab,Incident or Problem,TRUE,FALSE,835
+C,Medium,Open,Lab,Service request,TRUE,TRUE,834
+C,Medium,Open,Lab,Service request,TRUE,FALSE,833
+C,Medium,Service request triage,Production,Incident or Problem,TRUE,TRUE,832
+C,Medium,Service request triage,Production,Incident or Problem,TRUE,FALSE,831
+C,Medium,Service request triage,Production,Service request,TRUE,TRUE,830
+C,Medium,Service request triage,Production,Service request,TRUE,FALSE,829
+C,Medium,Service request triage,Lab,Incident or Problem,TRUE,TRUE,828
+C,Medium,Service request triage,Lab,Incident or Problem,TRUE,FALSE,827
+C,Medium,Service request triage,Lab,Service request,TRUE,TRUE,826
+C,Medium,Service request triage,Lab,Service request,TRUE,FALSE,825
+C,Medium,Other,Production,Incident or Problem,TRUE,TRUE,824
+C,Medium,Other,Production,Incident or Problem,TRUE,FALSE,823
+C,Medium,Other,Production,Service request,TRUE,TRUE,822
+C,Medium,Other,Production,Service request,TRUE,FALSE,821
+C,Medium,Other,Lab,Incident or Problem,TRUE,TRUE,820
+C,Medium,Other,Lab,Incident or Problem,TRUE,FALSE,819
+C,Medium,Other,Lab,Service request,TRUE,TRUE,818
+C,Medium,Other,Lab,Service request,TRUE,FALSE,817
+C,Medium,Pending,Production,Incident or Problem,TRUE,TRUE,816
+C,Medium,Pending,Production,Incident or Problem,TRUE,FALSE,815
+C,Medium,Pending,Production,Service request,TRUE,TRUE,814
+C,Medium,Pending,Production,Service request,TRUE,FALSE,813
+C,Medium,Pending,Lab,Incident or Problem,TRUE,TRUE,812
+C,Medium,Pending,Lab,Incident or Problem,TRUE,FALSE,811
+C,Medium,Pending,Lab,Service request,TRUE,TRUE,810
+C,Medium,Pending,Lab,Service request,TRUE,FALSE,809
+C,Low,New,Production,Incident or Problem,TRUE,TRUE,808
+C,Low,New,Production,Incident or Problem,TRUE,FALSE,807
+C,Low,New,Production,Service request,TRUE,TRUE,806
+C,Low,New,Production,Service request,TRUE,FALSE,805
+C,Low,New,Lab,Incident or Problem,TRUE,TRUE,804
+C,Low,New,Lab,Incident or Problem,TRUE,FALSE,803
+C,Low,New,Lab,Service request,TRUE,TRUE,802
+C,Low,New,Lab,Service request,TRUE,FALSE,801
+C,Low,Open,Production,Incident or Problem,TRUE,TRUE,800
+C,Low,Open,Production,Incident or Problem,TRUE,FALSE,799
+C,Low,Open,Production,Service request,TRUE,TRUE,798
+C,Low,Open,Production,Service request,TRUE,FALSE,797
+C,Low,Open,Lab,Incident or Problem,TRUE,TRUE,796
+C,Low,Open,Lab,Incident or Problem,TRUE,FALSE,795
+C,Low,Open,Lab,Service request,TRUE,TRUE,794
+C,Low,Open,Lab,Service request,TRUE,FALSE,793
+C,Low,Service request triage,Production,Incident or Problem,TRUE,TRUE,792
+C,Low,Service request triage,Production,Incident or Problem,TRUE,FALSE,791
+C,Low,Service request triage,Production,Service request,TRUE,TRUE,790
+C,Low,Service request triage,Production,Service request,TRUE,FALSE,789
+C,Low,Service request triage,Lab,Incident or Problem,TRUE,TRUE,788
+C,Low,Service request triage,Lab,Incident or Problem,TRUE,FALSE,787
+C,Low,Service request triage,Lab,Service request,TRUE,TRUE,786
+C,Low,Service request triage,Lab,Service request,TRUE,FALSE,785
+C,Low,Other,Production,Incident or Problem,TRUE,TRUE,784
+C,Low,Other,Production,Incident or Problem,TRUE,FALSE,783
+C,Low,Other,Production,Service request,TRUE,TRUE,782
+C,Low,Other,Production,Service request,TRUE,FALSE,781
+C,Low,Other,Lab,Incident or Problem,TRUE,TRUE,780
+C,Low,Other,Lab,Incident or Problem,TRUE,FALSE,779
+C,Low,Other,Lab,Service request,TRUE,TRUE,778
+C,Low,Other,Lab,Service request,TRUE,FALSE,777
+C,Low,Pending,Production,Incident or Problem,TRUE,TRUE,776
+C,Low,Pending,Production,Incident or Problem,TRUE,FALSE,775
+C,Low,Pending,Production,Service request,TRUE,TRUE,774
+C,Low,Pending,Production,Service request,TRUE,FALSE,773
+C,Low,Pending,Lab,Incident or Problem,TRUE,TRUE,772
+C,Low,Pending,Lab,Incident or Problem,TRUE,FALSE,771
+C,Low,Pending,Lab,Service request,TRUE,TRUE,770
+C,Low,Pending,Lab,Service request,TRUE,FALSE,769
+A,High,Open,Production,Incident or Problem,FALSE,TRUE,768
+A,High,Open,Production,Incident or Problem,FALSE,FALSE,767
+A,High,Open,Production,Service request,FALSE,TRUE,766
+A,High,Open,Production,Service request,FALSE,FALSE,765
+A,High,Open,Lab,Incident or Problem,FALSE,TRUE,764
+A,High,Open,Lab,Incident or Problem,FALSE,FALSE,763
+A,High,Open,Lab,Service request,FALSE,TRUE,762
+A,High,Open,Lab,Service request,FALSE,FALSE,761
+B,High,Open,Production,Incident or Problem,FALSE,TRUE,760
+B,High,Open,Production,Incident or Problem,FALSE,FALSE,759
+B,High,Open,Production,Service request,FALSE,TRUE,758
+B,High,Open,Production,Service request,FALSE,FALSE,757
+B,High,Open,Lab,Incident or Problem,FALSE,TRUE,756
+B,High,Open,Lab,Incident or Problem,FALSE,FALSE,755
+B,High,Open,Lab,Service request,FALSE,TRUE,754
+B,High,Open,Lab,Service request,FALSE,FALSE,753
+C,High,Open,Production,Incident or Problem,FALSE,TRUE,752
+C,High,Open,Production,Incident or Problem,FALSE,FALSE,751
+C,High,Open,Production,Service request,FALSE,TRUE,750
+C,High,Open,Production,Service request,FALSE,FALSE,749
+C,High,Open,Lab,Incident or Problem,FALSE,TRUE,748
+C,High,Open,Lab,Incident or Problem,FALSE,FALSE,747
+C,High,Open,Lab,Service request,FALSE,TRUE,746
+C,High,Open,Lab,Service request,FALSE,FALSE,745
+D,Urgent,Pending,Production,Incident or Problem,TRUE,TRUE,744
+D,Urgent,Pending,Production,Incident or Problem,TRUE,FALSE,743
+D,Urgent,Pending,Production,Service request,TRUE,TRUE,742
+D,Urgent,Pending,Production,Service request,TRUE,FALSE,741
+D,Urgent,Pending,Lab,Incident or Problem,TRUE,TRUE,740
+D,Urgent,Pending,Lab,Incident or Problem,TRUE,FALSE,739
+D,Urgent,Pending,Lab,Service request,TRUE,TRUE,738
+D,Urgent,Pending,Lab,Service request,TRUE,FALSE,737
+D,High,Pending,Production,Incident or Problem,TRUE,TRUE,736
+D,High,Pending,Production,Incident or Problem,TRUE,FALSE,735
+D,High,Pending,Production,Service request,TRUE,TRUE,734
+D,High,Pending,Production,Service request,TRUE,FALSE,733
+D,High,Pending,Lab,Incident or Problem,TRUE,TRUE,732
+D,High,Pending,Lab,Incident or Problem,TRUE,FALSE,731
+D,High,Pending,Lab,Service request,TRUE,TRUE,730
+D,High,Pending,Lab,Service request,TRUE,FALSE,729
+D,Medium,New,Production,Incident or Problem,TRUE,TRUE,728
+D,Medium,New,Production,Incident or Problem,TRUE,FALSE,727
+D,Medium,New,Production,Service request,TRUE,TRUE,726
+D,Medium,New,Production,Service request,TRUE,FALSE,725
+D,Medium,New,Lab,Incident or Problem,TRUE,TRUE,724
+D,Medium,New,Lab,Incident or Problem,TRUE,FALSE,723
+D,Medium,New,Lab,Service request,TRUE,TRUE,722
+D,Medium,New,Lab,Service request,TRUE,FALSE,721
+D,Medium,Open,Production,Incident or Problem,TRUE,TRUE,720
+D,Medium,Open,Production,Incident or Problem,TRUE,FALSE,719
+D,Medium,Open,Production,Service request,TRUE,TRUE,718
+D,Medium,Open,Production,Service request,TRUE,FALSE,717
+D,Medium,Open,Lab,Incident or Problem,TRUE,TRUE,716
+D,Medium,Open,Lab,Incident or Problem,TRUE,FALSE,715
+D,Medium,Open,Lab,Service request,TRUE,TRUE,714
+D,Medium,Open,Lab,Service request,TRUE,FALSE,713
+D,Medium,Service request triage,Production,Incident or Problem,TRUE,TRUE,712
+D,Medium,Service request triage,Production,Incident or Problem,TRUE,FALSE,711
+D,Medium,Service request triage,Production,Service request,TRUE,TRUE,710
+D,Medium,Service request triage,Production,Service request,TRUE,FALSE,709
+D,Medium,Service request triage,Lab,Incident or Problem,TRUE,TRUE,708
+D,Medium,Service request triage,Lab,Incident or Problem,TRUE,FALSE,707
+D,Medium,Service request triage,Lab,Service request,TRUE,TRUE,706
+D,Medium,Service request triage,Lab,Service request,TRUE,FALSE,705
+D,Medium,Other,Production,Incident or Problem,TRUE,TRUE,704
+D,Medium,Other,Production,Incident or Problem,TRUE,FALSE,703
+D,Medium,Other,Production,Service request,TRUE,TRUE,702
+D,Medium,Other,Production,Service request,TRUE,FALSE,701
+D,Medium,Other,Lab,Incident or Problem,TRUE,TRUE,700
+D,Medium,Other,Lab,Incident or Problem,TRUE,FALSE,699
+D,Medium,Other,Lab,Service request,TRUE,TRUE,698
+D,Medium,Other,Lab,Service request,TRUE,FALSE,697
+D,Medium,Pending,Production,Incident or Problem,TRUE,TRUE,696
+D,Medium,Pending,Production,Incident or Problem,TRUE,FALSE,695
+D,Medium,Pending,Production,Service request,TRUE,TRUE,694
+D,Medium,Pending,Production,Service request,TRUE,FALSE,693
+D,Medium,Pending,Lab,Incident or Problem,TRUE,TRUE,692
+D,Medium,Pending,Lab,Incident or Problem,TRUE,FALSE,691
+D,Medium,Pending,Lab,Service request,TRUE,TRUE,690
+D,Medium,Pending,Lab,Service request,TRUE,FALSE,689
+D,Low,New,Production,Incident or Problem,TRUE,TRUE,688
+D,Low,New,Production,Incident or Problem,TRUE,FALSE,687
+D,Low,New,Production,Service request,TRUE,TRUE,686
+D,Low,New,Production,Service request,TRUE,FALSE,685
+D,Low,New,Lab,Incident or Problem,TRUE,TRUE,684
+D,Low,New,Lab,Incident or Problem,TRUE,FALSE,683
+D,Low,New,Lab,Service request,TRUE,TRUE,682
+D,Low,New,Lab,Service request,TRUE,FALSE,681
+D,Low,Open,Production,Incident or Problem,TRUE,TRUE,680
+D,Low,Open,Production,Incident or Problem,TRUE,FALSE,679
+D,Low,Open,Production,Service request,TRUE,TRUE,678
+D,Low,Open,Production,Service request,TRUE,FALSE,677
+D,Low,Open,Lab,Incident or Problem,TRUE,TRUE,676
+D,Low,Open,Lab,Incident or Problem,TRUE,FALSE,675
+D,Low,Open,Lab,Service request,TRUE,TRUE,674
+D,Low,Open,Lab,Service request,TRUE,FALSE,673
+D,Low,Service request triage,Production,Incident or Problem,TRUE,TRUE,672
+D,Low,Service request triage,Production,Incident or Problem,TRUE,FALSE,671
+D,Low,Service request triage,Production,Service request,TRUE,TRUE,670
+D,Low,Service request triage,Production,Service request,TRUE,FALSE,669
+D,Low,Service request triage,Lab,Incident or Problem,TRUE,TRUE,668
+D,Low,Service request triage,Lab,Incident or Problem,TRUE,FALSE,667
+D,Low,Service request triage,Lab,Service request,TRUE,TRUE,666
+D,Low,Service request triage,Lab,Service request,TRUE,FALSE,665
+D,Low,Other,Production,Incident or Problem,TRUE,TRUE,664
+D,Low,Other,Production,Incident or Problem,TRUE,FALSE,663
+D,Low,Other,Production,Service request,TRUE,TRUE,662
+D,Low,Other,Production,Service request,TRUE,FALSE,661
+D,Low,Other,Lab,Incident or Problem,TRUE,TRUE,660
+D,Low,Other,Lab,Incident or Problem,TRUE,FALSE,659
+D,Low,Other,Lab,Service request,TRUE,TRUE,658
+D,Low,Other,Lab,Service request,TRUE,FALSE,657
+D,Low,Pending,Production,Incident or Problem,TRUE,TRUE,656
+D,Low,Pending,Production,Incident or Problem,TRUE,FALSE,655
+D,Low,Pending,Production,Service request,TRUE,TRUE,654
+D,Low,Pending,Production,Service request,TRUE,FALSE,653
+D,Low,Pending,Lab,Incident or Problem,TRUE,TRUE,652
+D,Low,Pending,Lab,Incident or Problem,TRUE,FALSE,651
+D,Low,Pending,Lab,Service request,TRUE,TRUE,650
+D,Low,Pending,Lab,Service request,TRUE,FALSE,649
+A,Low,New,Production,Incident or Problem,FALSE,TRUE,648
+A,Low,New,Production,Incident or Problem,FALSE,FALSE,647
+A,Low,New,Production,Service request,FALSE,TRUE,646
+A,Low,New,Production,Service request,FALSE,FALSE,645
+A,Low,New,Lab,Incident or Problem,FALSE,TRUE,644
+A,Low,New,Lab,Incident or Problem,FALSE,FALSE,643
+A,Low,New,Lab,Service request,FALSE,TRUE,642
+A,Low,New,Lab,Service request,FALSE,FALSE,641
+B,Low,New,Production,Incident or Problem,FALSE,TRUE,640
+B,Low,New,Production,Incident or Problem,FALSE,FALSE,639
+B,Low,New,Production,Service request,FALSE,TRUE,638
+B,Low,New,Production,Service request,FALSE,FALSE,637
+B,Low,New,Lab,Incident or Problem,FALSE,TRUE,636
+B,Low,New,Lab,Incident or Problem,FALSE,FALSE,635
+B,Low,New,Lab,Service request,FALSE,TRUE,634
+B,Low,New,Lab,Service request,FALSE,FALSE,633
+C,Low,New,Production,Incident or Problem,FALSE,TRUE,632
+C,Low,New,Production,Incident or Problem,FALSE,FALSE,631
+C,Low,New,Production,Service request,FALSE,TRUE,630
+C,Low,New,Production,Service request,FALSE,FALSE,629
+C,Low,New,Lab,Incident or Problem,FALSE,TRUE,628
+C,Low,New,Lab,Incident or Problem,FALSE,FALSE,627
+C,Low,New,Lab,Service request,FALSE,TRUE,626
+C,Low,New,Lab,Service request,FALSE,FALSE,625
+D,Medium,New,Production,Incident or Problem,FALSE,TRUE,624
+D,Medium,New,Production,Incident or Problem,FALSE,FALSE,623
+D,Medium,New,Production,Service request,FALSE,TRUE,622
+D,Medium,New,Production,Service request,FALSE,FALSE,621
+D,Medium,New,Lab,Incident or Problem,FALSE,TRUE,620
+D,Medium,New,Lab,Incident or Problem,FALSE,FALSE,619
+D,Medium,New,Lab,Service request,FALSE,TRUE,618
+D,Medium,New,Lab,Service request,FALSE,FALSE,617
+E,Medium,New,Production,Incident or Problem,TRUE,TRUE,616
+E,Medium,New,Production,Incident or Problem,TRUE,FALSE,615
+E,Medium,New,Production,Incident or Problem,FALSE,TRUE,614
+E,Medium,New,Production,Incident or Problem,FALSE,FALSE,613
+E,Medium,New,Production,Service request,TRUE,TRUE,612
+E,Medium,New,Production,Service request,TRUE,FALSE,611
+E,Medium,New,Production,Service request,FALSE,TRUE,610
+E,Medium,New,Production,Service request,FALSE,FALSE,609
+E,Medium,New,Lab,Incident or Problem,TRUE,TRUE,608
+E,Medium,New,Lab,Incident or Problem,TRUE,FALSE,607
+E,Medium,New,Lab,Incident or Problem,FALSE,TRUE,606
+E,Medium,New,Lab,Incident or Problem,FALSE,FALSE,605
+E,Medium,New,Lab,Service request,TRUE,TRUE,604
+E,Medium,New,Lab,Service request,TRUE,FALSE,603
+E,Medium,New,Lab,Service request,FALSE,TRUE,602
+E,Medium,New,Lab,Service request,FALSE,FALSE,601
+E,Urgent,Pending,Production,Incident or Problem,TRUE,TRUE,600
+E,Urgent,Pending,Production,Incident or Problem,TRUE,FALSE,599
+E,Urgent,Pending,Production,Service request,TRUE,TRUE,598
+E,Urgent,Pending,Production,Service request,TRUE,FALSE,597
+E,Urgent,Pending,Lab,Incident or Problem,TRUE,TRUE,596
+E,Urgent,Pending,Lab,Incident or Problem,TRUE,FALSE,595
+E,Urgent,Pending,Lab,Service request,TRUE,TRUE,594
+E,Urgent,Pending,Lab,Service request,TRUE,FALSE,593
+E,High,Pending,Production,Incident or Problem,TRUE,TRUE,592
+E,High,Pending,Production,Incident or Problem,TRUE,FALSE,591
+E,High,Pending,Production,Service request,TRUE,TRUE,590
+E,High,Pending,Production,Service request,TRUE,FALSE,589
+E,High,Pending,Lab,Incident or Problem,TRUE,TRUE,588
+E,High,Pending,Lab,Incident or Problem,TRUE,FALSE,587
+E,High,Pending,Lab,Service request,TRUE,TRUE,586
+E,High,Pending,Lab,Service request,TRUE,FALSE,585
+A,Medium,Open,Production,Incident or Problem,FALSE,TRUE,584
+A,Medium,Open,Production,Incident or Problem,FALSE,FALSE,583
+A,Medium,Open,Production,Service request,FALSE,TRUE,582
+A,Medium,Open,Production,Service request,FALSE,FALSE,581
+A,Medium,Open,Lab,Incident or Problem,FALSE,TRUE,580
+A,Medium,Open,Lab,Incident or Problem,FALSE,FALSE,579
+A,Medium,Open,Lab,Service request,FALSE,TRUE,578
+A,Medium,Open,Lab,Service request,FALSE,FALSE,577
+A,Medium,Service request triage,Production,Incident or Problem,FALSE,TRUE,576
+A,Medium,Service request triage,Production,Incident or Problem,FALSE,FALSE,575
+A,Medium,Service request triage,Production,Service request,FALSE,TRUE,574
+A,Medium,Service request triage,Production,Service request,FALSE,FALSE,573
+A,Medium,Service request triage,Lab,Incident or Problem,FALSE,TRUE,572
+A,Medium,Service request triage,Lab,Incident or Problem,FALSE,FALSE,571
+A,Medium,Service request triage,Lab,Service request,FALSE,TRUE,570
+A,Medium,Service request triage,Lab,Service request,FALSE,FALSE,569
+A,Medium,Other,Production,Incident or Problem,FALSE,TRUE,568
+A,Medium,Other,Production,Incident or Problem,FALSE,FALSE,567
+A,Medium,Other,Production,Service request,FALSE,TRUE,566
+A,Medium,Other,Production,Service request,FALSE,FALSE,565
+A,Medium,Other,Lab,Incident or Problem,FALSE,TRUE,564
+A,Medium,Other,Lab,Incident or Problem,FALSE,FALSE,563
+A,Medium,Other,Lab,Service request,FALSE,TRUE,562
+A,Medium,Other,Lab,Service request,FALSE,FALSE,561
+B,Medium,Open,Production,Incident or Problem,FALSE,TRUE,560
+B,Medium,Open,Production,Incident or Problem,FALSE,FALSE,559
+B,Medium,Open,Production,Service request,FALSE,TRUE,558
+B,Medium,Open,Production,Service request,FALSE,FALSE,557
+B,Medium,Open,Lab,Incident or Problem,FALSE,TRUE,556
+B,Medium,Open,Lab,Incident or Problem,FALSE,FALSE,555
+B,Medium,Open,Lab,Service request,FALSE,TRUE,554
+B,Medium,Open,Lab,Service request,FALSE,FALSE,553
+B,Medium,Service request triage,Production,Incident or Problem,FALSE,TRUE,552
+B,Medium,Service request triage,Production,Incident or Problem,FALSE,FALSE,551
+B,Medium,Service request triage,Production,Service request,FALSE,TRUE,550
+B,Medium,Service request triage,Production,Service request,FALSE,FALSE,549
+B,Medium,Service request triage,Lab,Incident or Problem,FALSE,TRUE,548
+B,Medium,Service request triage,Lab,Incident or Problem,FALSE,FALSE,547
+B,Medium,Service request triage,Lab,Service request,FALSE,TRUE,546
+B,Medium,Service request triage,Lab,Service request,FALSE,FALSE,545
+B,Medium,Other,Production,Incident or Problem,FALSE,TRUE,544
+B,Medium,Other,Production,Incident or Problem,FALSE,FALSE,543
+B,Medium,Other,Production,Service request,FALSE,TRUE,542
+B,Medium,Other,Production,Service request,FALSE,FALSE,541
+B,Medium,Other,Lab,Incident or Problem,FALSE,TRUE,540
+B,Medium,Other,Lab,Incident or Problem,FALSE,FALSE,539
+B,Medium,Other,Lab,Service request,FALSE,TRUE,538
+B,Medium,Other,Lab,Service request,FALSE,FALSE,537
+C,Medium,Open,Production,Incident or Problem,FALSE,TRUE,536
+C,Medium,Open,Production,Incident or Problem,FALSE,FALSE,535
+C,Medium,Open,Production,Service request,FALSE,TRUE,534
+C,Medium,Open,Production,Service request,FALSE,FALSE,533
+C,Medium,Open,Lab,Incident or Problem,FALSE,TRUE,532
+C,Medium,Open,Lab,Incident or Problem,FALSE,FALSE,531
+C,Medium,Open,Lab,Service request,FALSE,TRUE,530
+C,Medium,Open,Lab,Service request,FALSE,FALSE,529
+C,Medium,Service request triage,Production,Incident or Problem,FALSE,TRUE,528
+C,Medium,Service request triage,Production,Incident or Problem,FALSE,FALSE,527
+C,Medium,Service request triage,Production,Service request,FALSE,TRUE,526
+C,Medium,Service request triage,Production,Service request,FALSE,FALSE,525
+C,Medium,Service request triage,Lab,Incident or Problem,FALSE,TRUE,524
+C,Medium,Service request triage,Lab,Incident or Problem,FALSE,FALSE,523
+C,Medium,Service request triage,Lab,Service request,FALSE,TRUE,522
+C,Medium,Service request triage,Lab,Service request,FALSE,FALSE,521
+C,Medium,Other,Production,Incident or Problem,FALSE,TRUE,520
+C,Medium,Other,Production,Incident or Problem,FALSE,FALSE,519
+C,Medium,Other,Production,Service request,FALSE,TRUE,518
+C,Medium,Other,Production,Service request,FALSE,FALSE,517
+C,Medium,Other,Lab,Incident or Problem,FALSE,TRUE,516
+C,Medium,Other,Lab,Incident or Problem,FALSE,FALSE,515
+C,Medium,Other,Lab,Service request,FALSE,TRUE,514
+C,Medium,Other,Lab,Service request,FALSE,FALSE,513
+A,High,Service request triage,Production,Incident or Problem,FALSE,TRUE,512
+A,High,Service request triage,Production,Incident or Problem,FALSE,FALSE,511
+A,High,Service request triage,Production,Service request,FALSE,TRUE,510
+A,High,Service request triage,Production,Service request,FALSE,FALSE,509
+A,High,Service request triage,Lab,Incident or Problem,FALSE,TRUE,508
+A,High,Service request triage,Lab,Incident or Problem,FALSE,FALSE,507
+A,High,Service request triage,Lab,Service request,FALSE,TRUE,506
+A,High,Service request triage,Lab,Service request,FALSE,FALSE,505
+A,High,Other,Production,Incident or Problem,FALSE,TRUE,504
+A,High,Other,Production,Incident or Problem,FALSE,FALSE,503
+A,High,Other,Production,Service request,FALSE,TRUE,502
+A,High,Other,Production,Service request,FALSE,FALSE,501
+A,High,Other,Lab,Incident or Problem,FALSE,TRUE,500
+A,High,Other,Lab,Incident or Problem,FALSE,FALSE,499
+A,High,Other,Lab,Service request,FALSE,TRUE,498
+A,High,Other,Lab,Service request,FALSE,FALSE,497
+B,High,Service request triage,Production,Incident or Problem,FALSE,TRUE,496
+B,High,Service request triage,Production,Incident or Problem,FALSE,FALSE,495
+B,High,Service request triage,Production,Service request,FALSE,TRUE,494
+B,High,Service request triage,Production,Service request,FALSE,FALSE,493
+B,High,Service request triage,Lab,Incident or Problem,FALSE,TRUE,492
+B,High,Service request triage,Lab,Incident or Problem,FALSE,FALSE,491
+B,High,Service request triage,Lab,Service request,FALSE,TRUE,490
+B,High,Service request triage,Lab,Service request,FALSE,FALSE,489
+B,High,Other,Production,Incident or Problem,FALSE,TRUE,488
+B,High,Other,Production,Incident or Problem,FALSE,FALSE,487
+B,High,Other,Production,Service request,FALSE,TRUE,486
+B,High,Other,Production,Service request,FALSE,FALSE,485
+B,High,Other,Lab,Incident or Problem,FALSE,TRUE,484
+B,High,Other,Lab,Incident or Problem,FALSE,FALSE,483
+B,High,Other,Lab,Service request,FALSE,TRUE,482
+B,High,Other,Lab,Service request,FALSE,FALSE,481
+C,High,Service request triage,Production,Incident or Problem,FALSE,TRUE,480
+C,High,Service request triage,Production,Incident or Problem,FALSE,FALSE,479
+C,High,Service request triage,Production,Service request,FALSE,TRUE,478
+C,High,Service request triage,Production,Service request,FALSE,FALSE,477
+C,High,Service request triage,Lab,Incident or Problem,FALSE,TRUE,476
+C,High,Service request triage,Lab,Incident or Problem,FALSE,FALSE,475
+C,High,Service request triage,Lab,Service request,FALSE,TRUE,474
+C,High,Service request triage,Lab,Service request,FALSE,FALSE,473
+C,High,Other,Production,Incident or Problem,FALSE,TRUE,472
+C,High,Other,Production,Incident or Problem,FALSE,FALSE,471
+C,High,Other,Production,Service request,FALSE,TRUE,470
+C,High,Other,Production,Service request,FALSE,FALSE,469
+C,High,Other,Lab,Incident or Problem,FALSE,TRUE,468
+C,High,Other,Lab,Incident or Problem,FALSE,FALSE,467
+C,High,Other,Lab,Service request,FALSE,TRUE,466
+C,High,Other,Lab,Service request,FALSE,FALSE,465
+D,High,Open,Production,Incident or Problem,FALSE,TRUE,464
+D,High,Open,Production,Incident or Problem,FALSE,FALSE,463
+D,High,Open,Production,Service request,FALSE,TRUE,462
+D,High,Open,Production,Service request,FALSE,FALSE,461
+D,High,Open,Lab,Incident or Problem,FALSE,TRUE,460
+D,High,Open,Lab,Incident or Problem,FALSE,FALSE,459
+D,High,Open,Lab,Service request,FALSE,TRUE,458
+D,High,Open,Lab,Service request,FALSE,FALSE,457
+D,High,Service request triage,Production,Incident or Problem,FALSE,TRUE,456
+D,High,Service request triage,Production,Incident or Problem,FALSE,FALSE,455
+D,High,Service request triage,Production,Service request,FALSE,TRUE,454
+D,High,Service request triage,Production,Service request,FALSE,FALSE,453
+D,High,Service request triage,Lab,Incident or Problem,FALSE,TRUE,452
+D,High,Service request triage,Lab,Incident or Problem,FALSE,FALSE,451
+D,High,Service request triage,Lab,Service request,FALSE,TRUE,450
+D,High,Service request triage,Lab,Service request,FALSE,FALSE,449
+D,High,Other,Production,Incident or Problem,FALSE,TRUE,448
+D,High,Other,Production,Incident or Problem,FALSE,FALSE,447
+D,High,Other,Production,Service request,FALSE,TRUE,446
+D,High,Other,Production,Service request,FALSE,FALSE,445
+D,High,Other,Lab,Incident or Problem,FALSE,TRUE,444
+D,High,Other,Lab,Incident or Problem,FALSE,FALSE,443
+D,High,Other,Lab,Service request,FALSE,TRUE,442
+D,High,Other,Lab,Service request,FALSE,FALSE,441
+D,Medium,Open,Production,Incident or Problem,FALSE,TRUE,440
+D,Medium,Open,Production,Incident or Problem,FALSE,FALSE,439
+D,Medium,Open,Production,Service request,FALSE,TRUE,438
+D,Medium,Open,Production,Service request,FALSE,FALSE,437
+D,Medium,Open,Lab,Incident or Problem,FALSE,TRUE,436
+D,Medium,Open,Lab,Incident or Problem,FALSE,FALSE,435
+D,Medium,Open,Lab,Service request,FALSE,TRUE,434
+D,Medium,Open,Lab,Service request,FALSE,FALSE,433
+D,Medium,Service request triage,Production,Incident or Problem,FALSE,TRUE,432
+D,Medium,Service request triage,Production,Incident or Problem,FALSE,FALSE,431
+D,Medium,Service request triage,Production,Service request,FALSE,TRUE,430
+D,Medium,Service request triage,Production,Service request,FALSE,FALSE,429
+D,Medium,Service request triage,Lab,Incident or Problem,FALSE,TRUE,428
+D,Medium,Service request triage,Lab,Incident or Problem,FALSE,FALSE,427
+D,Medium,Service request triage,Lab,Service request,FALSE,TRUE,426
+D,Medium,Service request triage,Lab,Service request,FALSE,FALSE,425
+D,Medium,Other,Production,Incident or Problem,FALSE,TRUE,424
+D,Medium,Other,Production,Incident or Problem,FALSE,FALSE,423
+D,Medium,Other,Production,Service request,FALSE,TRUE,422
+D,Medium,Other,Production,Service request,FALSE,FALSE,421
+D,Medium,Other,Lab,Incident or Problem,FALSE,TRUE,420
+D,Medium,Other,Lab,Incident or Problem,FALSE,FALSE,419
+D,Medium,Other,Lab,Service request,FALSE,TRUE,418
+D,Medium,Other,Lab,Service request,FALSE,FALSE,417
+E,High,Open,Production,Incident or Problem,FALSE,TRUE,416
+E,High,Open,Production,Incident or Problem,FALSE,FALSE,415
+E,High,Open,Production,Service request,FALSE,TRUE,414
+E,High,Open,Production,Service request,FALSE,FALSE,413
+E,High,Open,Lab,Incident or Problem,FALSE,TRUE,412
+E,High,Open,Lab,Incident or Problem,FALSE,FALSE,411
+E,High,Open,Lab,Service request,FALSE,TRUE,410
+E,High,Open,Lab,Service request,FALSE,FALSE,409
+E,High,Service request triage,Production,Incident or Problem,FALSE,TRUE,408
+E,High,Service request triage,Production,Incident or Problem,FALSE,FALSE,407
+E,High,Service request triage,Production,Service request,FALSE,TRUE,406
+E,High,Service request triage,Production,Service request,FALSE,FALSE,405
+E,High,Service request triage,Lab,Incident or Problem,FALSE,TRUE,404
+E,High,Service request triage,Lab,Incident or Problem,FALSE,FALSE,403
+E,High,Service request triage,Lab,Service request,FALSE,TRUE,402
+E,High,Service request triage,Lab,Service request,FALSE,FALSE,401
+E,High,Other,Production,Incident or Problem,FALSE,TRUE,400
+E,High,Other,Production,Incident or Problem,FALSE,FALSE,399
+E,High,Other,Production,Service request,FALSE,TRUE,398
+E,High,Other,Production,Service request,FALSE,FALSE,397
+E,High,Other,Lab,Incident or Problem,FALSE,TRUE,396
+E,High,Other,Lab,Incident or Problem,FALSE,FALSE,395
+E,High,Other,Lab,Service request,FALSE,TRUE,394
+E,High,Other,Lab,Service request,FALSE,FALSE,393
+E,Medium,Open,Production,Incident or Problem,TRUE,TRUE,392
+E,Medium,Open,Production,Incident or Problem,TRUE,FALSE,391
+E,Medium,Open,Production,Incident or Problem,FALSE,TRUE,390
+E,Medium,Open,Production,Incident or Problem,FALSE,FALSE,389
+E,Medium,Open,Production,Service request,TRUE,TRUE,388
+E,Medium,Open,Production,Service request,TRUE,FALSE,387
+E,Medium,Open,Production,Service request,FALSE,TRUE,386
+E,Medium,Open,Production,Service request,FALSE,FALSE,385
+E,Medium,Open,Lab,Incident or Problem,TRUE,TRUE,384
+E,Medium,Open,Lab,Incident or Problem,TRUE,FALSE,383
+E,Medium,Open,Lab,Incident or Problem,FALSE,TRUE,382
+E,Medium,Open,Lab,Incident or Problem,FALSE,FALSE,381
+E,Medium,Open,Lab,Service request,TRUE,TRUE,380
+E,Medium,Open,Lab,Service request,TRUE,FALSE,379
+E,Medium,Open,Lab,Service request,FALSE,TRUE,378
+E,Medium,Open,Lab,Service request,FALSE,FALSE,377
+E,Medium,Service request triage,Production,Incident or Problem,TRUE,TRUE,376
+E,Medium,Service request triage,Production,Incident or Problem,TRUE,FALSE,375
+E,Medium,Service request triage,Production,Incident or Problem,FALSE,TRUE,374
+E,Medium,Service request triage,Production,Incident or Problem,FALSE,FALSE,373
+E,Medium,Service request triage,Production,Service request,TRUE,TRUE,372
+E,Medium,Service request triage,Production,Service request,TRUE,FALSE,371
+E,Medium,Service request triage,Production,Service request,FALSE,TRUE,370
+E,Medium,Service request triage,Production,Service request,FALSE,FALSE,369
+E,Medium,Service request triage,Lab,Incident or Problem,TRUE,TRUE,368
+E,Medium,Service request triage,Lab,Incident or Problem,TRUE,FALSE,367
+E,Medium,Service request triage,Lab,Incident or Problem,FALSE,TRUE,366
+E,Medium,Service request triage,Lab,Incident or Problem,FALSE,FALSE,365
+E,Medium,Service request triage,Lab,Service request,TRUE,TRUE,364
+E,Medium,Service request triage,Lab,Service request,TRUE,FALSE,363
+E,Medium,Service request triage,Lab,Service request,FALSE,TRUE,362
+E,Medium,Service request triage,Lab,Service request,FALSE,FALSE,361
+E,Medium,Other,Production,Incident or Problem,TRUE,TRUE,360
+E,Medium,Other,Production,Incident or Problem,TRUE,FALSE,359
+E,Medium,Other,Production,Incident or Problem,FALSE,TRUE,358
+E,Medium,Other,Production,Incident or Problem,FALSE,FALSE,357
+E,Medium,Other,Production,Service request,TRUE,TRUE,356
+E,Medium,Other,Production,Service request,TRUE,FALSE,355
+E,Medium,Other,Production,Service request,FALSE,TRUE,354
+E,Medium,Other,Production,Service request,FALSE,FALSE,353
+E,Medium,Other,Lab,Incident or Problem,TRUE,TRUE,352
+E,Medium,Other,Lab,Incident or Problem,TRUE,FALSE,351
+E,Medium,Other,Lab,Incident or Problem,FALSE,TRUE,350
+E,Medium,Other,Lab,Incident or Problem,FALSE,FALSE,349
+E,Medium,Other,Lab,Service request,TRUE,TRUE,348
+E,Medium,Other,Lab,Service request,TRUE,FALSE,347
+E,Medium,Other,Lab,Service request,FALSE,TRUE,346
+E,Medium,Other,Lab,Service request,FALSE,FALSE,345
+D,Low,New,Production,Incident or Problem,FALSE,TRUE,344
+D,Low,New,Production,Incident or Problem,FALSE,FALSE,343
+D,Low,New,Production,Service request,FALSE,TRUE,342
+D,Low,New,Production,Service request,FALSE,FALSE,341
+D,Low,New,Lab,Incident or Problem,FALSE,TRUE,340
+D,Low,New,Lab,Incident or Problem,FALSE,FALSE,339
+D,Low,New,Lab,Service request,FALSE,TRUE,338
+D,Low,New,Lab,Service request,FALSE,FALSE,337
+E,Low,New,Production,Incident or Problem,TRUE,TRUE,336
+E,Low,New,Production,Incident or Problem,TRUE,FALSE,335
+E,Low,New,Production,Incident or Problem,FALSE,TRUE,334
+E,Low,New,Production,Incident or Problem,FALSE,FALSE,333
+E,Low,New,Production,Service request,TRUE,TRUE,332
+E,Low,New,Production,Service request,TRUE,FALSE,331
+E,Low,New,Production,Service request,FALSE,TRUE,330
+E,Low,New,Production,Service request,FALSE,FALSE,329
+E,Low,New,Lab,Incident or Problem,TRUE,TRUE,328
+E,Low,New,Lab,Incident or Problem,TRUE,FALSE,327
+E,Low,New,Lab,Incident or Problem,FALSE,TRUE,326
+E,Low,New,Lab,Incident or Problem,FALSE,FALSE,325
+E,Low,New,Lab,Service request,TRUE,TRUE,324
+E,Low,New,Lab,Service request,TRUE,FALSE,323
+E,Low,New,Lab,Service request,FALSE,TRUE,322
+E,Low,New,Lab,Service request,FALSE,FALSE,321
+A,Low,Open,Production,Incident or Problem,FALSE,TRUE,320
+A,Low,Open,Production,Incident or Problem,FALSE,FALSE,319
+A,Low,Open,Production,Service request,FALSE,TRUE,318
+A,Low,Open,Production,Service request,FALSE,FALSE,317
+A,Low,Open,Lab,Incident or Problem,FALSE,TRUE,316
+A,Low,Open,Lab,Incident or Problem,FALSE,FALSE,315
+A,Low,Open,Lab,Service request,FALSE,TRUE,314
+A,Low,Open,Lab,Service request,FALSE,FALSE,313
+A,Low,Service request triage,Production,Incident or Problem,FALSE,TRUE,312
+A,Low,Service request triage,Production,Incident or Problem,FALSE,FALSE,311
+A,Low,Service request triage,Production,Service request,FALSE,TRUE,310
+A,Low,Service request triage,Production,Service request,FALSE,FALSE,309
+A,Low,Service request triage,Lab,Incident or Problem,FALSE,TRUE,308
+A,Low,Service request triage,Lab,Incident or Problem,FALSE,FALSE,307
+A,Low,Service request triage,Lab,Service request,FALSE,TRUE,306
+A,Low,Service request triage,Lab,Service request,FALSE,FALSE,305
+A,Low,Other,Production,Incident or Problem,FALSE,TRUE,304
+A,Low,Other,Production,Incident or Problem,FALSE,FALSE,303
+A,Low,Other,Production,Service request,FALSE,TRUE,302
+A,Low,Other,Production,Service request,FALSE,FALSE,301
+A,Low,Other,Lab,Incident or Problem,FALSE,TRUE,300
+A,Low,Other,Lab,Incident or Problem,FALSE,FALSE,299
+A,Low,Other,Lab,Service request,FALSE,TRUE,298
+A,Low,Other,Lab,Service request,FALSE,FALSE,297
+B,Low,Open,Production,Incident or Problem,FALSE,TRUE,296
+B,Low,Open,Production,Incident or Problem,FALSE,FALSE,295
+B,Low,Open,Production,Service request,FALSE,TRUE,294
+B,Low,Open,Production,Service request,FALSE,FALSE,293
+B,Low,Open,Lab,Incident or Problem,FALSE,TRUE,292
+B,Low,Open,Lab,Incident or Problem,FALSE,FALSE,291
+B,Low,Open,Lab,Service request,FALSE,TRUE,290
+B,Low,Open,Lab,Service request,FALSE,FALSE,289
+B,Low,Service request triage,Production,Incident or Problem,FALSE,TRUE,288
+B,Low,Service request triage,Production,Incident or Problem,FALSE,FALSE,287
+B,Low,Service request triage,Production,Service request,FALSE,TRUE,286
+B,Low,Service request triage,Production,Service request,FALSE,FALSE,285
+B,Low,Service request triage,Lab,Incident or Problem,FALSE,TRUE,284
+B,Low,Service request triage,Lab,Incident or Problem,FALSE,FALSE,283
+B,Low,Service request triage,Lab,Service request,FALSE,TRUE,282
+B,Low,Service request triage,Lab,Service request,FALSE,FALSE,281
+B,Low,Other,Production,Incident or Problem,FALSE,TRUE,280
+B,Low,Other,Production,Incident or Problem,FALSE,FALSE,279
+B,Low,Other,Production,Service request,FALSE,TRUE,278
+B,Low,Other,Production,Service request,FALSE,FALSE,277
+B,Low,Other,Lab,Incident or Problem,FALSE,TRUE,276
+B,Low,Other,Lab,Incident or Problem,FALSE,FALSE,275
+B,Low,Other,Lab,Service request,FALSE,TRUE,274
+B,Low,Other,Lab,Service request,FALSE,FALSE,273
+C,Low,Open,Production,Incident or Problem,FALSE,TRUE,272
+C,Low,Open,Production,Incident or Problem,FALSE,FALSE,271
+C,Low,Open,Production,Service request,FALSE,TRUE,270
+C,Low,Open,Production,Service request,FALSE,FALSE,269
+C,Low,Open,Lab,Incident or Problem,FALSE,TRUE,268
+C,Low,Open,Lab,Incident or Problem,FALSE,FALSE,267
+C,Low,Open,Lab,Service request,FALSE,TRUE,266
+C,Low,Open,Lab,Service request,FALSE,FALSE,265
+C,Low,Service request triage,Production,Incident or Problem,FALSE,TRUE,264
+C,Low,Service request triage,Production,Incident or Problem,FALSE,FALSE,263
+C,Low,Service request triage,Production,Service request,FALSE,TRUE,262
+C,Low,Service request triage,Production,Service request,FALSE,FALSE,261
+C,Low,Service request triage,Lab,Incident or Problem,FALSE,TRUE,260
+C,Low,Service request triage,Lab,Incident or Problem,FALSE,FALSE,259
+C,Low,Service request triage,Lab,Service request,FALSE,TRUE,258
+C,Low,Service request triage,Lab,Service request,FALSE,FALSE,257
+C,Low,Other,Production,Incident or Problem,FALSE,TRUE,256
+C,Low,Other,Production,Incident or Problem,FALSE,FALSE,255
+C,Low,Other,Production,Service request,FALSE,TRUE,254
+C,Low,Other,Production,Service request,FALSE,FALSE,253
+C,Low,Other,Lab,Incident or Problem,FALSE,TRUE,252
+C,Low,Other,Lab,Incident or Problem,FALSE,FALSE,251
+C,Low,Other,Lab,Service request,FALSE,TRUE,250
+C,Low,Other,Lab,Service request,FALSE,FALSE,249
+D,Low,Open,Production,Incident or Problem,FALSE,TRUE,248
+D,Low,Open,Production,Incident or Problem,FALSE,FALSE,247
+D,Low,Open,Production,Service request,FALSE,TRUE,246
+D,Low,Open,Production,Service request,FALSE,FALSE,245
+D,Low,Open,Lab,Incident or Problem,FALSE,TRUE,244
+D,Low,Open,Lab,Incident or Problem,FALSE,FALSE,243
+D,Low,Open,Lab,Service request,FALSE,TRUE,242
+D,Low,Open,Lab,Service request,FALSE,FALSE,241
+D,Low,Service request triage,Production,Incident or Problem,FALSE,TRUE,240
+D,Low,Service request triage,Production,Incident or Problem,FALSE,FALSE,239
+D,Low,Service request triage,Production,Service request,FALSE,TRUE,238
+D,Low,Service request triage,Production,Service request,FALSE,FALSE,237
+D,Low,Service request triage,Lab,Incident or Problem,FALSE,TRUE,236
+D,Low,Service request triage,Lab,Incident or Problem,FALSE,FALSE,235
+D,Low,Service request triage,Lab,Service request,FALSE,TRUE,234
+D,Low,Service request triage,Lab,Service request,FALSE,FALSE,233
+D,Low,Other,Production,Incident or Problem,FALSE,TRUE,232
+D,Low,Other,Production,Incident or Problem,FALSE,FALSE,231
+D,Low,Other,Production,Service request,FALSE,TRUE,230
+D,Low,Other,Production,Service request,FALSE,FALSE,229
+D,Low,Other,Lab,Incident or Problem,FALSE,TRUE,228
+D,Low,Other,Lab,Incident or Problem,FALSE,FALSE,227
+D,Low,Other,Lab,Service request,FALSE,TRUE,226
+D,Low,Other,Lab,Service request,FALSE,FALSE,225
+E,Low,Open,Production,Incident or Problem,TRUE,TRUE,224
+E,Low,Open,Production,Incident or Problem,TRUE,FALSE,223
+E,Low,Open,Production,Incident or Problem,FALSE,TRUE,222
+E,Low,Open,Production,Incident or Problem,FALSE,FALSE,221
+E,Low,Open,Production,Service request,TRUE,TRUE,220
+E,Low,Open,Production,Service request,TRUE,FALSE,219
+E,Low,Open,Production,Service request,FALSE,TRUE,218
+E,Low,Open,Production,Service request,FALSE,FALSE,217
+E,Low,Open,Lab,Incident or Problem,TRUE,TRUE,216
+E,Low,Open,Lab,Incident or Problem,TRUE,FALSE,215
+E,Low,Open,Lab,Incident or Problem,FALSE,TRUE,214
+E,Low,Open,Lab,Incident or Problem,FALSE,FALSE,213
+E,Low,Open,Lab,Service request,TRUE,TRUE,212
+E,Low,Open,Lab,Service request,TRUE,FALSE,211
+E,Low,Open,Lab,Service request,FALSE,TRUE,210
+E,Low,Open,Lab,Service request,FALSE,FALSE,209
+E,Low,Service request triage,Production,Incident or Problem,TRUE,TRUE,208
+E,Low,Service request triage,Production,Incident or Problem,TRUE,FALSE,207
+E,Low,Service request triage,Production,Incident or Problem,FALSE,TRUE,206
+E,Low,Service request triage,Production,Incident or Problem,FALSE,FALSE,205
+E,Low,Service request triage,Production,Service request,TRUE,TRUE,204
+E,Low,Service request triage,Production,Service request,TRUE,FALSE,203
+E,Low,Service request triage,Production,Service request,FALSE,TRUE,202
+E,Low,Service request triage,Production,Service request,FALSE,FALSE,201
+E,Low,Service request triage,Lab,Incident or Problem,TRUE,TRUE,200
+E,Low,Service request triage,Lab,Incident or Problem,TRUE,FALSE,199
+E,Low,Service request triage,Lab,Incident or Problem,FALSE,TRUE,198
+E,Low,Service request triage,Lab,Incident or Problem,FALSE,FALSE,197
+E,Low,Service request triage,Lab,Service request,TRUE,TRUE,196
+E,Low,Service request triage,Lab,Service request,TRUE,FALSE,195
+E,Low,Service request triage,Lab,Service request,FALSE,TRUE,194
+E,Low,Service request triage,Lab,Service request,FALSE,FALSE,193
+E,Low,Other,Production,Incident or Problem,TRUE,TRUE,192
+E,Low,Other,Production,Incident or Problem,TRUE,FALSE,191
+E,Low,Other,Production,Incident or Problem,FALSE,TRUE,190
+E,Low,Other,Production,Incident or Problem,FALSE,FALSE,189
+E,Low,Other,Production,Service request,TRUE,TRUE,188
+E,Low,Other,Production,Service request,TRUE,FALSE,187
+E,Low,Other,Production,Service request,FALSE,TRUE,186
+E,Low,Other,Production,Service request,FALSE,FALSE,185
+E,Low,Other,Lab,Incident or Problem,TRUE,TRUE,184
+E,Low,Other,Lab,Incident or Problem,TRUE,FALSE,183
+E,Low,Other,Lab,Incident or Problem,FALSE,TRUE,182
+E,Low,Other,Lab,Incident or Problem,FALSE,FALSE,181
+E,Low,Other,Lab,Service request,TRUE,TRUE,180
+E,Low,Other,Lab,Service request,TRUE,FALSE,179
+E,Low,Other,Lab,Service request,FALSE,TRUE,178
+E,Low,Other,Lab,Service request,FALSE,FALSE,177
+A,Urgent,Pending,Production,Incident or Problem,FALSE,TRUE,176
+A,Urgent,Pending,Production,Incident or Problem,FALSE,FALSE,175
+A,Urgent,Pending,Production,Service request,FALSE,TRUE,174
+A,Urgent,Pending,Production,Service request,FALSE,FALSE,173
+A,Urgent,Pending,Lab,Incident or Problem,FALSE,TRUE,172
+A,Urgent,Pending,Lab,Incident or Problem,FALSE,FALSE,171
+A,Urgent,Pending,Lab,Service request,FALSE,TRUE,170
+A,Urgent,Pending,Lab,Service request,FALSE,FALSE,169
+A,High,Pending,Production,Incident or Problem,FALSE,TRUE,168
+A,High,Pending,Production,Incident or Problem,FALSE,FALSE,167
+A,High,Pending,Production,Service request,FALSE,TRUE,166
+A,High,Pending,Production,Service request,FALSE,FALSE,165
+A,High,Pending,Lab,Incident or Problem,FALSE,TRUE,164
+A,High,Pending,Lab,Incident or Problem,FALSE,FALSE,163
+A,High,Pending,Lab,Service request,FALSE,TRUE,162
+A,High,Pending,Lab,Service request,FALSE,FALSE,161
+A,Medium,Pending,Production,Incident or Problem,FALSE,TRUE,160
+A,Medium,Pending,Production,Incident or Problem,FALSE,FALSE,159
+A,Medium,Pending,Production,Service request,FALSE,TRUE,158
+A,Medium,Pending,Production,Service request,FALSE,FALSE,157
+A,Medium,Pending,Lab,Incident or Problem,FALSE,TRUE,156
+A,Medium,Pending,Lab,Incident or Problem,FALSE,FALSE,155
+A,Medium,Pending,Lab,Service request,FALSE,TRUE,154
+A,Medium,Pending,Lab,Service request,FALSE,FALSE,153
+A,Low,Pending,Production,Incident or Problem,FALSE,TRUE,152
+A,Low,Pending,Production,Incident or Problem,FALSE,FALSE,151
+A,Low,Pending,Production,Service request,FALSE,TRUE,150
+A,Low,Pending,Production,Service request,FALSE,FALSE,149
+A,Low,Pending,Lab,Incident or Problem,FALSE,TRUE,148
+A,Low,Pending,Lab,Incident or Problem,FALSE,FALSE,147
+A,Low,Pending,Lab,Service request,FALSE,TRUE,146
+A,Low,Pending,Lab,Service request,FALSE,FALSE,145
+B,Urgent,Pending,Production,Incident or Problem,FALSE,TRUE,144
+B,Urgent,Pending,Production,Incident or Problem,FALSE,FALSE,143
+B,Urgent,Pending,Production,Service request,FALSE,TRUE,142
+B,Urgent,Pending,Production,Service request,FALSE,FALSE,141
+B,Urgent,Pending,Lab,Incident or Problem,FALSE,TRUE,140
+B,Urgent,Pending,Lab,Incident or Problem,FALSE,FALSE,139
+B,Urgent,Pending,Lab,Service request,FALSE,TRUE,138
+B,Urgent,Pending,Lab,Service request,FALSE,FALSE,137
+B,High,Pending,Production,Incident or Problem,FALSE,TRUE,136
+B,High,Pending,Production,Incident or Problem,FALSE,FALSE,135
+B,High,Pending,Production,Service request,FALSE,TRUE,134
+B,High,Pending,Production,Service request,FALSE,FALSE,133
+B,High,Pending,Lab,Incident or Problem,FALSE,TRUE,132
+B,High,Pending,Lab,Incident or Problem,FALSE,FALSE,131
+B,High,Pending,Lab,Service request,FALSE,TRUE,130
+B,High,Pending,Lab,Service request,FALSE,FALSE,129
+B,Medium,Pending,Production,Incident or Problem,FALSE,TRUE,128
+B,Medium,Pending,Production,Incident or Problem,FALSE,FALSE,127
+B,Medium,Pending,Production,Service request,FALSE,TRUE,126
+B,Medium,Pending,Production,Service request,FALSE,FALSE,125
+B,Medium,Pending,Lab,Incident or Problem,FALSE,TRUE,124
+B,Medium,Pending,Lab,Incident or Problem,FALSE,FALSE,123
+B,Medium,Pending,Lab,Service request,FALSE,TRUE,122
+B,Medium,Pending,Lab,Service request,FALSE,FALSE,121
+B,Low,Pending,Production,Incident or Problem,FALSE,TRUE,120
+B,Low,Pending,Production,Incident or Problem,FALSE,FALSE,119
+B,Low,Pending,Production,Service request,FALSE,TRUE,118
+B,Low,Pending,Production,Service request,FALSE,FALSE,117
+B,Low,Pending,Lab,Incident or Problem,FALSE,TRUE,116
+B,Low,Pending,Lab,Incident or Problem,FALSE,FALSE,115
+B,Low,Pending,Lab,Service request,FALSE,TRUE,114
+B,Low,Pending,Lab,Service request,FALSE,FALSE,113
+C,Urgent,Pending,Production,Incident or Problem,FALSE,TRUE,112
+C,Urgent,Pending,Production,Incident or Problem,FALSE,FALSE,111
+C,Urgent,Pending,Production,Service request,FALSE,TRUE,110
+C,Urgent,Pending,Production,Service request,FALSE,FALSE,109
+C,Urgent,Pending,Lab,Incident or Problem,FALSE,TRUE,108
+C,Urgent,Pending,Lab,Incident or Problem,FALSE,FALSE,107
+C,Urgent,Pending,Lab,Service request,FALSE,TRUE,106
+C,Urgent,Pending,Lab,Service request,FALSE,FALSE,105
+C,High,Pending,Production,Incident or Problem,FALSE,TRUE,104
+C,High,Pending,Production,Incident or Problem,FALSE,FALSE,103
+C,High,Pending,Production,Service request,FALSE,TRUE,102
+C,High,Pending,Production,Service request,FALSE,FALSE,101
+C,High,Pending,Lab,Incident or Problem,FALSE,TRUE,100
+C,High,Pending,Lab,Incident or Problem,FALSE,FALSE,99
+C,High,Pending,Lab,Service request,FALSE,TRUE,98
+C,High,Pending,Lab,Service request,FALSE,FALSE,97
+C,Medium,Pending,Production,Incident or Problem,FALSE,TRUE,96
+C,Medium,Pending,Production,Incident or Problem,FALSE,FALSE,95
+C,Medium,Pending,Production,Service request,FALSE,TRUE,94
+C,Medium,Pending,Production,Service request,FALSE,FALSE,93
+C,Medium,Pending,Lab,Incident or Problem,FALSE,TRUE,92
+C,Medium,Pending,Lab,Incident or Problem,FALSE,FALSE,91
+C,Medium,Pending,Lab,Service request,FALSE,TRUE,90
+C,Medium,Pending,Lab,Service request,FALSE,FALSE,89
+C,Low,Pending,Production,Incident or Problem,FALSE,TRUE,88
+C,Low,Pending,Production,Incident or Problem,FALSE,FALSE,87
+C,Low,Pending,Production,Service request,FALSE,TRUE,86
+C,Low,Pending,Production,Service request,FALSE,FALSE,85
+C,Low,Pending,Lab,Incident or Problem,FALSE,TRUE,84
+C,Low,Pending,Lab,Incident or Problem,FALSE,FALSE,83
+C,Low,Pending,Lab,Service request,FALSE,TRUE,82
+C,Low,Pending,Lab,Service request,FALSE,FALSE,81
+D,Urgent,Pending,Production,Incident or Problem,FALSE,TRUE,80
+D,Urgent,Pending,Production,Incident or Problem,FALSE,FALSE,79
+D,Urgent,Pending,Production,Service request,FALSE,TRUE,78
+D,Urgent,Pending,Production,Service request,FALSE,FALSE,77
+D,Urgent,Pending,Lab,Incident or Problem,FALSE,TRUE,76
+D,Urgent,Pending,Lab,Incident or Problem,FALSE,FALSE,75
+D,Urgent,Pending,Lab,Service request,FALSE,TRUE,74
+D,Urgent,Pending,Lab,Service request,FALSE,FALSE,73
+D,High,Pending,Production,Incident or Problem,FALSE,TRUE,72
+D,High,Pending,Production,Incident or Problem,FALSE,FALSE,71
+D,High,Pending,Production,Service request,FALSE,TRUE,70
+D,High,Pending,Production,Service request,FALSE,FALSE,69
+D,High,Pending,Lab,Incident or Problem,FALSE,TRUE,68
+D,High,Pending,Lab,Incident or Problem,FALSE,FALSE,67
+D,High,Pending,Lab,Service request,FALSE,TRUE,66
+D,High,Pending,Lab,Service request,FALSE,FALSE,65
+D,Medium,Pending,Production,Incident or Problem,FALSE,TRUE,64
+D,Medium,Pending,Production,Incident or Problem,FALSE,FALSE,63
+D,Medium,Pending,Production,Service request,FALSE,TRUE,62
+D,Medium,Pending,Production,Service request,FALSE,FALSE,61
+D,Medium,Pending,Lab,Incident or Problem,FALSE,TRUE,60
+D,Medium,Pending,Lab,Incident or Problem,FALSE,FALSE,59
+D,Medium,Pending,Lab,Service request,FALSE,TRUE,58
+D,Medium,Pending,Lab,Service request,FALSE,FALSE,57
+D,Low,Pending,Production,Incident or Problem,FALSE,TRUE,56
+D,Low,Pending,Production,Incident or Problem,FALSE,FALSE,55
+D,Low,Pending,Production,Service request,FALSE,TRUE,54
+D,Low,Pending,Production,Service request,FALSE,FALSE,53
+D,Low,Pending,Lab,Incident or Problem,FALSE,TRUE,52
+D,Low,Pending,Lab,Incident or Problem,FALSE,FALSE,51
+D,Low,Pending,Lab,Service request,FALSE,TRUE,50
+D,Low,Pending,Lab,Service request,FALSE,FALSE,49
+E,Urgent,Pending,Production,Incident or Problem,FALSE,TRUE,48
+E,Urgent,Pending,Production,Incident or Problem,FALSE,FALSE,47
+E,Urgent,Pending,Production,Service request,FALSE,TRUE,46
+E,Urgent,Pending,Production,Service request,FALSE,FALSE,45
+E,Urgent,Pending,Lab,Incident or Problem,FALSE,TRUE,44
+E,Urgent,Pending,Lab,Incident or Problem,FALSE,FALSE,43
+E,Urgent,Pending,Lab,Service request,FALSE,TRUE,42
+E,Urgent,Pending,Lab,Service request,FALSE,FALSE,41
+E,High,Pending,Production,Incident or Problem,FALSE,TRUE,40
+E,High,Pending,Production,Incident or Problem,FALSE,FALSE,39
+E,High,Pending,Production,Service request,FALSE,TRUE,38
+E,High,Pending,Production,Service request,FALSE,FALSE,37
+E,High,Pending,Lab,Incident or Problem,FALSE,TRUE,36
+E,High,Pending,Lab,Incident or Problem,FALSE,FALSE,35
+E,High,Pending,Lab,Service request,FALSE,TRUE,34
+E,High,Pending,Lab,Service request,FALSE,FALSE,33
+E,Medium,Pending,Production,Incident or Problem,TRUE,TRUE,32
+E,Medium,Pending,Production,Incident or Problem,TRUE,FALSE,31
+E,Medium,Pending,Production,Incident or Problem,FALSE,TRUE,30
+E,Medium,Pending,Production,Incident or Problem,FALSE,FALSE,29
+E,Medium,Pending,Production,Service request,TRUE,TRUE,28
+E,Medium,Pending,Production,Service request,TRUE,FALSE,27
+E,Medium,Pending,Production,Service request,FALSE,TRUE,26
+E,Medium,Pending,Production,Service request,FALSE,FALSE,25
+E,Medium,Pending,Lab,Incident or Problem,TRUE,TRUE,24
+E,Medium,Pending,Lab,Incident or Problem,TRUE,FALSE,23
+E,Medium,Pending,Lab,Incident or Problem,FALSE,TRUE,22
+E,Medium,Pending,Lab,Incident or Problem,FALSE,FALSE,21
+E,Medium,Pending,Lab,Service request,TRUE,TRUE,20
+E,Medium,Pending,Lab,Service request,TRUE,FALSE,19
+E,Medium,Pending,Lab,Service request,FALSE,TRUE,18
+E,Medium,Pending,Lab,Service request,FALSE,FALSE,17
+E,Low,Pending,Production,Incident or Problem,TRUE,TRUE,16
+E,Low,Pending,Production,Incident or Problem,TRUE,FALSE,15
+E,Low,Pending,Production,Incident or Problem,FALSE,TRUE,14
+E,Low,Pending,Production,Incident or Problem,FALSE,FALSE,13
+E,Low,Pending,Production,Service request,TRUE,TRUE,12
+E,Low,Pending,Production,Service request,TRUE,FALSE,11
+E,Low,Pending,Production,Service request,FALSE,TRUE,10
+E,Low,Pending,Production,Service request,FALSE,FALSE,9
+E,Low,Pending,Lab,Incident or Problem,TRUE,TRUE,8
+E,Low,Pending,Lab,Incident or Problem,TRUE,FALSE,7
+E,Low,Pending,Lab,Incident or Problem,FALSE,TRUE,6
+E,Low,Pending,Lab,Incident or Problem,FALSE,FALSE,5
+E,Low,Pending,Lab,Service request,TRUE,TRUE,4
+E,Low,Pending,Lab,Service request,TRUE,FALSE,3
+E,Low,Pending,Lab,Service request,FALSE,TRUE,2
+E,Low,Pending,Lab,Service request,FALSE,FALSE,1
