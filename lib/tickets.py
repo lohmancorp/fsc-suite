@@ -4,7 +4,7 @@
 # - Ticket Sorting
 #
 # Author: Taylor Giddens - taylor.giddens@ingrammicro.com
-# Version: 1.1.0-a
+# Version: 1.1.0-b
 ################################################################################
 import requests
 import logging

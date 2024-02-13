@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+  <head>
+    <script src="{{ url_for('static', filename='assets/js/color-modes.js') }}"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Taylor Giddens">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>CloudBlue - FS Commander Suite</title>
+    <link rel="icon" type="image/x-icon" href="static/assets/images/favicon.ico">
+
+    <link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+        bottom: 0;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+
+      [data-href] { 
+        cursor: pointer; 
+      }
+
+      footer {
+          height: 70px;
+      }
+
+    .table-fixed-header thead {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 1;
+    }
+
+    .table-fixed-header tbody {
+      display: block;
+      max-height: 1050px; /* Adjust the height as needed */
+      /* overflow-y: auto; */
+    }
+
+    .table-fixed-header thead, .table-fixed-header tbody tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .table-fixed-header thead {
+      width: calc(100% - 1em); /* Adjust the scrollbar width */
+    }
+
+    #ticketsTable thead th {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+      @keyframes zoomSpin {
+          0%, 100% { transform: scale(1) rotate(0deg); }
+          50% { transform: scale(1.5) rotate(180deg); }
+      }
+
+      .icon-animate {
+          animation: zoomSpin 1s ease-in-out forwards;
+      }
+
+      /* Ensure the background color covers the entire row, adjust as necessary */
+      #ticketsTable tr {
+          background-color: transparent; /* Default background color */
+          transition: background-color 0.2s, transform 0.2s; /* Smooth transition for both properties */
+      }
+
+    .bi {
+        animation-fill-mode: forwards; /* Ensure the animation stays at the last keyframe when completed */
+    }
+
+    .drag-placeholder {
+        background-color: #28a745; /* Green background */
+        position: absolute;
+        z-index: 0; /* Lower than the dragged row */
+        transition: width 0.2s; /* Optional: for smooth width transition */
+    }
+
+    .row-dragging {
+      position: relative;
+      z-index: 11; /* Ensure the dragged row is above the placeholder */
+    }
+
+    .no-select {
+      user-select: none;
+      -moz-user-select: none; /* Firefox */
+      -webkit-user-select: none; /* Chrome/Safari */
+      -ms-user-select: none; /* IE/Edge */
+    }
+
+    #offcanvasConfig {
+        z-index: 9999;
+    }
+
+    .form-switch .form-check-input:checked {
+        background-color: black; /* Change background color when active */
+        border-color: black; /* Change border color when active */
+    }
+
+    .form-switch .form-check-input:focus {
+        outline: 1px solid black; /* Keep the focus outline color black */
+        box-shadow: 0 0 0 0.25rem grey; /* Set the focus box-shadow to grey */
+        border-color: black; /* Keep border color black when active */
+    }
+
+    a {
+        border: none; /* Removes any border */
+        box-shadow: none; /* Removes any box-shadow */
+        outline: none; /* Removes the outline */
+    }
+    .config-option:focus,
+    .config-option:active,
+    .config-option:focus-visible {
+        outline: none !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    .config-option input:focus,
+    .config-option label:focus {
+        outline: none !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    .config-option::-moz-focus-inner {
+        border: 0;
+    }
+
+    .btn-close-white {
+        color: white !important;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .rotating {
+      animation: spin 2s linear infinite;
+    }
+
+    .bg-dark {
+        background-color: #201e4f !important;
+    }
+
+    .bg-warning {
+        background-color: #2058aa !important;
+    }
+
+    navbar-dark {
+        background-color: #201e4f !important;
+    }
+
+    bg-cloudblue-dark {
+        background-color: #201e4f !important;
+    }
+
+    btn-primary {
+        background-color: #201e4f !important;
+    }
+
+    .bg-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3); /* Dark gray transparent overlay */
+    border-radius: inherit; /* To match the border-radius of the card */
+    }
+
+    .card.card-cover.bg-overlay {
+    position: relative; /* Required for the absolute positioning of the pseudo-element */
+    }
+
+    shadow {
+        text-shadow: 1px 1px 1px black;
+    }
+
+    a.card-link {
+        text-decoration: none;
+    }
+
+  </style>
+    
+  </head>
+  
+<body class="d-flex flex-column h-100">
+ 
+
+
+<!-- TOAST CONTENT -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 20000;">
+  <div id="refreshToastEnd" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-dark text-light">
+      <i class="bi bi-check-circle text-light"></i>
+      <strong class="me-auto">&nbsp; Refreshed</strong>
+      <small id="refreshToastEndTime" class="text-light text-body-secondary " style="color: white !important;"><- Toast Time Goes Here -></small>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body fw-bold bg-light text-dark">
+      Ticket refresh completed.
+    </div>
+  </div>
+
+  <div id="refreshToastStart" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-dark text-light">
+      <i class="bi bi-arrow-clockwise text-light rotating" style="display: inline-block;"></i>
+      <strong class="me-auto">&nbsp; Refreshing</strong>
+      <small id="refreshToastStartTime" class="text-light text-body-secondary " style="color: white !important;"><- Toest Time Goes Here -></small>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body fw-bold bg-light text-dark">
+      Ticket refresh starting...
+    </div>
+  </div>
+
+  <div id="copyToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-dark text-light">
+      <i class="bi bi-info-circle text-light" style="display: inline-block;"></i>
+      <strong class="me-auto">&nbsp; Filter Copied</strong>
+      <small id="refreshCopyTime" class="text-light text-body-secondary " style="color: white !important;"><- Toest Time Goes Here -></small>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div id="copyToastBody" class="toast-body fw-bold bg-light text-dark">
+      You may now paste the URL elsewhere.
+    </div>
+  </div>
+
+</div>
+
+<!-- Begin configuration content -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasConfig" aria-labelledby="offcanvasConfigLabel">
+  <div class="offcanvas-header bg-dark">
+    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasConfigLabel">FSC Suite Configurations</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+    <nav class="col-lg-8">
+      <ul class="list-unstyled d-flex flex-column gap-2">
+        <li>
+            <a class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start config-option">
+                <i class="bi bi-person-badge" style="font-size: 2rem;"></i>
+                <div>
+                    <strong class="d-block">Who are you?</strong>
+                        <div class="form-check form-switch" style="padding-top: 20px;">
+                                <select class="form-select" id="agentSelect">
+                                    <option selected>Choose...</option>
+                                    <!-- Options will be added here dynamically -->
+                                </select>
+                        </div>
+                </div>
+            </a>
+        </li>
+        <li>
+          <a class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start config-option">
+            <i class="bi bi-arrow-clockwise" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">Automatically Refresh Data?</strong>
+              <small>
+                <form class="needs-validation" novalidate>
+                <div class="form-check form-switch" style="padding-top: 20px;">
+                    <input class="form-check-input  " type="checkbox" role="switch" id="toggleAutoRefresh" checked style="form-switch-checked-color: black;">
+                    <label class="form-check-label" for="toggleAutoRefresh"> Auto Refresh</label>
+                </div>
+                <div class="input-group mb-3" style="padding-top: 20px;">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-stopwatch"></i></span>
+                    <input id="refreshTime" type="number" min="10" max="60" step="10" value="30" size="10" class="form-control" placeholder="Time in minutes" aria-label="refreshTime" aria-describedby="refreshTime-addon1" required>
+                      <span class="input-group-text" id="basic-addon2">min.</span>
+                    <div class="invalid-feedback">
+                        Please enter a value between 2 and 60.
+                    </div>
+                  </form>
+                </div>
+              </small>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start config-option">
+            <i class="bi bi-card-heading" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">View Dashboard?</strong>
+              <small>
+                <div class="form-check form-switch" style="padding-top: 20px;">
+                    <input class="form-check-input  " type="checkbox" role="switch" id="toggleDashboard" checked style="form-switch-checked-color: black;">
+                    <label class="form-check-label" for="toggleDashboard"> Dashboard</label>
+                </div>
+              </small>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start config-option">
+            <i class="bi bi-bar-chart" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">View Progress Bar?</strong>
+              <small>
+                <div class="form-check form-switch" style="padding-top: 20px;">
+                    <input class="form-check-input  " type="checkbox" role="switch" id="toggleProgressBar" checked style="form-switch-checked-color: black;">
+                    <label class="form-check-label" for="toggleProgressBar"> Progress Bar</label>
+                </div>
+              </small>
+            </div>
+          </a>
+        </li>
+        <li style="display:none;">
+          <a class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start">
+            <i class="bi bi-boombox" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">Listen to Tunes While Waiting?</strong>
+              <small>
+                    <div class="form-check form-switch" style="padding-top: 20px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="toggleMusic" checked>
+                        <label class="form-check-label" for="toggleMusic"> Music</label>
+                    </div>
+              </small>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="btn rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start" disabled>
+            <i class="bi bi-back" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">What Look Do You Want?</strong>
+              <small style="padding-top: 20px;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+                  <symbol id="check2" viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                  </symbol>
+                  <symbol id="circle-half" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                  </symbol>
+                  <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+                    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                    <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+                  </symbol>
+                  <symbol id="sun-fill" viewBox="0 0 16 16">
+                    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                  </symbol>
+                </svg>
+
+                <div class="dropdown bd-mode-toggle" style="padding-top: 20px;">
+                  <button class="btn btn-sm btn-dark dropdown-toggle d-flex align-items-center"
+                          id="bd-theme"
+                          type="button"
+                          aria-expanded="false"
+                          data-bs-toggle="dropdown"
+                          aria-label="Toggle theme (auto)">
+                    <svg class="bi my-1 theme-icon-active" width=".75em" height=".75em"><use href="#circle-half"></use></svg>
+                    <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                    <li>
+                      <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                        <svg class="bi me-2 opacity-50 theme-icon" width=".5em" height=".5em"><use href="#sun-fill"></use></svg>
+                        Light
+                        <svg class="bi ms-auto d-none" width=".5em" height=".5em"><use href="#check2"></use></svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                        <svg class="bi me-2 opacity-50 theme-icon" width=".5em" height=".5em"><use href="#moon-stars-fill"></use></svg>
+                        Dark
+                        <svg class="bi ms-auto d-none" width=".5em" height=".5em"><use href="#check2"></use></svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                        <svg class="bi me-2 opacity-50 theme-icon" width=".5em" height=".5em"><use href="#circle-half"></use></svg>
+                        Auto
+                        <svg class="bi ms-auto d-none" width=".5em" height=".5em"><use href="#check2"></use></svg>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </small>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start">
+            <i class="bi bi-table" style="font-size: 2rem;"></i>
+            <div>
+              <strong class="d-block">Fine Tune Your Columns?</strong>
+              <small>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="3" data-column="3" checked>
+                      <label class="form-check-label" for="3"> Company</label>
+                    </div>
+                  </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="4" data-column="4" checked>
+                      <label class="form-check-label" for="4"> Tier</label>
+                    </div>
+                  </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="5" data-column="5" checked>
+                      <label class="form-check-label" for="5"> Subject</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="6" data-column="6" checked>
+                      <label class="form-check-label" for="6"> Priority</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="7" data-column="7" checked>
+                      <label class="form-check-label" for="7"> Status</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="8" data-column="8" checked>
+                      <label class="form-check-label" for="8"> Type</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="9" data-column="9" checked>
+                      <label class="form-check-label" for="9"> Environment</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="10" data-column="10" checked>
+                      <label class="form-check-label" for="10"> Escalated</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="11" data-column="11" checked>
+                      <label class="form-check-label" for="11"> Past Due</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="12" data-column="12" checked>
+                      <label class="form-check-label" for="12"> Created</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="13" data-column="13" checked>
+                      <label class="form-check-label" for="13">FR Due Bye</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="14" data-column="14" checked>
+                      <label class="form-check-label" for="14"> Due Bye</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="15" data-column="15" checked>
+                      <label class="form-check-label" for="15"> Updated</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="16" data-column="16" checked>
+                      <label class="form-check-label" for="16"> Agent</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="17" data-column="17" checked>
+                      <label class="form-check-label" for="17"> Group</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="18" data-column="18" checked>
+                      <label class="form-check-label" for="18"> TAM</label>
+                    </div>
+                </a></li>
+                <li style="padding-left: 60px;"><a class="dropdown-item d-flex align-items-center gap-2 py-2">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input column-toggle" type="checkbox" role="switch" id="19" data-column="19" checked>
+                      <label class="form-check-label" for="19"> Score</label>
+                    </div>
+                </a></li>
+              </small>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0" style="padding-top: 45px;">
+  <div class="container-fluid">
+    <p class="lead">
+      {% block content %}
+      {% endblock %}
+    </p>
+  </div>
+</main>
+
+<!-- Begin Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='assets/js/fsc-suite.js') }}" defer></script>
+<script src="{{ url_for('static', filename='assets/js/purify.js') }}" defer></script>
+
+</body>
+</html>

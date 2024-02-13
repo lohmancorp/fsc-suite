@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: #070354;">
+        <div class="container-fluid">
+            <span class="navbar-brand"><img src="{{ url_for('static', filename='assets/logos/cloudblue-logo-white.png') }}" style="max-height: 30px;" id="logoElement"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active fw-bold" href="#" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/"><i class="bi bi-house"></i> Home</a></li>
+                            <li><a class="dropdown-item" href="/ticketlist"><i class="bi bi-ticket-detailed"></i> Tickets</a></li>
+                            <li><a class="dropdown-item" href="/documentation"><i class="bi bi-journal-richtext"></i> Documentation</a></li>
+                            <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasConfig" aria-controls="offcanvasConfig"><i class="bi bi-person-gear"></i> Configuration</a></li>
+                        </ul>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+</header>
+<!-- Documentation-specific content goes here -->
+<main>
+  <div class="container py-4">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg" style="background-image: url('static/assets/images/textured_background.jpg'); max-width:100%;">
+      <div class="col-lg-8 p-3 p-lg-5 pt-lg-3" >
+        <h2 class="display-4 fw-bold text-white lh-1" style="text-shadow: 1px 1px 1px black;">Welcome to the new FSCS Experience</h1>
+        <p class="lead text-white">Quickly help partners with the FreshService Commander Suite (FSCS) experience that is meant to enhance your experience with FreshService and the service we provide to our customers.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+    
+          <a class="btn btn-outline-light" href="/documentation" type="button">Learn More</a>
+        </div>
+      </div>
+      <div class="col-lg-3 p-0">
+          <img class="rounded-lg-3 overflow-hidden" src="static/assets/images/tech-header.png" style="display: block; margin-left: auto; margin-right: auto; padding-right:50px;">
+      </div>
+    </div>
+  </div>
+  <div class="container py-4">
+
+
+
+    <div class="row align-items-md-stretch" style="bs-gutter-x: .5rem !important;">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-bg-dark rounded-3" style="background-image: url('static/assets/images/textured_background_3_small.jpg');">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2 class="fw-bold">Your Tickets</h2>
+                    <p>Continue work on tickets already assigned to you.</p>
+                    <a class="btn btn-outline-light" href="/ticketlist?filterCategory=agent&filterValue=$selectedAgent" id="yourTicketsLink" type="button">Start</a>
+                </div>
+                <div class="col-sm-4">
+                    <div class="filter-criteria-container" data-target="agentCount1" style="display:none;">
+                        <span id="selectedAgentCount" data-filter="agent_name" data-value="$selectedAgent"></span>
+                    </div>
+                    <h1 id="agentCount1" class="display-1 fw-bold"style="font-size: 7rem; text-shadow: 1px 1px 1px black;">#</h1>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-bg-dark rounded-3" style="background-image: url('static/assets/images/textured_background_3_small.jpg');">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2 class="fw-bold">New Tickets</h2>
+                    <p>Work on new tickets to triage and provide Initial Response.</p>
+                    <a class="btn btn-outline-light" href="/ticketlist?filterCategory=status&filterValue=New" type="button">Start</a>
+                </div>
+                <div class="col-sm-4" style="vertical-align: middle;">
+                    <div class="filter-criteria-container" data-target="newCount1" style="display:none;">
+                        <span data-filter="status" data-value="New"></span>
+                    </div>
+                    <h1 id="newCount1" class="display-1 fw-bold"style="font-size: 7rem; text-shadow: 1px 1px 1px black;">#</h1>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Our Teams</h2>
+
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+        <div class="col">
+            <a href="/ticketlist?filterCategory=group&filterValue=CBTS - APAC" class="card-link">
+                <div class="card card-cover bg-overlay h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                    style="background-image: url('/static/assets/images/brisbane.jpg'); min-height: 400px;">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" style="z-index: 100;">
+                        <h2 class="pt-2 mt-2 mb-4 display-6 lh-1 fw-bold" style="text-shadow: 1px 1px 1px black;">TEAM APAC</h2>
+                        <div class="filter-criteria-container" data-target="apacCount1" style="display:none;">
+                            <span data-filter="group_name" data-value="CBTS - APAC"></span>
+                        </div>
+                        <h1 id="apacCount1" class="display-1 fw-bold" style="font-size: 7rem; text-align: center; padding-top: 20px;text-shadow: 1px 1px 1px black;">#</h1>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+                                <img src="https://www.worldometers.info/img/flags/as-flag.gif" alt="Bootstrap" width="32"
+                                    height="32" class="rounded-circle border border-white">
+                            </li>
+                            <li class="d-flex align-items-center me-3" style="width: 165px; padding-left:10px;">
+                                <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: 400px;">
+                                    <div id="progress-apac" class="progress-bar progress-bar-striped progress-bar-animated bg-dark" data-criteria='{"group_name":"CBTS - APAC","percentageOf":"all"}'
+                                        style="width: 50%">0%</div>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="filter-criteria-container" data-target="apacCount2" style="display:none;">
+                                    <span data-filter="group_name" data-value="CBTS - APAC"></span>
+                                    <span data-filter="is_past_due" data-value="true"></span>
+                                </div>
+                                <div class="filter-criteria-container" data-target="apacCount3" style="display:none;">
+                                    <span data-filter="group_name" data-value="CBTS - APAC"></span>
+                                    <span data-filter="escalated" data-value="Yes"></span>
+                                </div>
+                                <small><span id="apacCount2">#</span> OD / <span id="apacCount3">#</span> E</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="/ticketlist?filterCategory=group&filterValue=CBTS - EMEA" class="card-link">
+            <div class="card card-cover bg-overlay h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/static/assets/images/santander.jpg'); min-height: 400px;">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" style="z-index: 100;">
+                <h2 class="pt-2 mt-2 mb-4 display-6 lh-1 fw-bold" style="text-shadow: 1px 1px 1px black;">TEAM EMEA</h2>
+                        <div class="filter-criteria-container" data-target="emeaCount1" style="display:none;">
+                            <span data-filter="group_name" data-value="CBTS - EMEA"></span>
+                        </div>
+                        <h1 id="emeaCount1" class="display-1 fw-bold" style="font-size: 7rem; text-align: center; padding-top: 20px;text-shadow: 1px 1px 1px black;">#</h1>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+                                <img src="https://www.worldometers.info/img/flags/sp-flag.gif" alt="Bootstrap" width="32"
+                                    height="32" class="rounded-circle border border-white">
+                            </li>
+                            <li class="d-flex align-items-center me-3" style="width: 165px; padding-left:10px;">
+                                <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: 400px;">
+                                    <div id="progress-emea" class="progress-bar progress-bar-striped progress-bar-animated bg-dark" data-criteria='{"group_name":"CBTS - EMEA","percentageOf":"all"}'
+                                        style="width: 50%">0%</div>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="filter-criteria-container" data-target="emeaCount2" style="display:none;">
+                                    <span data-filter="group_name" data-value="CBTS - EMEA"></span>
+                                    <span data-filter="is_past_due" data-value="true"></span>
+                                </div>
+                                <div class="filter-criteria-container" data-target="emeaCount3" style="display:none;">
+                                    <span data-filter="group_name" data-value="CBTS - EMEA"></span>
+                                    <span data-filter="escalated" data-value="Yes"></span>
+                                </div>
+                                <small><span id="emeaCount2">#</span> OD / <span id="emeaCount3">#</span> E</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="/ticketlist?filterCategory=group&filterValue=CBTS - AMER" class="card-link">
+            <div class="card card-cover bg-overlay h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/static/assets/images/toronto.jpg'); min-height: 400px;">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" style="z-index: 100;">
+                <h2 class="pt-2 mt-2 mb-4 display-6 lh-1 fw-bold" style="text-shadow: 1px 1px 1px black;">TEAM AMER</h2>
+                        <div class="filter-criteria-container" data-target="amerCount1" style="display:none;">
+                            <span data-filter="group_name" data-value="CBTS - AMER"></span>
+                        </div>
+                        <h1 id="amerCount1" class="display-1 fw-bold" style="font-size: 7rem; text-align: center; padding-top: 20px;text-shadow: 1px 1px 1px black;">#</h1>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+                                <img src="https://www.worldometers.info/img/flags/ca-flag.gif" alt="Bootstrap" width="32"
+                                    height="32" class="rounded-circle border border-white">
+                            </li>
+                            <li class="d-flex align-items-center me-3" style="width: 165px; padding-left:10px;">
+                                <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: 400px;">
+                                    <div id="progress-amer" class="progress-bar progress-bar-striped progress-bar-animated bg-dark" data-criteria='{"group_name":"CBTS - AMER","percentageOf":"all"}'
+                                        style="width: 50%">0%</div>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="filter-criteria-container" data-target="amerCount2" style="display:none;">
+                                    <span data-filter="group_name" data-value="CBTS - AMER"></span>
+                                    <span data-filter="is_past_due" data-value="true"></span>
+                                </div>
+                                <div class="filter-criteria-container" data-target="amerCount3" style="display:none;">
+                                    <span data-filter="group_name" data-value="CBTS - AMER"></span>
+                                    <span data-filter="escalated" data-value="Yes"></span>
+                                </div>
+                                <small><span id="amerCount2">#</span> OD / <span id="amerCount3">#</span> E</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        </div>
+    </div>
+  
+  </div>
+
+</main>
+
+
+
+{% endblock %}
+<script>
+document.getElementById('agentSelect').addEventListener('change', function () {
+    saveSettingsToCookie(); // Save settings after change
+    applySettings();
+});
+</script>

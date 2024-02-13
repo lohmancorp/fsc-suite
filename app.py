@@ -5,7 +5,7 @@
 # - Ticket Sorting
 #
 # Author: Taylor Giddens - taylor.giddens@ingrammicro.com
-# Version: 1.1.0-a
+# Version: 1.1.0-b
 ################################################################################
 
 # Import necessary libraries
@@ -20,7 +20,7 @@ import sys
 import string
 from datetime import datetime
 from pathlib import Path
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from lib.tickets import get_all_tickets, make_status_priority_readable, sort_tickets
 
 # Flask app initialization
@@ -28,11 +28,16 @@ app = Flask(__name__)
 
 # Script Variables:
 SCRIPT_NAME = 'app.py'
-SCRIPT_VERSION = '1.1.0-a'  # Update with each release.
+SCRIPT_VERSION = '1.1.0-b'  # Update with each release.
 
 # Global variables for tracking
 original_time_wait = None
 interrupted = False
+global_companies = None
+global_agents = None
+global_groups = None
+global_tickets = None
+
 
 # Argument Parsing
 def parse_arguments():
@@ -232,25 +237,184 @@ def sanitize_user_input(input_string):
         return False
     return True
 
-# Define the API endpoint
+# Get all initial data so pages load quickly
+def load_initial_data():
+    global global_companies, global_agents, global_groups, global_tickets
+    auth_header = generate_auth_header(API_KEY)
+    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Companies.")
+    logging.info(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Companies.")
 
-@app.route('/')
-def index():
-    return render_template('tickets.html')
+    global_companies = get_company_names(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
+    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Agents.")
+    logging.info(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Agents.")
+    
+    global_agents = get_agents(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
+    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Groups.")
+    logging.info(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Groups.")
+    
+    global_groups = get_groups(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
+    fetched_tickets = get_all_tickets(FRESH_SERVICE_ENDPOINTS['production'], auth_header, global_agents, global_companies, global_groups)
+    readable_tickets = make_status_priority_readable(fetched_tickets)
+    global_tickets = sort_tickets(readable_tickets)
+
+
+# Endpoints for API content
+# Get refreshed ticket information or share backed cached information.
+@app.route('/companies', methods=['GET'])
+def companies():
+    global global_companies
+    if not global_companies:
+        auth_header = generate_auth_header(API_KEY)
+        global_companies = get_company_names(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
+
+    # Sort global_companies by company name
+    sorted_companies = sorted(global_companies.items(), key=lambda x: x[1]['name'])
+
+    # Convert the sorted list of tuples back into a dictionary
+    sorted_companies_dict = {company_id: company_info for company_id, company_info in sorted_companies}
+
+    return jsonify(sorted_companies_dict)
+
+
+@app.route('/groups', methods=['GET'])
+def groups():
+    global global_groups
+    if not global_groups:
+        auth_header = generate_auth_header(API_KEY)
+        global_groups = get_groups(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
+
+    # Sort global_groups by group name
+    sorted_groups = sorted(global_groups.items(), key=lambda x: x[1])
+
+    # Convert the sorted list of tuples back into a dictionary
+    sorted_groups_dict = {group_id: group_name for group_id, group_name in sorted_groups}
+
+    return jsonify(sorted_groups_dict)
+
+
+
+@app.route('/agents', methods=['GET'])
+def agents():
+    global global_agents
+    if not global_agents:
+        auth_header = generate_auth_header(API_KEY)
+        global_agents = get_agents(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
+    
+    # Sort global_agents by agent name
+    sorted_agents = sorted(global_agents.items(), key=lambda x: x[1]['name'])
+    
+    # Convert the sorted list of tuples back into a dictionary
+    sorted_agents_dict = {agent_id: agent_info for agent_id, agent_info in sorted_agents}
+    
+    return jsonify(sorted_agents_dict)
+
 
 @app.route('/tickets', methods=['GET'])
 def get_tickets():
-    args = parse_arguments()
+    global global_tickets
+    refresh = request.args.get('refresh', 'false').lower() == 'true'
+    
+    if refresh or global_tickets is None:
+        # Fetch and transform only if refreshing or if cache is empty
+        auth_header = generate_auth_header(API_KEY)
+        fetched_tickets = get_all_tickets(FRESH_SERVICE_ENDPOINTS['production'], auth_header, global_agents, global_companies, global_groups)
+        readable_tickets = make_status_priority_readable(fetched_tickets)
+        global_tickets = sort_tickets(readable_tickets)
+        
+    return jsonify(global_tickets)
 
-    companies = get_company_names(FRESH_SERVICE_ENDPOINTS[args.mode], generate_auth_header(API_KEY))
-    agents = get_agents(FRESH_SERVICE_ENDPOINTS[args.mode], generate_auth_header(API_KEY))
-    groups = get_groups(FRESH_SERVICE_ENDPOINTS[args.mode], generate_auth_header(API_KEY))
+@app.route('/tickets/count', methods=['GET'])
+def get_dynamic_filtered_ticket_count():
+    # Retrieve all query parameters as a dictionary
+    filter_criteria = request.args.to_dict()
 
-    tickets = get_all_tickets(FRESH_SERVICE_ENDPOINTS[args.mode], generate_auth_header(API_KEY), agents, companies, groups)
-    readable_tickets = make_status_priority_readable(tickets)
-    sorted_tickets = sort_tickets(readable_tickets)
+    # Initialize the count
+    count = 0
 
-    return jsonify(sorted_tickets)
+    # Check if global_tickets is not None and has data
+    if global_tickets:
+        # Iterate over each ticket in global_tickets
+        for ticket in global_tickets:
+            # Flag to track if ticket matches all filter criteria
+            matches_all_criteria = True
+
+            # Check each filter criterion in filter_criteria
+            for key, value in filter_criteria.items():
+                # If any criterion doesn't match, set the flag to False and break
+                if str(ticket.get(key, '')).lower() != value.lower():
+                    matches_all_criteria = False
+                    break
+            
+            # If the ticket matches all criteria, increment the count
+            if matches_all_criteria:
+                count += 1
+
+    # Return the count as JSON
+    return jsonify({'count': count})
+
+@app.route('/tickets/count/percent', methods=['GET'])
+def get_tickets_count_percent():
+    # Retrieve all query parameters as a dictionary
+    all_criteria = request.args.to_dict()
+
+    # Handling 'percentageOf' separately
+    percentage_of = all_criteria.pop('percentageOf', None)
+
+    # The remaining criteria are for the subset count
+    subset_criteria = all_criteria
+
+    # Initialize counts
+    subset_count = 0
+    total_set_count = 0
+
+    # Check if global_tickets is not None and has data
+    if global_tickets:
+        # Count for subset
+        for ticket in global_tickets:
+            if all(str(ticket.get(key, '')).lower() == value.lower() for key, value in subset_criteria.items()):
+                subset_count += 1
+
+        # Determine total set count based on percentageOf value
+        if percentage_of == 'all':
+            total_set_count = len(global_tickets)
+        else:
+            # Parse the percentageOf criteria into a dictionary
+            total_set_criteria = {}
+            for criterion in percentage_of.split('&'):
+                key, value = criterion.split('=')
+                total_set_criteria[key] = value
+
+            # Count for total set based on parsed criteria
+            for ticket in global_tickets:
+                if all(str(ticket.get(key, '')).lower() == value.lower() for key, value in total_set_criteria.items()):
+                    total_set_count += 1
+
+    # Calculate percentage
+    percent = (subset_count / total_set_count * 100) if total_set_count > 0 else 0
+    rounded_percent = round(percent)
+
+    # Return the calculated percentage
+    return jsonify({'percent': f'{rounded_percent}%'})
+
+# Endpoints for html content.
+@app.route('/')
+def index():
+    # Render the main template that might include the navigation, footer, and common elements
+    return render_template('main.html')
+
+
+@app.route('/ticketlist')
+def tickets_view():
+    # This route is for displaying the tickets in a web page format
+    global global_tickets
+    return render_template('tickets.html')
+
+
+
+@app.route('/documentation')
+def documentation():
+    # Render the documentation-specific template
+    return render_template('documentation.html')
 
 if __name__ == "__main__":
     args = parse_arguments()
@@ -258,4 +422,5 @@ if __name__ == "__main__":
     # Register the signal handler
     signal.signal(signal.SIGINT, signal_handler)
     debug_mode = False if args.log_level.upper() == 'DEBUG' else False
+    load_initial_data()
     app.run(debug=False, use_reloader=False, host='127.0.0.1', port=5000)

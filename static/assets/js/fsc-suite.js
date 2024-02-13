@@ -15,6 +15,7 @@ let isFetchAndUpdateRunning = false;
 let lastFetchAndUpdateTimestamp = null;
 let autoRefreshIntervalId = null;
 let autoRefreshInterval = 10 * 60 * 1000; // Default 10 minutes in milliseconds
+let urlFiltersApplied = false;
 
 const completionAudio = new Audio('/static/assets/music/100_percent.mp3');
 
@@ -28,7 +29,7 @@ function startAutoRefresh() {
     autoRefreshIntervalId = setInterval(() => {
         if (!isFetchAndUpdateRunning) {
             console.log('Starting auto-refresh');
-            fetchAndUpdateTickets();
+            fetchAndUpdateTickets(true);
         } else {
             console.log('Auto-refresh is already running');
         }
@@ -36,7 +37,9 @@ function startAutoRefresh() {
 }
 
 // Function to fetch and update tickets
-function fetchAndUpdateTickets() {
+
+function fetchAndUpdateTickets(refresh = false) {
+    // Prevent concurrent fetch operations
     if (isFetchAndUpdateRunning) {
         console.log('fetchAndUpdateTickets is already running');
         return; // Exit if already running
@@ -44,33 +47,45 @@ function fetchAndUpdateTickets() {
     console.log('fetchAndUpdateTickets started');
     isFetchAndUpdateRunning = true;
 
-    // Start spinning the icon and show start toast
-    document.querySelector('#homeButton i').classList.add('rotating');
-    showStartToast();
+    // Show loading UI only if refresh is true
+    if (refresh) {
+        document.querySelector('#homeButton i').classList.add('rotating');
+        showStartToast();
+    }
 
-    fetch('/tickets')
+    // Construct the fetch URL with an optional refresh query based on the argument
+    const url = '/tickets' + (refresh ? '?refresh=true' : '');
+
+    fetch(url)
         .then(response => response.json())
         .then(tickets => {
             globalTickets = tickets;
             populateTable(tickets); // Update the table with new ticket data
 
-            // Stop spinning the icon and call end toast after updating the table
-            document.querySelector('#homeButton i').classList.remove('rotating');
-            showEndToast();
-
+            // Only show completion UI if refresh was true
+            if (refresh) {
+                console.log('fetchAndUpdateTickets completed with refresh');
+                document.querySelector('#homeButton i').classList.remove('rotating');
+                showEndToast(); // Assuming this function hides the start toast and shows an end toast
+            } else {
+                console.log('fetchAndUpdateTickets completed from cache');
+            }
         })
         .catch(error => {
+            // Error handling
             console.error('Error:', error);
-
-            // Stop spinning the icon and show end toast even if there's an error
-            document.querySelector('#homeButton i').classList.remove('rotating');
-            showEndToast();
+            if (refresh) {
+                document.querySelector('#homeButton i').classList.remove('rotating');
+                showEndToast(); // Show end toast to indicate completion, even on error
+            }
         })
-    .finally(() => {
-        console.log('fetchAndUpdateTickets completed');
-        isFetchAndUpdateRunning = false; // Set to false when done
-    });
+        .finally(() => {
+            isFetchAndUpdateRunning = false; // Mark fetch operation as complete
+        });
 }
+
+
+
 
 // Check if the refresh interval has elapsed
 function isRefreshIntervalElapsed() {
@@ -135,6 +150,7 @@ const toggleColumnVisibility = (column, isVisible) => {
 const saveSettingsToCookie = () => {
     const settings = {
         columnVisibility: {},
+        selectedAgent: document.getElementById('agentSelect').value, // Add selected agent to settings
         filterCategory: document.getElementById('filterCategory').value,
         filterValue: document.getElementById('filterValue').value,
         focusFilter: document.getElementById('focusFilter').value, // Adding focus filter to settings
@@ -167,57 +183,112 @@ const getSettingsFromCookie = () => {
 // Function to apply settings and then apply the filters
 const applySettings = () => {
     const settings = getSettingsFromCookie();
+
     // Apply column visibility
     Object.keys(settings.columnVisibility || {}).forEach(column => {
         const isVisible = settings.columnVisibility[column];
-        toggleColumnVisibility(column, isVisible);
         const checkbox = document.querySelector(`.column-toggle[data-column="${column}"]`);
         if (checkbox) {
+            toggleColumnVisibility(column, isVisible);
             checkbox.checked = isVisible;
         }
     });
 
-    // Apply filters for category and value
-    if (settings.filterCategory) {
-        document.getElementById('filterCategory').value = settings.filterCategory;
-        updateFilterValueDropdown(() => {
-            if (settings.filterValue) {
-                document.getElementById('filterValue').value = settings.filterValue;
-            }
-        });
+    // Apply filters for category and value from cookies
+    const filterCategoryElement = document.getElementById('filterCategory');
+    const filterValueElement = document.getElementById('filterValue');
+    const focusFilterElement = document.getElementById('focusFilter');
+
+    if (!urlFiltersApplied && filterCategoryElement && filterValueElement) {
+        if (settings.filterCategory) {
+            filterCategoryElement.value = settings.filterCategory;
+            updateFilterValueDropdown(() => {
+                if (settings.filterValue) {
+                    filterValueElement.value = settings.filterValue;
+                }
+            });
+        }
     }
 
-    // Apply focus filter
-    if (settings.focusFilter) {
-        document.getElementById('focusFilter').value = settings.focusFilter;
+    if (settings.focusFilter && focusFilterElement) {
+        focusFilterElement.value = settings.focusFilter;
     }
 
-    if (settings.dashboardVisible !== undefined) {
-        document.getElementById('toggleDashboard').checked = settings.dashboardVisible;
-        document.getElementById('topDashboard').style.display = settings.dashboardVisible ? '' : 'none';
+    // Apply selected agent from settings
+    const selectedAgentName = getSelectedAgentName();
+    const agentSelectDropdown = document.getElementById('agentSelect');
+    if (selectedAgentName && agentSelectDropdown) {
+        agentSelectDropdown.value = selectedAgentName; // This should now work as expected
+    }
+    
+    const dashboardToggleElement = document.getElementById('toggleDashboard');
+    const topDashboardElement = document.getElementById('topDashboard');
+    if (settings.dashboardVisible !== undefined && dashboardToggleElement && topDashboardElement) {
+        dashboardToggleElement.checked = settings.dashboardVisible;
+        topDashboardElement.style.display = settings.dashboardVisible ? '' : 'none';
     }
 
-    if (settings.progressBarVisible !== undefined) {
-        document.getElementById('toggleProgressBar').checked = settings.progressBarVisible;
-        document.getElementById('topProgressBar').style.display = settings.progressBarVisible ? '' : 'none';
+    const progressBarToggleElement = document.getElementById('toggleProgressBar');
+    const topProgressBarElement = document.getElementById('topProgressBar');
+    if (settings.progressBarVisible !== undefined && progressBarToggleElement && topProgressBarElement) {
+        progressBarToggleElement.checked = settings.progressBarVisible;
+        topProgressBarElement.style.display = settings.progressBarVisible ? '' : 'none';
     }
 
-    // Apply refresh settings
-    if (settings.autoRefreshEnabled !== undefined) {
-        document.getElementById('toggleAutoRefresh').checked = settings.autoRefreshEnabled;
-    }
-    if (settings.autoRefreshInterval !== undefined) {
-        document.getElementById('refreshTime').value = settings.autoRefreshInterval;
-        autoRefreshInterval = parseInt(settings.autoRefreshInterval, 10) * 60 * 1000; // Convert minutes to milliseconds
-    }
-
-    if (settings.autoRefreshEnabled) {
-        startAutoRefresh();
+    const autoRefreshToggleElement = document.getElementById('toggleAutoRefresh');
+    const refreshTimeElement = document.getElementById('refreshTime');
+    if (autoRefreshToggleElement && refreshTimeElement) {
+        if (settings.autoRefreshEnabled !== undefined) {
+            autoRefreshToggleElement.checked = settings.autoRefreshEnabled;
+        }
+        if (settings.autoRefreshInterval !== undefined) {
+            refreshTimeElement.value = settings.autoRefreshInterval;
+            autoRefreshInterval = parseInt(settings.autoRefreshInterval, 10) * 60 * 1000;
+        }
+        if (settings.autoRefreshEnabled) {
+            startAutoRefresh();
+        }
     }
 
     // Ensure filterRows is called after all dropdowns have been set
     filterRows();
 };
+
+
+// Remove query parameters from the URL without reloading the page
+function clearURLFilters(){
+    const urlWithoutQueryParams = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.pushState({ path: urlWithoutQueryParams }, '', urlWithoutQueryParams);
+}
+
+// Function to read URL encoded parameters on the ticket page to apply filter settings so specific views can be linked to.
+function readAndApplyURLFilters() {
+    console.log('Reading URL parameters...');
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterCategory = urlParams.get('filterCategory');
+    const filterValue = urlParams.get('filterValue');
+
+    console.log(`URL Parameters - filterCategory: ${filterCategory}, filterValue: ${filterValue}`);
+
+    if (filterCategory) {
+        document.getElementById('filterCategory').value = filterCategory;
+
+        new Promise((resolve) => {
+            updateFilterValueDropdown(resolve);
+        }).then(() => {
+            if (filterValue) {
+                const decodedValue = decodeURIComponent(filterValue);
+                console.log(`Decoded filterValue to set: ${decodedValue}`);
+                document.getElementById('filterValue').value = decodedValue;
+                console.log('filterValue should now be set. Checking dropdown value:', document.getElementById('filterValue').value);
+                filterRows(); // Ensure this function exists and works as intended
+                urlFiltersApplied = true;
+            }
+        });
+    }
+}
+
+
 
 // Function to get a random MP3 file
 const getRandomLoadingAudio = () => {
@@ -339,6 +410,127 @@ function calculateEngineersRequired(N) {
     return Math.ceil(Etotal);
 }
 
+// Function to get counts for a static dashboard
+const selectedAgentName = getSelectedAgentName(); // This should return the actual name, e.g., "Alexandr Churikov"
+
+document.addEventListener('DOMContentLoaded', function () {
+    const selectedAgentName = getSelectedAgentName();
+    document.querySelectorAll('.filter-criteria-container').forEach((container) => {
+        const resultContainerId = container.getAttribute('data-target');
+        let filterCriteria = {};
+
+        container.querySelectorAll('[data-filter]').forEach((element) => {
+            const filterName = element.getAttribute('data-filter');
+            let filterValue = element.getAttribute('data-value');
+
+            // Check if placeholder value is present, and replace it with the actual variable's value
+            if (filterValue === '$selectedAgent' && selectedAgentName) {
+                filterValue = selectedAgentName; // Use the actual agent name
+            }
+
+            filterCriteria[filterName] = filterValue;
+        });
+
+        const queryParams = new URLSearchParams(filterCriteria).toString();
+        console.log(`Fetching data for URL: /tickets/count?${queryParams}`); // Debugging log
+
+        fetch(`/tickets/count?${queryParams}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById(resultContainerId).textContent = data.count;
+            })
+            .catch(error => console.error('Error fetching ticket count:', error));
+    });
+});
+
+// Function to update the link with the selected agent from the cookie
+const updateLinkWithSelectedAgent = () => {
+    const selectedAgent = getSelectedAgentName(); // Directly fetch the selected agent name
+    const yourTicketsLink = document.getElementById('yourTicketsLink');
+
+    if (yourTicketsLink && selectedAgent) {
+        // Encode the selectedAgent value for URL
+        const encodedSelectedAgent = encodeURIComponent(selectedAgent);
+
+        // Update the href with the encoded selectedAgent
+        yourTicketsLink.href = `/ticketlist?filterCategory=agent&filterValue=${encodedSelectedAgent}`;
+
+        // If you have other elements that need updating based on the selected agent, handle them here
+    }
+};
+
+
+function afterDropdownPopulated() {
+    // Call applySettings to apply any settings stored in cookies or elsewhere
+    applySettings();
+    updateLinkWithSelectedAgent();
+    const selectedAgentName = getSelectedAgentName();
+    document.querySelectorAll('.filter-criteria-container').forEach((container) => {
+        const resultContainerId = container.getAttribute('data-target');
+        let filterCriteria = {};
+
+        container.querySelectorAll('[data-filter]').forEach((element) => {
+            const filterName = element.getAttribute('data-filter');
+            let filterValue = element.getAttribute('data-value');
+
+            if (filterValue === '$selectedAgent' && selectedAgentName) {
+                filterValue = selectedAgentName; // Use the actual agent name
+            }
+
+            filterCriteria[filterName] = filterValue;
+        });
+
+        const queryParams = new URLSearchParams(filterCriteria).toString();
+        console.log(`Fetching data for URL: /tickets/count?${queryParams}`);
+
+        fetch(`/tickets/count?${queryParams}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById(resultContainerId).textContent = data.count;
+            })
+            .catch(error => console.error('Error fetching ticket count:', error));
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Populate the agent dropdown and call applySettings as a callback
+    populateAgentDropdown(afterDropdownPopulated);
+    updateLinkWithSelectedAgent();
+});
+
+// Function to update percentages
+document.addEventListener('DOMContentLoaded', function () {
+    // Function to update percentage for progress bars based on data-criteria
+    function updateProgressBars() {
+        // Select all progress bars with data-criteria
+        const progressBars = document.querySelectorAll('[data-criteria]');
+
+        progressBars.forEach(bar => {
+            const criteria = JSON.parse(bar.getAttribute('data-criteria'));
+            let apiUrl = '/tickets/count/percent?';
+
+            // Construct the query string from criteria
+            Object.entries(criteria).forEach(([key, value], index) => {
+                apiUrl += `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+                if (index < Object.entries(criteria).length - 1) apiUrl += '&';
+            });
+
+            // Fetch the percentage and update the progress bar
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const percent = data.percent;
+                    bar.setAttribute('style', `width: ${percent};`); // Explicitly set the style attribute
+                    bar.textContent = percent; // Update the text content
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    }
+
+    // Call the function to update all progress bars on page load
+    updateProgressBars();
+});
 
 // Function to update dashboard counts & progress bar
 const updateDashboardCounts = () => {
@@ -392,16 +584,16 @@ const updateDashboardCounts = () => {
 
     // Update progress bar class based on progressBarFraction
     if (progressBarFraction < 0.5) {
-        progressBar.classList.remove('bg-danger', 'bg-warning', 'bg-info', 'bg-success');
-        progressBar.classList.add('bg-danger');
+        progressBar.classList.remove('bg-dark', 'bg-warning', 'bg-info', 'bg-success');
+        progressBar.classList.add('bg-dark');
     } else if (progressBarFraction >= 0.5 && progressBarFraction < 0.7) {
-        progressBar.classList.remove('bg-danger', 'bg-warning', 'bg-info', 'bg-success');
+        progressBar.classList.remove('bg-dark', 'bg-warning', 'bg-info', 'bg-success');
         progressBar.classList.add('bg-warning');
     } else if (progressBarFraction >= 0.7 && progressBarFraction < 0.8) {
-        progressBar.classList.remove('bg-danger', 'bg-warning', 'bg-info', 'bg-success');
+        progressBar.classList.remove('bg-dark', 'bg-warning', 'bg-info', 'bg-success');
         progressBar.classList.add('bg-info');
     } else {
-        progressBar.classList.remove('bg-danger', 'bg-warning', 'bg-info', 'bg-success');
+        progressBar.classList.remove('bg-dark', 'bg-warning', 'bg-info', 'bg-success');
         progressBar.classList.add('bg-success');
         if (progressBarFraction === 1) {
             // Show the loading overlay and play the audio
@@ -446,6 +638,7 @@ const delayedUpdateDashboardCounts = () => {
         updateDashboardCounts();
     }, 100); // Delay by 100 milliseconds
 };
+
 
 
 // Function to filter rows based on dropdown selection
@@ -516,11 +709,18 @@ const resetFilters = () => {
     filterRows();
     saveSettingsToCookie();
     applySettings();
+
+    // Remove query parameters from the URL without reloading the page
+    const urlWithoutQueryParams = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.pushState({ path: urlWithoutQueryParams }, '', urlWithoutQueryParams);
 };
+
 
 // Function to update the filter value dropdown based on category selection
 const updateFilterValueDropdown = (callback) => {
+    console.log('Updating filterValue dropdown...');
     const filterCategory = document.getElementById('filterCategory').value;
+    console.log(`Selected filterCategory: ${filterCategory}`);
     const filterValueDropdown = document.getElementById('filterValue');
     const rows = document.querySelectorAll('#ticketsTable tbody tr');
 
@@ -570,7 +770,10 @@ const updateFilterValueDropdown = (callback) => {
             options.push(value);
         }
         counts[value] = (counts[value] || 0) + 1;
+
     });
+    
+    console.log('Options generated:', options);
 
     // Sort options and ensure 'Unassigned' is at the top for 'group' and 'agent'
     if (filterCategory === 'group' || filterCategory === 'agent') {
@@ -592,9 +795,29 @@ const updateFilterValueDropdown = (callback) => {
         const newOption = new Option(optionText, option);
         filterValueDropdown.add(newOption);
     });
-
+    console.log('Dropdown options populated.');
+    console.log(`Selected filterValue: ${filterValue}`);
     if (callback) callback();
 };
+
+function copyFilteredTicketsURLToClipboard() {
+    const baseUrl = 'http://127.0.0.1:5000/ticketlist';
+    const filterCategory = document.getElementById('filterCategory').value;
+    const filterValue = document.getElementById('filterValue').value;
+    const encodedFilterValue = encodeURIComponent(filterValue); // Ensure the value is URL-friendly
+    const fullUrl = `${baseUrl}?filterCategory=${filterCategory}&filterValue=${encodedFilterValue}`;
+
+    // Create a temporary textarea element to hold the URL
+    const tempInput = document.createElement('textarea');
+    tempInput.value = fullUrl;
+    document.body.appendChild(tempInput);
+    tempInput.select(); // Select the text
+    document.execCommand('copy'); // Copy the text
+    document.body.removeChild(tempInput); // Remove the temporary element
+
+    // Notify the user that the URL has been copied with a toast, including the full URL
+    showCopyToast(fullUrl);
+}
 
 
 
@@ -660,7 +883,7 @@ const calculateTimeDifference = (dateStr, redThresholdDays) => {
     let hourWord = hours === 1 ? 'hr' : 'hrs'; // Singular or plural for hours
     let timeDiffText = (days > 0 ? `${days} ${dayWord} ` : '') + `${hours} ${hourWord}`;
 
-    let textClass = diff < 0 && days >= redThresholdDays ? 'text-danger' : 'text-dark';
+    let textClass = diff < 0 && days >= redThresholdDays ? 'text-danger' : '';
 
     return `<span class="${textClass}" style="white-space:nowrap;">${timeDiffText}</span>`;
 };
@@ -693,9 +916,6 @@ const populateTable = (tickets) => {
         row.ondblclick = () => window.open(`https://support.cloudblue.com/a/tickets/${ticket.id}`, '_blank');
         // Calculate and set popover content for cellPastDue, cellCreated, and cellDueBy
         const pastDuePopoverContent = calculateTimeDifference(ticket.due_by, 0); // Assuming ticket object has past_due_date
-        //const createdPopoverContent = calculateTimeDifference(ticket.created_at);
-        //const dueByPopoverContent = calculateTimeDifference(ticket.due_by);
-        //const lastUpdatePopoverContent = calculateTimeDifference(ticket.updated_at);
 
 
         // Event listeners for drag functionality
@@ -888,6 +1108,7 @@ const populateTable = (tickets) => {
     });
     updateFilterValueDropdown();
     applySettings();
+    readAndApplyURLFilters();
     delayedUpdateDashboardCounts();
     var newTooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     newTooltipTriggerList.forEach(function (tooltipTriggerEl) {
@@ -932,11 +1153,38 @@ function showEndToast() {
             refreshToastStart.hide();
             refreshToastEnd.hide();
 
-        }, 10000); // Hide both toasts after 5 seconds
+        }, 3000); // Hide both toasts after 3 seconds
     } else {
         console.error('End toast element, icon, or button text not found');
     }
 }
+
+function showCopyToast(copiedUrl) {
+    const toastElement = document.getElementById('copyToast');
+
+    if (toastElement) {
+        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        toastElement.querySelector('#refreshCopyTime').textContent = currentTime;
+        toastElement.querySelector('#copyToastBody').textContent = `Copied URL: ${copiedUrl}`; // Set the copied URL in the toast body
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+        setTimeout(() => {
+            toast.hide();
+        }, 2500); // Hides toast after 3 seconds
+    } else {
+        console.error('Toast element not found');
+    }
+}
+
+// Example implementation, adjust based on your application logic
+function getSelectedAgentName() {
+    // Example: Fetching the selected agent's name from a cookie
+    const settings = getSettingsFromCookie(); // Assuming this function is correctly implemented
+    return settings.selectedAgent; // Make sure this matches your actual settings structure
+}
+
+// Run the function to update the link when the page loads
+document.addEventListener('DOMContentLoaded', updateLinkWithSelectedAgent);
 
 
 document.querySelectorAll('.column-toggle').forEach(checkbox => {
@@ -954,6 +1202,7 @@ document.getElementById('filterCategory').addEventListener('change', function ()
             document.getElementById('focusFilter').value = 'all'; // Reset the third dropdown to 'All'
         }
         filterRows(); // Apply filters based on the new dropdown settings
+        clearURLFilters();
         saveSettingsToCookie();
     });
 });
@@ -963,6 +1212,7 @@ document.getElementById('resetFilters').addEventListener('click', resetFilters);
 
 document.getElementById('filterValue').addEventListener('change', () => {
     filterRows();
+    clearURLFilters();
     saveSettingsToCookie();
 });
 
@@ -974,9 +1224,11 @@ document.getElementById('focusFilter').addEventListener('change', () => {
 
 // Main Event Listener for Page Load - DOMContentLoaded listener
 window.addEventListener('DOMContentLoaded', (event) => {
-    applySettings();
-    fetchAndUpdateTickets(); // Fetch tickets immediately on load
 
+    fetchAndUpdateTickets(); // Fetch tickets immediately on load
+    populateAgentDropdown();
+    applySettings();
+    //updateYourTicketsLinkFromCookie();
     if (document.getElementById('toggleAutoRefresh').checked) {
         startAutoRefresh(); // Start auto-refresh if enabled
     }
@@ -984,9 +1236,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    populateAgentDropdown();
     refreshToastStart = new bootstrap.Toast(document.getElementById('refreshToastStart'));
     refreshToastEnd = new bootstrap.Toast(document.getElementById('refreshToastEnd'));
+    applySettings();
+    //updateYourTicketsLinkFromCookie();
 });
+
+document.getElementById('agentSelect').addEventListener('change', function () {
+    saveSettingsToCookie(); // Save settings after change
+    applySettings();
+});
+
 
 document.getElementById('toggleMusic').addEventListener('change', function () {
     if (this.checked) {
@@ -1082,12 +1343,6 @@ document.getElementById('toggleProgressBar').addEventListener('change', function
     applySettings();
 });
 
-// document.getElementById('toggleAutoRefresh').addEventListener('change', function () {
-//     // Existing code to handle dashboard visibility toggle...
-//     saveSettingsToCookie(); // Save settings after change
-//     applySettings();
-// });
-
 // Additional handling for internal navigation (if needed)
 // Replace 'logoElement' and 'homeButton' with the actual IDs or classes of your elements
 document.getElementById('homeButton').addEventListener('click', handleInternalNavigation);
@@ -1097,9 +1352,60 @@ function handleInternalNavigation(event) {
     // Refresh the page
     //location.reload();
     //Refresh the ticket data in the background.
-    fetchAndUpdateTickets();
+    fetchAndUpdateTickets(true);
 }
 function handleLogoInternalNavigation(event) {
     event.preventDefault(); // Prevent default link behavior
     // Refresh the page
 }
+
+
+document.getElementById('refreshTickets').addEventListener('click', function () {
+    fetchAndUpdateTickets(true); // True to refresh data
+});
+
+
+function populateAgentDropdown(callback) {
+    console.log("Attempting to populate agents dropdown...");
+    fetch('/agents')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Agents data:", data);
+            const select = document.getElementById('agentSelect');
+            if (!select) {
+                throw new Error('Agent select element not found');
+            }
+            // Clear existing options except the first one
+            while (select.options.length > 1) {
+                select.remove(1);
+            }
+
+            // Sort agents by name
+            const sortedAgents = Object.entries(data)
+                .sort(([, agentInfoA], [, agentInfoB]) => agentInfoA.name.localeCompare(agentInfoB.name));
+
+            // Populate the select element with sorted agents
+            sortedAgents.forEach(([_, agentInfo]) => {
+                const option = new Option(agentInfo.name, agentInfo.name); // Set both text and value to agent's name
+                select.appendChild(option);
+            });
+
+            // Call the callback function if provided, indicating the dropdown has been populated
+            if (callback && typeof callback === 'function') {
+                callback();
+            }
+        })
+        .catch(error => {
+            console.error('Error populating agents dropdown:', error);
+        });
+}
+
+
+
+
+
