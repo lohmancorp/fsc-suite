@@ -58,10 +58,7 @@ venv\Scripts\activate
 py -m pip install --upgrade pip
 ```
 ```
-py -m pip install flask
-```
-```
-py -m pip install requests
+py -m pip install flask requests pandas
 ```
 3. Start the application
 ```
@@ -87,10 +84,7 @@ source venv/bin/activate
 pip install --upgrade pip
 ```
 ```
-pip install flask
-```
-```
-pip install requests
+pip install flask requests pandas
 ```
 3. Start the application
 ```
