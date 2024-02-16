@@ -63,9 +63,6 @@ py -m pip install flask
 ```
 py -m pip install requests
 ```
-```
-py -m pip install pandas
-```
 3. Start the application
 ```
 py -m app
@@ -94,9 +91,6 @@ pip install flask
 ```
 ```
 pip install requests
-```
-```
-pip install pandas
 ```
 3. Start the application
 ```

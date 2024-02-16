@@ -5,7 +5,7 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: #070354;">
         <div class="container-fluid">
-            <span class="navbar-brand"><img src="{{ url_for('static', filename='assets/logos/cloudblue-logo-white.png') }}" style="max-height: 30px;" id="logoElement"></span>
+            <span class="navbar-brand"><a href="/"><img src="{{ url_for('static', filename='assets/logos/cloudblue-logo-white.png') }}" style="max-height: 30px;" id="logoElement"></a></span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,6 +22,42 @@
                         </ul>
                     </li>
                 </ul>
+				<!-- Dropdown for Filter Category -->
+                <div class="input-group" style="max-width: 40%; display: none;">
+
+                    <span class="input-group-text"> <i class="bi bi-funnel-fill"></i> Ticket Filters</span>
+                    <select id="filterCategory" class="form-control form-select me-2" style="padding-left: 10px;">
+                        <option value="all">All</option>
+                        <option value="company">Company</option>
+                        <option value="group">Group</option>
+                        <option value="agent">Agent</option>
+                        <option value="tam">TAM</option>
+                        <option value="tier">Tier</option>
+                        <option value="priority">Priority</option>
+                        <option value="status">Status</option>
+                        <option value="type">Type</option>
+                        <option value="environment">Environment</option>
+                        <option value="escalated">Escalated</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                    <!-- Dropdown for Filter Value -->
+                    <select id="filterValue" class="form-control form-select me-2" style="padding-left:0px;">
+                        <!-- Options will be dynamically populated based on the category selection -->
+                    </select>
+                    <!-- Dropdown for Third Filter -->
+                    <select id="focusFilter" class="form-control form-select me-2">
+                        <option value="all">All</option>
+                        <option value="focused">Focused</option>
+                    </select>
+                    <!-- Reset Button -->
+                    <a class="btn btn-secondary" aria-expanded="false" role="button" href="" id="homeButton">
+                        <i class="bi bi-arrow-clockwise text-white" style="display: inline-block;"></i>
+                        <span>Reload</span>
+                    </a>
+                    <button id="resetFilters" class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="bottom" title="Reset Filter"><i class="bi bi-x-circle"></i></button>
+                    <button id="copyUrlButton" class="btn btn-secondary" type="button" onclick="copyFilteredTicketsURLToClipboard()"data-toggle="tooltip" data-placement="top" title="Copy Filter"><i class="bi bi-copy"></i></button>
+                </div>
+			</div>
         </div>
     </nav>
 </header>

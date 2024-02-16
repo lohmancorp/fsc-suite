@@ -52,7 +52,7 @@ def parse_arguments():
 #API_KEY = input("Enter your API key: ")
 ## New method
 print(f"Enter your API Key: ")
-API_KEY = sys.stdin.readline().rstrip('\n');
+API_KEY = sys.stdin.readline().rstrip('\n')
 
 FRESH_SERVICE_ENDPOINTS = {
     'staging': 'cbportal-fs-sandbox',
