@@ -253,6 +253,12 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
                 if is_past_due is None:    
                     is_past_due = False 
 
+                escalated_value = ticket['custom_fields'].get('escalated')
+                if escalated_value == "Yes":
+                    escalated = True
+                elif escalated_value == "No" or escalated_value is None:
+                    escalated = False
+                    
                 # Filtering and transforming ticket data
                 filtered_ticket = {
                     'id': ticket['id'],
@@ -270,7 +276,7 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
                     'agent_email': agent_info['email'],
                     'account_tier': account_tier,
                     'environment': environment,
-                    'escalated': ticket['custom_fields'].get('escalated', None),
+                    'escalated': escalated,
                     'ticket_type': ticket_type
                 }
 
