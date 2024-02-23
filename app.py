@@ -5,7 +5,7 @@
 # - Ticket Sorting
 #
 # Author: Taylor Giddens - taylor.giddens@ingrammicro.com
-# Version: 1.1.0-b
+# Version: 1.1.0-c
 ################################################################################
 
 # Import necessary libraries
@@ -28,7 +28,7 @@ app = Flask(__name__)
 
 # Script Variables:
 SCRIPT_NAME = 'app.py'
-SCRIPT_VERSION = '1.1.0-b'  # Update with each release.
+SCRIPT_VERSION = '1.1.0-c'  # Update with each release.
 
 # Global variables for tracking
 original_time_wait = None
