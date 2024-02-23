@@ -8,6 +8,9 @@ The FSC-suite script is a collection of tools that is to be used on-top of an ex
  - v1.0.3 - Public Internal POC - EOL
  - v1.0.4 - Public Internal POC - Current
 
+## 1.0.4 Release Notes
+1. **Bug** - Escalated Status was reflected incorrectly if value is set to "No".
+
 ## Setup Instructions
 1. Contact local IT to have them install Python 3.6+ on your profile on your local machine.
 2. Verify the version of Python installed and that it is available in your profile.
