@@ -5,7 +5,8 @@ The FSC-suite script is a collection of tools that is to be used on-top of an ex
  - v1.0.0 - Alpha Proof of Concept - EOL
  - v1.0.1 - Beta Proof of Concept - EOL
  - v1.0.2 - Gamma Proof of Concept - EOL
- - v1.0.3 - Public Internal POC - Current
+ - v1.0.3 - Public Internal POC - EOL
+ - v1.0.4 - Public Internal POC - Current
 
 ## Setup Instructions
 1. Contact local IT to have them install Python 3.6+ on your profile on your local machine.
