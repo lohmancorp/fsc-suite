@@ -4,7 +4,7 @@
 # - Ticket Sorting
 #
 # Author: Taylor Giddens - taylor.giddens@ingrammicro.com
-# Version: 1.1.0-b
+# Version: 1.1.0-c
 ################################################################################
 import requests
 import logging
@@ -260,6 +260,11 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
                 company_name = company_info['name']
                 tam_name = company_info['tam_name']  # Extract tam_name for the company    
                 account_tier = company_info['account_tier'] # Extract account_tier for the company
+                escalated_value = ticket['custom_fields'].get('escalated')
+                if escalated_value == "Yes":
+                    escalated = True
+                elif escalated_value == "No" or escalated_value is None:
+                    escalated = False
 
                 # Filtering and transforming ticket data
                 filtered_ticket = {
@@ -279,7 +284,7 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
                     'agent_email': agent_info['email'],
                     'account_tier': account_tier,
                     'environment': environment,
-                    'escalated': ticket['custom_fields'].get('escalated', None),
+                    'escalated': escalated,
                     'ticket_type': ticket_type
                 }
 
