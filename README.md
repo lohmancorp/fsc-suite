@@ -99,7 +99,7 @@ To stop the application, use ctrl+c on your keyboard.
 
 
 # Second Run + instructions 
-The following instructions are meant to be used after the initial virtual environment has been setup, but the application has been stopped.
+The following instructions are meant to be used after the initial virtual environment has been setup, but the application has been stopped. If you have closed your terminal, you may have to reset your source to the virtual environment.
 
 ### Virtual environment Windows
 1. In your command prompt, navigate to the root directory folder of FSC Suite
