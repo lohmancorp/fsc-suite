@@ -7,8 +7,7 @@ The FSC-suite script is a collection of tools that is to be used on-top of an ex
  - v1.0.2 - Gamma Proof of Concept - EOL
  - v1.0.3 - Public Internal POC - Current
  - v1.1.0-a - Public Internal POC - EOL 
- - v1.1.0-b - Public Internal POC - EOL 
- - v1.1.0-c - Public Internal POC - Dev Preview
+ - v1.1.0-b - Public Internal POC - Dev Preview 
 
 ## Setup Instructions
 1. Contact local IT to have them install Python 3.6+ on your profile on your local machine.
@@ -99,7 +98,7 @@ To stop the application, use ctrl+c on your keyboard.
 
 
 # Second Run + instructions 
-The following instructions are meant to be used after the initial virtual environment has been setup, but the application has been stopped. If you have closed your terminal, you may have to reset your source to the virtual environment.
+The following instructions are meant to be used after the initial virtual environment has been setup, but the application has been stopped.
 
 ### Virtual environment Windows
 1. In your command prompt, navigate to the root directory folder of FSC Suite

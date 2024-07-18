@@ -4,7 +4,7 @@
 # - Ticket Sorting
 #
 # Author: Taylor Giddens - taylor.giddens@ingrammicro.com
-# Version: 1.1.0-c
+# Version: 1.1.0-b
 ################################################################################
 import requests
 import logging
@@ -287,11 +287,9 @@ def get_all_tickets(base_url, headers, agents, companies, groups):
                     'escalated': escalated,
                     'ticket_type': ticket_type
                 }
-
                 tickets.append(filtered_ticket)
 
             logging.info(f"Page {page} of tickets retrieved. Count: {len(data['tickets'])}")
-            print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Page {page} of tickets retrieved. Count: {len(data['tickets'])}")
 
             # Check if the number of tickets is 99 or less and exit the loop if so
             if len(data['tickets']) <= 99:

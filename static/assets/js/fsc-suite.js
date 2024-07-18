@@ -11,34 +11,34 @@ let environment = new Set();
 let escalated = new Set(['Yes', 'No']); // Prepopulate with Yes and No
 let overdue = new Set(['Yes', 'No']); // Prepopulate with Yes and No
 let focusedStatuses = new Set(['Open', 'New', 'Service request triage']); // Prepopulate with focused statuses
-let isFetchAndUpdateRunning = false;
-let lastFetchAndUpdateTimestamp = null;
-let autoRefreshIntervalId = null;
-let autoRefreshInterval = 10 * 60 * 1000; // Default 10 minutes in milliseconds
+//let isFetchAndUpdateRunning = false;
+//let lastFetchAndUpdateTimestamp = null;
+//let autoRefreshIntervalId = null;
+//let autoRefreshInterval = 10 * 60 * 1000; // Default 10 minutes in milliseconds
 let urlFiltersApplied = false;
 
 const completionAudio = new Audio('/static/assets/music/100_percent.mp3');
 
 
 // Function to start auto-refresh
-function startAutoRefresh() {
-    console.log('Attempting to start auto-refresh');
-    if (autoRefreshIntervalId !== null) {
-        clearInterval(autoRefreshIntervalId); // Clear existing interval if any
-    }
-    autoRefreshIntervalId = setInterval(() => {
-        if (!isFetchAndUpdateRunning) {
-            console.log('Starting auto-refresh');
-            fetchAndUpdateTickets(true);
-        } else {
-            console.log('Auto-refresh is already running');
-        }
-    }, autoRefreshInterval);
-}
+// function startAutoRefresh() {
+//     console.log('Attempting to start auto-refresh');
+//     if (autoRefreshIntervalId !== null) {
+//         clearInterval(autoRefreshIntervalId); // Clear existing interval if any
+//     }
+//     autoRefreshIntervalId = setInterval(() => {
+//         if (!isFetchAndUpdateRunning) {
+//             console.log('Starting auto-refresh');
+//             fetchAndUpdateTickets(true);
+//         } else {
+//             console.log('Auto-refresh is already running');
+//         }
+//     }, autoRefreshInterval);
+// }
 
 // Function to fetch and update tickets
 
-function fetchAndUpdateTickets(refresh = false) {
+function fetchAndUpdateTickets_2(refresh = false) {
     // Prevent concurrent fetch operations
     if (isFetchAndUpdateRunning) {
         console.log('fetchAndUpdateTickets is already running');
@@ -60,7 +60,7 @@ function fetchAndUpdateTickets(refresh = false) {
         .then(response => response.json())
         .then(tickets => {
             globalTickets = tickets;
-            populateTable(tickets); // Update the table with new ticket data
+            populateTable(globalTickets); // Update the table with new ticket data
 
             // Only show completion UI if refresh was true
             if (refresh) {
@@ -84,33 +84,12 @@ function fetchAndUpdateTickets(refresh = false) {
         });
 }
 
-
-
-
-// Check if the refresh interval has elapsed
-function isRefreshIntervalElapsed() {
-    if (!lastFetchAndUpdateTimestamp) return true;
-    const now = new Date();
-    return (now - lastFetchAndUpdateTimestamp) >= autoRefreshInterval;
-}
-
-// Show loading overlay
-const showLoadingOverlay = () => {
-    document.getElementById('loadingOverlay').style.display = 'flex';
-    if (document.getElementById('toggleMusic').checked) {
-        loadingAudio.play();
-    } else {
-        loadingAudio.pause();
-        loadingAudio.currentTime = 0;
-    }
-};
-
-// Hide loading overlay
-const hideLoadingOverlay = () => {
-    document.getElementById('loadingOverlay').style.display = 'none';
-    loadingAudio.pause();
-    loadingAudio.currentTime = 0;
-};
+// // Check if the refresh interval has elapsed
+// function isRefreshIntervalElapsed() {
+//     if (!lastFetchAndUpdateTimestamp) return true;
+//     const now = new Date();
+//     return (now - lastFetchAndUpdateTimestamp) >= autoRefreshInterval;
+// }
 
 // Function to format date and time
 const formatDateTime = (dateTimeStr) => {
@@ -150,11 +129,11 @@ const toggleColumnVisibility = (column, isVisible) => {
 const saveSettingsToCookie = () => {
     const settings = {
         columnVisibility: {},
-        selectedAgent: document.getElementById('agentSelect').value, // Add selected agent to settings
+        // selectedAgent: document.getElementById('agentSelect').value, // Add selected agent to settings
         filterCategory: document.getElementById('filterCategory').value,
         filterValue: document.getElementById('filterValue').value,
         focusFilter: document.getElementById('focusFilter').value, // Adding focus filter to settings
-        musicEnabled: document.getElementById('toggleMusic').checked,
+        //musicEnabled: document.getElementById('toggleMusic').checked,
         dashboardVisible: document.getElementById('toggleDashboard').checked,
         progressBarVisible: document.getElementById('toggleProgressBar').checked, // New setting
         autoRefreshEnabled: document.getElementById('toggleAutoRefresh').checked,
@@ -215,11 +194,11 @@ const applySettings = () => {
     }
 
     // Apply selected agent from settings
-    const selectedAgentName = getSelectedAgentName();
-    const agentSelectDropdown = document.getElementById('agentSelect');
-    if (selectedAgentName && agentSelectDropdown) {
-        agentSelectDropdown.value = selectedAgentName; // This should now work as expected
-    }
+    // const selectedAgentName = getSelectedAgentName();
+    // const agentSelectDropdown = document.getElementById('agentSelect');
+    // if (selectedAgentName && agentSelectDropdown) {
+    //     agentSelectDropdown.value = selectedAgentName; // This should now work as expected
+    // }
     
     const dashboardToggleElement = document.getElementById('toggleDashboard');
     const topDashboardElement = document.getElementById('topDashboard');
@@ -235,25 +214,24 @@ const applySettings = () => {
         topProgressBarElement.style.display = settings.progressBarVisible ? '' : 'none';
     }
 
-    const autoRefreshToggleElement = document.getElementById('toggleAutoRefresh');
-    const refreshTimeElement = document.getElementById('refreshTime');
-    if (autoRefreshToggleElement && refreshTimeElement) {
-        if (settings.autoRefreshEnabled !== undefined) {
-            autoRefreshToggleElement.checked = settings.autoRefreshEnabled;
-        }
-        if (settings.autoRefreshInterval !== undefined) {
-            refreshTimeElement.value = settings.autoRefreshInterval;
-            autoRefreshInterval = parseInt(settings.autoRefreshInterval, 10) * 60 * 1000;
-        }
-        if (settings.autoRefreshEnabled) {
-            startAutoRefresh();
-        }
-    }
+    // const autoRefreshToggleElement = document.getElementById('toggleAutoRefresh');
+    // const refreshTimeElement = document.getElementById('refreshTime');
+    // if (autoRefreshToggleElement && refreshTimeElement) {
+    //     if (settings.autoRefreshEnabled !== undefined) {
+    //         autoRefreshToggleElement.checked = settings.autoRefreshEnabled;
+    //     }
+    //     if (settings.autoRefreshInterval !== undefined) {
+    //         refreshTimeElement.value = settings.autoRefreshInterval;
+    //         autoRefreshInterval = parseInt(settings.autoRefreshInterval, 10) * 60 * 1000;
+    //     }
+    //     if (settings.autoRefreshEnabled) {
+    //         startAutoRefresh();
+    //     }
+    // }
 
     // Ensure filterRows is called after all dropdowns have been set
     filterRows();
 };
-
 
 // Remove query parameters from the URL without reloading the page
 function clearURLFilters(){
@@ -288,8 +266,6 @@ function readAndApplyURLFilters() {
     }
 }
 
-
-
 // Function to get a random MP3 file
 const getRandomLoadingAudio = () => {
     const audios = ['/static/assets/music/loading_1.mp3', '/static/assets/music/loading_2.mp3', '/static/assets/music/loading_3.mp3', '/static/assets/music/loading_4.mp3', '/static/assets/music/loading_5.mp3'];
@@ -299,8 +275,6 @@ const getRandomLoadingAudio = () => {
 
 // Initialize loading audio with a random MP3
 const loadingAudio = getRandomLoadingAudio();
-
-
 
 // Helper function to get a cookie by name
 function getCookie(name) {
@@ -324,7 +298,6 @@ function setCookie(name, value, days = 30) { // Default to 30 days if days param
     }
     document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Strict";
 }
-
 
 const updateFscTicketsCookie = (ticketId, cellPriority, cellStatus, cellLastUpdate, readStatus) => {
     let fscTickets = JSON.parse(getCookie('fsc-tickets') || '[]');
@@ -388,6 +361,8 @@ function evaluateReadStatus(tickets) {
     }
 }
 
+/// *** THIS SHOULD BE REFACTORED OUT AND INTO hc-load.js *** \\\
+
 // Function to calculate total engineers needed for load/backload open within 5 days.
 function calculateEngineersRequired(N) {
     const AHT = 2.55; // Average handle time in hours  (SHOULD BE INPUT VALUE)
@@ -443,27 +418,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Function to update the link with the selected agent from the cookie
-const updateLinkWithSelectedAgent = () => {
-    const selectedAgent = getSelectedAgentName(); // Directly fetch the selected agent name
-    const yourTicketsLink = document.getElementById('yourTicketsLink');
-
-    if (yourTicketsLink && selectedAgent) {
-        // Encode the selectedAgent value for URL
-        const encodedSelectedAgent = encodeURIComponent(selectedAgent);
-
-        // Update the href with the encoded selectedAgent
-        yourTicketsLink.href = `/ticketlist?filterCategory=agent&filterValue=${encodedSelectedAgent}`;
-
-        // If you have other elements that need updating based on the selected agent, handle them here
-    }
-};
-
-
 function afterDropdownPopulated() {
     // Call applySettings to apply any settings stored in cookies or elsewhere
     applySettings();
-    updateLinkWithSelectedAgent();
+    //updateLinkWithSelectedAgent();
     const selectedAgentName = getSelectedAgentName();
     document.querySelectorAll('.filter-criteria-container').forEach((container) => {
         const resultContainerId = container.getAttribute('data-target');
@@ -491,46 +449,6 @@ function afterDropdownPopulated() {
             .catch(error => console.error('Error fetching ticket count:', error));
     });
 }
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Populate the agent dropdown and call applySettings as a callback
-    populateAgentDropdown(afterDropdownPopulated);
-    updateLinkWithSelectedAgent();
-});
-
-// Function to update percentages
-document.addEventListener('DOMContentLoaded', function () {
-    // Function to update percentage for progress bars based on data-criteria
-    function updateProgressBars() {
-        // Select all progress bars with data-criteria
-        const progressBars = document.querySelectorAll('[data-criteria]');
-
-        progressBars.forEach(bar => {
-            const criteria = JSON.parse(bar.getAttribute('data-criteria'));
-            let apiUrl = '/tickets/count/percent?';
-
-            // Construct the query string from criteria
-            Object.entries(criteria).forEach(([key, value], index) => {
-                apiUrl += `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-                if (index < Object.entries(criteria).length - 1) apiUrl += '&';
-            });
-
-            // Fetch the percentage and update the progress bar
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    const percent = data.percent;
-                    bar.setAttribute('style', `width: ${percent};`); // Explicitly set the style attribute
-                    bar.textContent = percent; // Update the text content
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        });
-    }
-
-    // Call the function to update all progress bars on page load
-    updateProgressBars();
-});
 
 // Function to update dashboard counts & progress bar
 const updateDashboardCounts = () => {
@@ -605,7 +523,7 @@ const updateDashboardCounts = () => {
     }
 };
 
-
+/// *** EASTER EGG *** \\\
 // Show victory overlay
 const showVictoryOverlay = () => {
     const victoryOverlay = document.getElementById('victoryOverlay');
@@ -632,14 +550,11 @@ const hideVictoryOverlay = () => {
     }
 };
 
-
 const delayedUpdateDashboardCounts = () => {
     setTimeout(() => {
         updateDashboardCounts();
     }, 100); // Delay by 100 milliseconds
 };
-
-
 
 // Function to filter rows based on dropdown selection
 const filterRows = () => {
@@ -715,7 +630,6 @@ const resetFilters = () => {
     window.history.pushState({ path: urlWithoutQueryParams }, '', urlWithoutQueryParams);
 };
 
-
 // Function to update the filter value dropdown based on category selection
 const updateFilterValueDropdown = (callback) => {
     console.log('Updating filterValue dropdown...');
@@ -770,9 +684,8 @@ const updateFilterValueDropdown = (callback) => {
             options.push(value);
         }
         counts[value] = (counts[value] || 0) + 1;
-
     });
-    
+
     console.log('Options generated:', options);
 
     // Sort options and ensure 'Unassigned' is at the top for 'group' and 'agent'
@@ -783,20 +696,33 @@ const updateFilterValueDropdown = (callback) => {
         options.sort();
     }
 
-    // Add a blank option at the start for other categories
-    if (filterCategory !== 'escalated' && filterCategory !== 'overdue' && filterCategory !== 'group' && filterCategory !== 'agent') {
-        options.unshift('');
+    // Add a blank option at the start for categories other than 'escalated', 'overdue', 'group', and 'agent'
+    if (!['escalated', 'overdue', 'group', 'agent'].includes(filterCategory)) {
+        options.unshift('Choose...');
     }
 
     // Create dropdown options
     options.forEach(option => {
         const count = counts[option] || 0;
-        const optionText = option ? `${option} (${count})` : '';
+        // Check if the option is "Choose..." and format optionText accordingly
+        const optionText = option === "Choose..." ? option : (option ? `${option} (${count})` : '');
         const newOption = new Option(optionText, option);
         filterValueDropdown.add(newOption);
     });
+
+    // Set default value for 'escalated' and 'overdue' categories
+    if (['escalated', 'overdue'].includes(filterCategory)) {
+        filterValueDropdown.value = "Yes"; // Default to "Yes"
+        // Ensure the "Yes" option exists in the dropdown before setting it
+        if (!filterValueDropdown.querySelector(`option[value="Yes"]`)) {
+            const yesOption = new Option('Yes (0)', 'Yes');
+            filterValueDropdown.add(yesOption);
+            yesOption.selected = true;
+        }
+    }
+
     console.log('Dropdown options populated.');
-    console.log(`Selected filterValue: ${filterValue}`);
+    console.log(`Selected filterValue: ${filterValueDropdown.value}`);
     if (callback) callback();
 };
 
@@ -819,8 +745,6 @@ function copyFilteredTicketsURLToClipboard() {
     showCopyToast(fullUrl);
 }
 
-
-
 const toggleIcon = (cellIcon, cellId, cellPriority, cellStatus, cellLastUpdate) => {
     let isCurrentlyRead = cellIcon.innerHTML.includes('bi-envelope-check');
     let newReadStatus = isCurrentlyRead ? 'unread' : 'read';
@@ -842,7 +766,6 @@ const toggleIcon = (cellIcon, cellId, cellPriority, cellStatus, cellLastUpdate) 
     // Recalculate and update dashboard counts
     delayedUpdateDashboardCounts();
 };
-
 
 // Function to apply animation to the icon
 const animateIcon = (iconElement) => {
@@ -888,6 +811,31 @@ const calculateTimeDifference = (dateStr, redThresholdDays) => {
     return `<span class="${textClass}" style="white-space:nowrap;">${timeDiffText}</span>`;
 };
 
+const calculateSimpleTimeDifference = (dateStr) => {
+    const now = new Date();
+    const targetDate = new Date(dateStr);
+    const diff = targetDate - now;
+    const diffInHours = Math.abs(diff) / (1000 * 60 * 60);
+    const diffInDays = diffInHours / 24;
+    const diffInWeeks = diffInDays / 7;
+    let timeDiffText = '';
+
+    if (diffInHours <= 24) {
+        // Difference is 24 hours or less
+        let hourWord = Math.round(diffInHours) === 1 ? 'hr' : 'hrs';
+        timeDiffText = `${Math.round(diffInHours)} ${hourWord}`;
+    } else if (diffInDays <= 14) {
+        // Difference is two weeks or less
+        let dayWord = Math.round(diffInDays) === 1 ? 'day' : 'days';
+        timeDiffText = `${Math.round(diffInDays)} ${dayWord}`;
+    } else {
+        // Difference is more than two weeks
+        let weekWord = Math.round(diffInWeeks) === 1 ? 'week' : 'weeks';
+        timeDiffText = `${Math.round(diffInWeeks)} ${weekWord}`;
+    }
+
+    return `<span style="white-space:nowrap;">${timeDiffText}</span>`;
+};
 
 // Populate table with tickets and then apply visibility settings
 const populateTable = (tickets) => {
@@ -986,6 +934,7 @@ const populateTable = (tickets) => {
         let cellGroup = row.insertCell(16);
         let cellTam = row.insertCell(17);
         let cellScore = row.insertCell(18);
+        let cellGear = row.insertCell(19);
 
         let matchedTicket = fscTickets.find(fscTicket => fscTicket.ticketId === ticket.id);
         let readStatus = ticket.read_status;
@@ -1066,11 +1015,11 @@ const populateTable = (tickets) => {
         overdue.add(ticket.is_past_due ? 'Yes' : 'No');
         cellIcon.classList.add('text-center');
         cellId.classList.add('text-center');
-        cellTier.classList.add('text-center');
-        cellPriority.classList.add('text-center');
-        cellStatus.classList.add('text-center');
-        cellEscalated.classList.add('text-center');
-        cellPastDue.classList.add('text-center');
+        cellTier.classList.add('text-left');
+        cellPriority.classList.add('text-left');
+        cellStatus.classList.add('text-left');
+        cellEscalated.classList.add('text-left');
+        cellPastDue.classList.add('text-left');
         cellCreated.classList.add('text-center');
         cellFrDueBy.classList.add('text-center');
         cellDueBy.classList.add('text-center');
@@ -1104,60 +1053,60 @@ const populateTable = (tickets) => {
             });
         });
 
-
     });
+
     updateFilterValueDropdown();
     applySettings();
     readAndApplyURLFilters();
     delayedUpdateDashboardCounts();
+
     var newTooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     newTooltipTriggerList.forEach(function (tooltipTriggerEl) {
         new bootstrap.Tooltip(tooltipTriggerEl);
     });
+    updateFilterValueDropdown();
+    applySettings();
 };
 
-//const refreshToastStart = new bootstrap.Toast(document.getElementById('refreshToastStart'));
-//const refreshToastEnd = new bootstrap.Toast(document.getElementById('refreshToastEnd'));
+// function showStartToast() {
+//     const toastElement = document.getElementById('refreshToastStart');
+//     const refreshIcon = document.querySelector('#homeButton .bi-arrow-clockwise');
+//     const reloadButtonText = document.querySelector('#homeButton span');
 
-function showStartToast() {
-    const toastElement = document.getElementById('refreshToastStart');
-    const refreshIcon = document.querySelector('#homeButton .bi-arrow-clockwise');
-    const reloadButtonText = document.querySelector('#homeButton span');
+//     if (toastElement && refreshIcon && reloadButtonText) {
+//         const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+//         toastElement.querySelector('.text-body-secondary').textContent = currentTime;
+//         const toast = new bootstrap.Toast(toastElement);
+//         toast.show();
+//         refreshIcon.classList.add('rotating');  // Start rotating
+//         reloadButtonText.textContent = ' Reloading'; // Update text to 'Reloading'
+//     } else {
+//         console.error('Toast element, icon, or button text not found');
+//     }
+// }
 
-    if (toastElement && refreshIcon && reloadButtonText) {
-        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        toastElement.querySelector('.text-body-secondary').textContent = currentTime;
-        const toast = new bootstrap.Toast(toastElement);
-        toast.show();
-        refreshIcon.classList.add('rotating');  // Start rotating
-        reloadButtonText.textContent = ' Reloading'; // Update text to 'Reloading'
-    } else {
-        console.error('Toast element, icon, or button text not found');
-    }
-}
+// function showEndToast() {
+//     const toastElementEnd = document.getElementById('refreshToastEnd');
+//     const refreshIcon = document.querySelector('#homeButton .bi-arrow-clockwise');
+//     const reloadButtonText = document.querySelector('#homeButton span');
 
-function showEndToast() {
-    const toastElementEnd = document.getElementById('refreshToastEnd');
-    const refreshIcon = document.querySelector('#homeButton .bi-arrow-clockwise');
-    const reloadButtonText = document.querySelector('#homeButton span');
+//     if (toastElementEnd && refreshIcon && reloadButtonText) {
+//         const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+//         document.querySelector('#refreshToastEnd .text-body-secondary').textContent = currentTime;
+//         refreshToastEnd.show();
+//         refreshIcon.classList.remove('rotating');  // Stop rotating
+//         reloadButtonText.textContent = ' Reload'; // Restore text to 'Reload'
 
-    if (toastElementEnd && refreshIcon && reloadButtonText) {
-        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        document.querySelector('#refreshToastEnd .text-body-secondary').textContent = currentTime;
-        refreshToastEnd.show();
-        refreshIcon.classList.remove('rotating');  // Stop rotating
-        reloadButtonText.textContent = ' Reload'; // Restore text to 'Reload'
+//         setTimeout(() => {
 
-        setTimeout(() => {
+//             refreshToastStart.hide();
+//             refreshToastEnd.hide();
 
-            refreshToastStart.hide();
-            refreshToastEnd.hide();
-
-        }, 3000); // Hide both toasts after 3 seconds
-    } else {
-        console.error('End toast element, icon, or button text not found');
-    }
-}
+//         }, 3000); // Hide both toasts after 3 seconds
+//     } else {
+//         console.error('End toast element, icon, or button text not found');
+//     }
+// }
 
 function showCopyToast(copiedUrl) {
     const toastElement = document.getElementById('copyToast');
@@ -1179,13 +1128,12 @@ function showCopyToast(copiedUrl) {
 // Example implementation, adjust based on your application logic
 function getSelectedAgentName() {
     // Example: Fetching the selected agent's name from a cookie
-    const settings = getSettingsFromCookie(); // Assuming this function is correctly implemented
+    const settings = readFromCookie('yourName'); // Assuming this function is correctly implemented
     return settings.selectedAgent; // Make sure this matches your actual settings structure
 }
 
 // Run the function to update the link when the page loads
-document.addEventListener('DOMContentLoaded', updateLinkWithSelectedAgent);
-
+//document.addEventListener('DOMContentLoaded', updateLinkWithSelectedAgent);
 
 document.querySelectorAll('.column-toggle').forEach(checkbox => {
     checkbox.addEventListener('change', () => {
@@ -1203,118 +1151,75 @@ document.getElementById('filterCategory').addEventListener('change', function ()
         }
         filterRows(); // Apply filters based on the new dropdown settings
         clearURLFilters();
-        saveSettingsToCookie();
+        //saveSettingsToCookie();
     });
 });
-
 
 document.getElementById('resetFilters').addEventListener('click', resetFilters);
 
 document.getElementById('filterValue').addEventListener('change', () => {
     filterRows();
     clearURLFilters();
-    saveSettingsToCookie();
+    //saveSettingsToCookie();
 });
 
 // Event listener for focus filter change
 document.getElementById('focusFilter').addEventListener('change', () => {
     filterRows();
-    saveSettingsToCookie();
+    //saveSettingsToCookie();
 });
 
 // Main Event Listener for Page Load - DOMContentLoaded listener
 window.addEventListener('DOMContentLoaded', (event) => {
 
-    fetchAndUpdateTickets(); // Fetch tickets immediately on load
-    populateAgentDropdown();
+    fetchAndUpdateTickets_2(); // Fetch tickets immediately on load
+    //populateAgentDropdown();
     applySettings();
     //updateYourTicketsLinkFromCookie();
-    if (document.getElementById('toggleAutoRefresh').checked) {
-        startAutoRefresh(); // Start auto-refresh if enabled
-    }
+    // if (document.getElementById('toggleAutoRefresh').checked) {
+    //     startAutoRefresh(); // Start auto-refresh if enabled
+    // }
 });
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    populateAgentDropdown();
+    //populateAgentDropdown();
     refreshToastStart = new bootstrap.Toast(document.getElementById('refreshToastStart'));
     refreshToastEnd = new bootstrap.Toast(document.getElementById('refreshToastEnd'));
     applySettings();
     //updateYourTicketsLinkFromCookie();
 });
 
-document.getElementById('agentSelect').addEventListener('change', function () {
-    saveSettingsToCookie(); // Save settings after change
-    applySettings();
-});
-
-
-document.getElementById('toggleMusic').addEventListener('change', function () {
-    if (this.checked) {
-        // Code to enable music
-        //loadingAudio.play();
-        saveSettingsToCookie(); // Save settings after change
-        applySettings();
-    } else {
-        // Code to disable music
-        loadingAudio.pause();
-        loadingAudio.currentTime = 0;
-        saveSettingsToCookie();
-        applySettings();
-    }
-});
-
-document.getElementById('toggleDashboard').addEventListener('change', function () {
-    const dashboard = document.getElementById('topDashboard');
-    if (this.checked) {
-        dashboard.style.display = ''; // Show the dashboard
-    } else {
-        dashboard.style.display = 'none'; // Hide the dashboard
-    }
-});
-
-document.getElementById('toggleProgressBar').addEventListener('change', function () {
-    const progressbar = document.getElementById('topProgressBar');
-    if (this.checked) {
-        progressbar.style.display = ''; // Show the progress bar
-    } else {
-        progressbar.style.display = 'none'; // Hide the progress bar
-    }
-});
-
 // Event listener for the toggleAutoRefresh checkbox
-document.getElementById('toggleAutoRefresh').addEventListener('change', function () {
-    if (this.checked) {
-        startAutoRefresh();
-    } else {
-        clearTimeout(autoRefreshIntervalId);
-        autoRefreshIntervalId = null;
-    }
-    saveSettingsToCookie();
-});
+// document.getElementById('toggleAutoRefresh').addEventListener('change', function () {
+//     if (this.checked) {
+//         startAutoRefresh();
+//     } else {
+//         clearTimeout(autoRefreshIntervalId);
+//         autoRefreshIntervalId = null;
+//     }
+//     saveSettingsToCookie();
+// });
 
+// document.getElementById('refreshTime').addEventListener('input', function () {
+//     const inputValue = parseInt(this.value, 10);
+//     const form = this.closest('form');
 
+//     // Check if input is within the allowed range
+//     if (!isNaN(inputValue) && inputValue >= 10 && inputValue <= 60) {
+//         this.classList.remove('is-invalid');
+//         autoRefreshInterval = inputValue * 60 * 1000; // Convert minutes to milliseconds
 
-document.getElementById('refreshTime').addEventListener('input', function () {
-    const inputValue = parseInt(this.value, 10);
-    const form = this.closest('form');
+//         if (document.getElementById('toggleAutoRefresh').checked) {
+//             //startAutoRefresh(); // Restart auto-refresh with new interval
+//         }
+//         saveSettingsToCookie(); // Save settings after change
+//         applySettings();
+//     } else {
+//         this.classList.add('is-invalid'); // Show validation error
+//     }
 
-    // Check if input is within the allowed range
-    if (!isNaN(inputValue) && inputValue >= 10 && inputValue <= 60) {
-        this.classList.remove('is-invalid');
-        autoRefreshInterval = inputValue * 60 * 1000; // Convert minutes to milliseconds
-
-        if (document.getElementById('toggleAutoRefresh').checked) {
-            startAutoRefresh(); // Restart auto-refresh with new interval
-        }
-        saveSettingsToCookie(); // Save settings after change
-        applySettings();
-    } else {
-        this.classList.add('is-invalid'); // Show validation error
-    }
-
-    form.classList.add('was-validated'); // Bootstrap validation class
-});
+//     form.classList.add('was-validated'); // Bootstrap validation class
+// });
 
 // Event listener for the Esc key
 document.addEventListener('keydown', (event) => {
@@ -1324,26 +1229,6 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// Event listeners for the new toggles
-document.getElementById('toggleMusic').addEventListener('change', function () {
-    // Existing code to handle music toggle...
-    saveSettingsToCookie(); // Save settings after change
-    applySettings();
-});
-
-document.getElementById('toggleDashboard').addEventListener('change', function () {
-    // Existing code to handle dashboard visibility toggle...
-    saveSettingsToCookie(); // Save settings after change
-    applySettings();
-});
-
-document.getElementById('toggleProgressBar').addEventListener('change', function () {
-    // Existing code to handle dashboard visibility toggle...
-    saveSettingsToCookie(); // Save settings after change
-    applySettings();
-});
-
-// Additional handling for internal navigation (if needed)
 // Replace 'logoElement' and 'homeButton' with the actual IDs or classes of your elements
 document.getElementById('homeButton').addEventListener('click', handleInternalNavigation);
 
@@ -1352,60 +1237,9 @@ function handleInternalNavigation(event) {
     // Refresh the page
     //location.reload();
     //Refresh the ticket data in the background.
-    fetchAndUpdateTickets(true);
+    fetchAndUpdateTickets_2(true);
 }
 function handleLogoInternalNavigation(event) {
     event.preventDefault(); // Prevent default link behavior
     // Refresh the page
 }
-
-
-document.getElementById('refreshTickets').addEventListener('click', function () {
-    fetchAndUpdateTickets(true); // True to refresh data
-});
-
-
-function populateAgentDropdown(callback) {
-    console.log("Attempting to populate agents dropdown...");
-    fetch('/agents')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Agents data:", data);
-            const select = document.getElementById('agentSelect');
-            if (!select) {
-                throw new Error('Agent select element not found');
-            }
-            // Clear existing options except the first one
-            while (select.options.length > 1) {
-                select.remove(1);
-            }
-
-            // Sort agents by name
-            const sortedAgents = Object.entries(data)
-                .sort(([, agentInfoA], [, agentInfoB]) => agentInfoA.name.localeCompare(agentInfoB.name));
-
-            // Populate the select element with sorted agents
-            sortedAgents.forEach(([_, agentInfo]) => {
-                const option = new Option(agentInfo.name, agentInfo.name); // Set both text and value to agent's name
-                select.appendChild(option);
-            });
-
-            // Call the callback function if provided, indicating the dropdown has been populated
-            if (callback && typeof callback === 'function') {
-                callback();
-            }
-        })
-        .catch(error => {
-            console.error('Error populating agents dropdown:', error);
-        });
-}
-
-
-
-
-

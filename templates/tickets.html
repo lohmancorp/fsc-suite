@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <!-- Begin header content -->
 <header>
     <!-- Fixed navbar -->
@@ -11,22 +12,25 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active fw-bold" href="#" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/"><i class="bi bi-house"></i> Home</a></li>
-                            <li><a class="dropdown-item" href="/ticketlist"><i class="bi bi-ticket-detailed"></i> Tickets</a></li>
-                            <li><a class="dropdown-item" href="/documentation"><i class="bi bi-journal-richtext"></i> Documentation</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasConfig" aria-controls="offcanvasConfig"><i class="bi bi-person-gear"></i> Configuration</a></li>
-                        </ul>
+                  <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li>
+                        <div class="btn-toolbar align-middle" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group me-2" role="group" aria-label="First group">
+                                <a href="/" class="btn btn-sm btn-secondary text-light" role="button"><i class="bi bi-house"></i> Home </a>
+                                <a href="/ticketlist" class="btn btn-sm btn-outline-secondary text-light" role="button"><i class="bi bi-ticket-detailed"></i> Tickets </a>
+                                <a href="/settings" class="btn btn-sm btn-secondary text-light" role="button"><i class="bi bi-gear"></i> Settings </a>
+                                <a class="btn btn-sm btn-secondary"role="button" href="" id="homeButton" style="padding-top: 6px;">
+                                    <i class="bi bi-arrow-clockwise text-white" style="margin-top:0px; display: inline-block;"></i>
+                                    <span>Reload</span>
+                                </a>
+                            </div>
+                        </div> 
                     </li>
-                </ul>
+                </ul> 
                 <!-- Dropdown for Filter Category -->
-                <div class="input-group" style="max-width: 45%;">
-
-                    <span class="btn input-group-text bg-secondary text-light"> <i class="bi bi-funnel-fill"></i> Ticket Filters</span>
-                    <select id="filterCategory" class="form-control form-select me-2" style="padding-left: 10px;">
+                <div class="input-group me-2" style="max-width: 67%;">
+                    <span class="input-group-text bg-secondary text-light btn btn-sm" style="padding-top: 6px;"> <i class="bi bi-funnel-fill"></i> Ticket Filters</span>
+                    <select id="filterCategory" class="form-control form-control-sm form-select me-2" style="margin-left: 0px; max-width:200px;">
                         <option value="all">All</option>
                         <option value="company">Company</option>
                         <option value="group">Group</option>
@@ -41,21 +45,21 @@
                         <option value="overdue">Overdue</option>
                     </select>
                     <!-- Dropdown for Filter Value -->
-                    <select id="filterValue" class="form-control form-select me-2" style="padding-left:0px;">
+                    <select id="filterValue" class="form-control form-control-sm form-select me-2" style="margin-left:0px;">
                         <!-- Options will be dynamically populated based on the category selection -->
                     </select>
                     <!-- Dropdown for Third Filter -->
-                    <select id="focusFilter" class="form-control form-select me-2">
+                    <select id="focusFilter" class="form-control form-control-sm form-select me-2" style="max-width:150px;">
                         <option value="all">All</option>
                         <option value="focused">Focused</option>
                     </select>
                     <!-- Reset Button -->
-                    <a class="btn btn-secondary" aria-expanded="false" role="button" href="" id="homeButton">
-                        <i class="bi bi-arrow-clockwise text-white" style="display: inline-block;"></i>
+                    <!-- <a class="btn btn-sm btn-secondary"role="button" href="" id="homeButton" style="padding-top: 6px;">
+                        <i class="bi bi-arrow-clockwise text-white" style="margin-top:0px; display: inline-block;"></i>
                         <span>Reload</span>
-                    </a>
-                    <button id="resetFilters" class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="bottom" title="Reset Filter"><i class="bi bi-x-circle"></i></button>
-                    <button id="copyUrlButton" class="btn btn-secondary" type="button" onclick="copyFilteredTicketsURLToClipboard()"data-toggle="tooltip" data-placement="top" title="Copy Filter"><i class="bi bi-copy"></i></button>
+                    </a> -->
+                    <button id="resetFilters" class="btn btn-sm btn-secondary" type="button" data-toggle="tooltip" data-placement="bottom" title="Reset Filter"><i class="bi bi-x-circle"></i></button>
+                    <button id="copyUrlButton" class="btn btn-sm btn-secondary" type="button" onclick="copyFilteredTicketsURLToClipboard()"data-toggle="tooltip" data-placement="top" title="Copy Filter"><i class="bi bi-copy"></i></button>
                 </div>
         </div>
     </nav>
@@ -65,47 +69,47 @@
 <main class="flex-shrink-0">
   <div class="container-fluid">
     <p class="lead">
-      <div class="row pt-2" id="topDashboard">
+      <div class="row pt-2" id="ticketStats">
         <div class="card-group">
-          <div class="card mb-2">
-              <div class="card-header bg-dark">
-                <h5 class="card-title text-white fw-bold align-middle text-center">Tickets</h5>
+          <div class="card">
+              <div class="card-header bg-dark align-middle">
+                <h5 class="card-title text-white fw-bold align-middle text-center pt-2">Tickets</h5>
               </div>
             <div class="card-body">
               <p class="card-text fw-bold text-center" id="totalTickets">Loading...</p>
             </div>
             <!-- ... -->
           </div>
-          <div class="card mb-2">
-              <div class="card-header bg-dark">
-                <h5 class="card-title text-white fw-bold align-middle text-center">Incidents</h5>
+          <div class="card">
+              <div class="card-header bg-dark align-middle">
+                <h5 class="card-title text-white fw-bold align-middle text-center pt-2">Incidents</h5>
               </div>
             <div class="card-body">
               <p class="card-text fw-bold text-center" id="totalIncidents">Loading...</p>
             </div>
             <!-- ... -->
           </div>
-          <div class="card mb-2">
-              <div class="card-header bg-dark">
-                <h5 class="card-title text-white fw-bold align-middle text-center">Service Requests</h5>
+          <div class="card">
+              <div class="card-header bg-dark align-middle">
+                <h5 class="card-title text-white fw-bold align-middle text-center pt-2">Service Requests</h5>
               </div>
             <div class="card-body">
               <p class="card-text fw-bold text-center" id="totalServiceRequests">Loading...</p>
             </div>
             <!-- ... -->
           </div>
-          <div class="card mb-2">
-              <div class="card-header bg-dark">
-                <h5 class="card-title text-white fw-bold align-middle text-center">Escalated</h5>
+          <div class="card">
+              <div class="card-header bg-dark align-middle">
+                <h5 class="card-title text-white fw-bold align-middle text-center pt-2">Escalated</h5>
               </div>
             <div class="card-body">
               <p class="card-text fw-bold text-center" id="totalEscalated">Loading...</p>
             </div>
             <!-- ... -->
           </div>
-          <div class="card mb-2">
-              <div class="card-header bg-dark">
-                <h5 class="card-title text-white fw-bold align-middle text-center">Overdue</h5>
+          <div class="card">
+              <div class="card-header bg-dark align-middle">
+                <h5 class="card-title text-white fw-bold align-middle text-center pt-2">Overdue</h5>
               </div>
             <div class="card-body">
               <p class="card-text fw-bold text-center" id="totalOverdue">Loading...</p>
@@ -114,7 +118,7 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-center" id="topProgressBar" style="padding-top: 10px;">
+      <div class="row justify-content-center" id="ticketProgressBar" style="padding-top: 10px;">
         <div class="mx-auto" style="width:98%;">
           <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Amount of tickets in the view that are Read, Pending, or Done.">
             <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-dark" style="width: 25%">loading...</div>
@@ -126,23 +130,24 @@
             <tr>
                 <th class="text-center align-middle"><i class="bi bi-mailbox fw-bold" style="font-size: 1.25rem; font-weight: bold;"></i></th>  
                 <th class="text-center align-middle">ID</th>
-                <th class="text-truncate align-middle">Company</th>
-                <th class="text-center align-middle">Tier</th>
-                <th class="text-truncate align-middle">Subject</th>
-                <th class="text-center align-middle">Priority</th>
-                <th class="text-center align-middle">Status</th>
-                <th class="align-middle">Type</th>
-                <th class="align-middle">Env.</th>
-                <th class="text-center align-middle">Escalated</th>
-                <th class="text-center align-middle">Overdue</th>
+                <th class="text-truncate align-left">Company</th>
+                <th class="text-left align-left">Tier</th>
+                <th class="text-truncate align-left">Subject</th>
+                <th class="text-left align-left">Priority</th>
+                <th class="text-left align-left">Status</th>
+                <th class="align-left">Type</th>
+                <th class="align-left">Env.</th>
+                <th class="text-left align-left">Escalated</th>
+                <th class="text-left align-left">Overdue</th>
                 <th class="text-center align-middle">Created</th>
                 <th class="text-center align-middle" style="white-space:nowrap;">FR Due By</th>
                 <th class="text-center align-middle">Due By</th>
                 <th class="text-center align-middle" style="white-space:nowrap;">Last Update</th>
-                <th class="align-middle">Agent</th>
-                <th class="align-middle">Group</th>
-                <th class="align-middle">TAM</th>
+                <th class="align-left">Agent</th>
+                <th class="align-left">Group</th>
+                <th class="align-left">TAM</th>
                 <th class="text-center align-middle">Score</th>
+                <th class="text-center align-middle"><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasConfig" aria-controls="offcanvasConfig"><i class="bi bi-gear"></i></a></th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -189,5 +194,60 @@
     <span><img src="{{ url_for('static', filename='assets/images/victory.gif') }}"></span>
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Function to check if a specific cookie exists
+    function doesCookieExist(cookieName) {
+      return document.cookie.split(';').some((item) => item.trim().startsWith(`${cookieName}=`));
+    }
+  
+    // Function to read a value from the 'fscs' cookie
+    function readFromCookie(key) {
+      let cookieValue = document.cookie.split('; ').find(row => row.startsWith('fscs='));
+      if (cookieValue) {
+        try {
+          let data = JSON.parse(cookieValue.split('=')[1]); // Split by '=' and parse the JSON
+          return data[key] || null; // Return null if the key does not exist
+        } catch(e) {
+          console.error("Error parsing cookie value", e);
+          return null;
+        }
+      }
+      return null;
+    }
+  
+    // Function to toggle the display of elements based on cookie values
+    function toggleElementDisplay() {
+      // Check if the 'fscs' cookie exists
+      if (doesCookieExist('fscs')) {
+        // Read values for 'ticketStatus' and 'ticketProgressBar' from the cookie
+        const ticketStatus = readFromCookie('ticketStatus');
+        const ticketProgressBar = readFromCookie('ticketProgressBar');
+  
+        // Find DOM elements
+        const ticketStatsElement = document.getElementById('ticketStats');
+        const ticketProgressBarElement = document.getElementById('ticketProgressBar');
+  
+        // Toggle display based on the cookie values
+        if (ticketStatsElement && ticketStatus !== null) {
+          ticketStatsElement.style.display = ticketStatus ? '' : 'none !important';
+        }
+        if (ticketProgressBarElement && ticketProgressBar !== null) {
+          ticketProgressBarElement.style.display = ticketProgressBar ? '' : 'none !important';
+        }
+      }
+    }
+  
+    // Call the toggle function on page load
+    toggleElementDisplay();
+  });
+  </script>
+
+<script src="{{ url_for('static', filename='assets/js/cookies.js') }}" defer></script>
+<!-- <script src="{{ url_for('static', filename='assets/js/ticketlist.js') }}" defer></script> -->
+<script src="{{ url_for('static', filename='assets/js/fsc-suite.js') }}" defer></script>
+<script src="{{ url_for('static', filename='assets/js/main.js') }}" defer></script>
+<script src="{{ url_for('static', filename='assets/js/refresh.js') }}" defer></script>
+  
 {% endblock %}
 

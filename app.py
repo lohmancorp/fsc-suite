@@ -187,7 +187,7 @@ def get_company_names(base_url, headers):
             break
     return companies
 
-def get_agents(base_url, headers):
+def get_agents(base_url, headers, group_mapping):
     agents = {}
     page = 1
     while True:
@@ -197,15 +197,21 @@ def get_agents(base_url, headers):
 
         if 'agents' in data and data['agents']:
             for agent in data['agents']:
+                # Use group_mapping to replace group IDs with group names
+                groups_names = [group_mapping.get(group_id, "Unknown Group") for group_id in agent['member_of']]
+
                 agent_info = {
+                    'id': agent['id'],
                     'name': f"{agent['first_name']} {agent['last_name']}".strip(),
-                    'email': agent['email']
+                    'email': agent['email'],
+                    'groups': groups_names  # Updated to use group names instead of IDs
                 }
                 agents[agent['id']] = agent_info
             page += 1
         else:
             break
     return agents
+
 
 def get_groups(base_url, headers):
     groups = {}
@@ -223,6 +229,15 @@ def get_groups(base_url, headers):
         else:
             break
     return groups
+
+# def get_groups_with_members(base_url, headers):
+#     groups = get_groups(base_url, headers)  # Your existing method to get basic group info
+#     for group in groups.values():
+#         # Assuming you have a method like get_group_members(group_id) that returns member names
+#         member_names = get_group_members(base_url, group['id'], headers)
+#         group['members'] = member_names
+#     return list(groups.values())
+
 
 # section for utility methods
 def sanitize_user_input(input_string):
@@ -248,14 +263,18 @@ def load_initial_data():
     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Agents.")
     logging.info(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Agents.")
     
-    global_agents = get_agents(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
+    # Fetch groups first to use them in agent fetching
+    global_groups = get_groups(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
+    # Now call get_agents with the group mapping
+    global_agents = get_agents(FRESH_SERVICE_ENDPOINTS['production'], auth_header, global_groups)
+    
     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Groups.")
     logging.info(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Retrieving Groups.")
     
-    global_groups = get_groups(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
     fetched_tickets = get_all_tickets(FRESH_SERVICE_ENDPOINTS['production'], auth_header, global_agents, global_companies, global_groups)
     readable_tickets = make_status_priority_readable(fetched_tickets)
     global_tickets = sort_tickets(readable_tickets)
+
 
 
 # Endpoints for API content
@@ -291,8 +310,6 @@ def groups():
 
     return jsonify(sorted_groups_dict)
 
-
-
 @app.route('/agents', methods=['GET'])
 def agents():
     global global_agents
@@ -300,13 +317,41 @@ def agents():
         auth_header = generate_auth_header(API_KEY)
         global_agents = get_agents(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
     
-    # Sort global_agents by agent name
-    sorted_agents = sorted(global_agents.items(), key=lambda x: x[1]['name'])
+    # Convert the agents dictionary to a list of dictionaries as per the new format
+    agents_list = [agent_info for _, agent_info in global_agents.items()]
     
-    # Convert the sorted list of tuples back into a dictionary
-    sorted_agents_dict = {agent_id: agent_info for agent_id, agent_info in sorted_agents}
+    # Sort the list of agents by name
+    sorted_agents = sorted(agents_list, key=lambda x: x['name'])
     
-    return jsonify(sorted_agents_dict)
+    return jsonify({"agents": sorted_agents})
+
+
+@app.route('/api/agents', methods=['GET'])
+def agents_get():
+    global global_agents
+    if not global_agents:
+        auth_header = generate_auth_header(API_KEY)
+        global_agents = get_agents(FRESH_SERVICE_ENDPOINTS['production'], auth_header)
+    
+    # Convert the agents dictionary to a list of dictionaries as per the new format
+    agents_list = [agent_info for _, agent_info in global_agents.items()]
+    
+    # Sort the list of agents by name
+    sorted_agents = sorted(agents_list, key=lambda x: x['name'])
+    
+    return jsonify({"agents": sorted_agents})
+
+# @app.route('/api/groups', methods=['GET'])
+# def groups_get():
+#     global global_groups
+#     if not global_groups:
+#         auth_header = generate_auth_header(API_KEY)
+#         global_groups = get_groups_with_members(FRESH_SERVICE_ENDPOINTS['production'], auth_header)  # Assuming this method now fetches groups with member names
+
+#     # Sort the list of groups by name
+#     sorted_groups = sorted(global_groups, key=lambda x: x['name'])
+    
+#     return jsonify({"groups": sorted_groups})
 
 
 @app.route('/tickets', methods=['GET'])
@@ -409,7 +454,10 @@ def tickets_view():
     global global_tickets
     return render_template('tickets.html')
 
-
+@app.route('/settings')
+def settings():
+    # Render the settings-specific template
+    return render_template('settings.html')
 
 @app.route('/documentation')
 def documentation():

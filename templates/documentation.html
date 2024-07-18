@@ -11,14 +11,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active fw-bold" href="#" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/"><i class="bi bi-house"></i> Home</a></li>
-                            <li><a class="dropdown-item" href="/ticketlist"><i class="bi bi-ticket-detailed"></i> Tickets</a></li>
-                            <li><a class="dropdown-item" href="/documentation"><i class="bi bi-journal-richtext"></i> Documentation</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasConfig" aria-controls="offcanvasConfig"><i class="bi bi-person-gear"></i> Configuration</a></li>
-                        </ul>
+                    <li>
+                        <div class="btn-toolbar align-middle" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group me-2" role="group" aria-label="First group">
+                                <a href="/" class="btn btn-sm btn-outline-secondary text-light" role="button"><i class="bi bi-house"></i> Home </a>
+                                <a href="/ticketlist" class="btn btn-sm btn-secondary text-light" role="button"><i class="bi bi-ticket-detailed"></i> Tickets </a>
+                                <a href="/settings" class="btn btn-sm btn-secondary text-light" role="button"><i class="bi bi-gear"></i> Settings </a>
+                            </div>
+                        </div> 
                     </li>
                 </ul>
         </div>

@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: #070354;">
+        <div class="container-fluid">
+            <span class="navbar-brand"><a href="/"><img src="{{ url_for('static', filename='assets/logos/cloudblue-logo-white.png') }}" style="max-height: 30px;" id="logoElement"></a></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li>
+                    <div class="btn-toolbar align-middle" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group me-2" role="group" aria-label="First group">
+                            <a href="/" class="btn btn-sm btn-secondary text-light" role="button"><i class="bi bi-house"></i> Home </a>
+                            <a href="/ticketlist" class="btn btn-sm btn-secondary text-light" role="button"><i class="bi bi-ticket-detailed"></i> Tickets </a>
+                            <a href="/settings" class="btn btn-sm btn-outline-secondary text-light" role="button"><i class="bi bi-gear"></i> Settings </a>
+                            <a class="btn btn-sm btn-secondary"role="button" href="" id="homeButton" style="padding-top: 6px;">
+                                <i class="bi bi-arrow-clockwise text-white" style="margin-top:0px; display: inline-block;"></i>
+                                <span>Reload</span>
+                            </a>
+                        </div>
+                    </div> 
+                </li>
+            </ul> 
+        </div>
+    </nav>
+</header>
+<!-- Documentation-specific content goes here -->
+<main class="container py-4">
+    <!-- Global Settings Section-->
+    <div class="bg-body-tertiary p-5 rounded-3 border shadow-lg" style="background-image: url('../static/assets/images/textured_background.jpg'); max-width:100%; max-height: 590px;">
+      <h2 class="fw-bold text-light"> 
+          <svg class="bi" width="1em" height="1em">
+              <use xlink:href="#globe2" />
+          </svg>
+          Global Settings
+      </h2>
+      <hr style="display:block; height: 1px; border:0; border-top: 1px solid #FFFFFF; margin: 1em 0; padding: 0;">
+      <div class="row row-cols-1 row-cols-md-2 align-items-md-top g-5 py-5">
+          <div class="col d-flex flex-column align-items-start gap-2">
+          <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+              <svg class="bi" width="1em" height="1em">
+                  <use xlink:href="#person-badge" />
+              </svg>
+              </div>  
+            <h3 class="fw-bold text-light top-header">
+              Let's start with you...</h3>
+            <p class="text-light">Please tell me who you are.</p>
+            <div class="row">
+              <div class="col col-12 mb-3">
+                <input id="yourName" type="text" class="form-control" placeholder="Your name" aria-label="Your name" style="min-width: 400px;">
+                <div id="searchResults" class="search-results-container text-dark"></div>
+
+                <br>
+                <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                    <svg class="bi" width="1em" height="1em">
+                        <use xlink:href="#people" />
+                    </svg>
+                    </div>  
+                <h4 class="fw-bold text-light top-header">
+                    Your Groups</h4>
+                <select id="yourGroups" class="form-select" multiple aria-label="Multiple select example">
+                  </select>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col">
+            <div class="row row-cols-1 row-cols-sm-2 g-4">
+              <div class="col d-flex flex-column gap-2">
+                <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                  <svg class="bi" width="1em" height="1em">
+                    <use xlink:href="#refresh" />
+                  </svg>
+                </div>
+                <h5 class="fw-semibold mb-0 text-light">Data Auto Refresh</h5>
+                <p class="text-light">
+                  Enable the automatic refresh of data in the background.
+                  <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" id="autoRefresh">
+                      <label class="form-check-label text-light" for="autoRefresh">Activated</label>
+                    </div>
+                </p>
+              </div>
+    
+              <div class="col d-flex flex-column gap-2">
+                <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                  <svg class="bi" width="1em" height="1em">
+                    <use xlink:href="#stopwatch" />
+                  </svg>
+                </div>
+                <h5 class="fw-semibold mb-0 text-light">Refresh Interval</h5>
+                <p class="text-light">
+                  Defines how often the data will be reloaded.
+                  <br>
+                  <br>
+                  <span>
+                      <input id="refreshInterval" type="range" class="form-range" min="15" max="60" step="15" value="30" style="max-width: 70%; padding-top:12px;" oninput="refreshIntervalOutput.value = refreshInterval.value">
+                      <label for="refreshInterval" class="form-label"><output id="refreshIntervalOutput" class="text-light">30</output> Min</label>
+                  </span>
+                </p>            
+              </div>
+              <div class="col d-flex flex-column gap-2">
+                <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                  <svg class="bi" width="1em" height="1em">
+                    <use xlink:href="#circle-half" />
+                  </svg>
+                </div>
+                <h5 class="fw-semibold mb-0 text-light">Darkmode</h5>
+                <p class="text-light">
+                  Because bugs are attaracted to the light.
+                  <div class="form-check form-switch">
+                      <input id="darkMode" class="form-check-input" type="checkbox" role="switch">
+                      <label class="form-check-label text-light" for="darkMode">Deactivated</label>
+                    </div>
+                </p>            
+            </div>
+            <div class="col d-flex flex-column gap-2" style="display :none !important;">
+                <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                  <svg class="bi" width="1em" height="1em">
+                    <use xlink:href="#exclamation-circle" />
+                  </svg>
+                </div>
+                <h5 class="fw-semibold mb-0 text-light">Notifications</h5>
+                <p class="text-light">
+                  Enables notifications to your browser for important events.
+                  <div class="form-check form-switch">
+                      <input id="siteNotifications"  class="form-check-input" type="checkbox" role="switch">
+                      <label class="form-check-label text-light" for="siteNotifications">Activated</label>
+                    </div>
+                </p>            
+            </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  
+    <div class="b-example-divider"></div>
+  
+    <!-- Ticket Settings Section-->
+    <div class="bg-body-tertiary p-5 rounded-3 border shadow-lg" style="background-image: url('../static/assets/images/upper_right_geometric.png'); height: 360px; background-size: cover;">
+        <h2 class="fw-bold text-light"> 
+          <svg class="bi" width="1em" height="1em">
+              <use xlink:href="#table" />
+          </svg>
+          Ticket Settings
+      </h2>
+      <hr style="display:block; height: 1px; border:0; border-top: 1px solid #FFFFFF; margin: 1em 0; padding: 0; max-width: 80%;">
+      <div class="row row-cols-1 row-cols-md-2 align-items-md-top g-5 py-5">
+          <div class="col">
+              <div class="row row-cols-1 row-cols-sm-2 g-4">
+                <div class="col d-flex flex-column gap-2">
+                  <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                    <svg class="bi" width="1em" height="1em">
+                      <use xlink:href="#speedometer2" />
+                    </svg>
+                  </div>
+                  <h5 class="fw-semibold mb-0 text-light">Dashboard</h5>
+                  <p class="text-light">
+                    Show dashboard on the ticket view page.<br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="ticketStats">
+                        <label class="form-check-label text-light" for="ticketStats">Activated</label>
+                      </div>
+                  </p>
+                </div>
+      
+                <div class="col d-flex flex-column gap-2">
+                  <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                    <svg class="bi" width="1em" height="1em">
+                      <use xlink:href="#bar-chart-steps" />
+                    </svg>
+                  </div>
+                  <h5 class="fw-semibold mb-0 text-light">Progress Bar</h5>
+                  <p class="text-light">
+                    Show progress bar on ticket page to track progress.
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="ticketProgressBar">
+                        <label class="form-check-label text-light" for="ticketProgressBar">Activated</label>
+                      </div>
+                  </p>            
+                </div>
+      
+                <div class="col d-flex flex-column gap-2">
+                    <!-- future feature can go here in column 1, row 2-->
+                </div>
+      
+                <div class="col d-flex flex-column gap-2">   
+                    <!-- future feature can go here in column 1, row 2-->
+                </div>
+              </div>
+            </div>
+          <div class="col">
+            <div class="row row-cols-1 row-cols-sm-2 g-4">
+              <div class="col d-flex flex-column gap-2">
+                    <!-- future feature can go here in column 2, row 1-->
+                 </div>
+    
+              <div class="col d-flex flex-column gap-2">
+                    <!-- future feature can go here in column 2, row 1-->           
+                </div>
+    
+              <div class="col d-flex flex-column gap-2"> 
+                    <!-- future feature can go here in column 2, row 2-->
+                 </div>
+    
+              <div class="col d-flex flex-column gap-2">  
+                    <!-- future feature can go here in column 2, row 2-->
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </main>
+
+  <script src="{{ url_for('static', filename='assets/js/cookies.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='assets/js/settings.js') }}" defer></script>
+
+
+{% endblock %}
